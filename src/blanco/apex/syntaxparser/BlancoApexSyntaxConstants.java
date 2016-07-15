@@ -21,7 +21,7 @@ package blanco.apex.syntaxparser;
  * @author Toshiki Iga
  */
 public class BlancoApexSyntaxConstants {
-	public static final String VERSION = "v0.8.1-20160716a";
+	public static final String VERSION = "v0.8.1-20160716b";
 
 	public static String getVersion() {
 		return VERSION;

@@ -81,6 +81,10 @@ public class BlancoApexSyntaxBlockParser extends AbstractBlancoApexSyntaxSyntaxP
 						input.resetRead();
 						blockToken.getTokenList().add(new BlancoApexSyntaxForStatementParser(input).parse());
 						continue;
+					} else if (wordToken.getValue().equalsIgnoreCase("while")) {
+						input.resetRead();
+						blockToken.getTokenList().add(new BlancoApexSyntaxWhileStatementParser(input).parse());
+						continue;
 					}
 
 					// System.out.println("TRACE DEBUG: " +
