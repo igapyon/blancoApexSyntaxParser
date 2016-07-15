@@ -63,7 +63,7 @@ public class BlancoApexSyntaxParserTest {
 
 	@Test
 	public void testReadFukugen() throws Exception {
-		final File[] files = new File("/home/admin1/user1/classes/").listFiles();
+		final File[] files = new File("./test/data/apex/").listFiles();
 		for (File file : files) {
 			if (file.isFile() && file.getName().toLowerCase().endsWith(".cls")) {
 				final String fileString = file2String(file);
@@ -89,7 +89,8 @@ public class BlancoApexSyntaxParserTest {
 	@Test
 	public void testSingleFile() throws Exception {
 		// TODO change apex class filename to adapt your environment.
-		final List<BlancoApexToken> sourceTokenList = new BlancoApexParser().parse(new File("/home/user1/MyClass.cls"));
+		final List<BlancoApexToken> sourceTokenList = new BlancoApexParser()
+				.parse(new File("./test/data/apex/MySimpleTest.cls"));
 
 		final List<BlancoApexToken> tokenList = new BlancoApexSyntaxParser().parse(sourceTokenList);
 
