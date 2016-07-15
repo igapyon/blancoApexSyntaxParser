@@ -24,7 +24,7 @@ import org.junit.Test;
 import blanco.apex.parser.BlancoApexParser;
 import blanco.apex.parser.token.BlancoApexToken;
 
-public class BlancoApexSyntaxParser_Class_Test {
+public class BlancoApexSyntaxParser011Test {
 
 	@Test
 	public void test() throws Exception {

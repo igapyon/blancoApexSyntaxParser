@@ -29,7 +29,7 @@ import blanco.apex.parser.BlancoApexParser;
 import blanco.apex.parser.token.BlancoApexToken;
 import blanco.apex.syntaxparser.token.AbstractBlancoApexSyntaxToken;
 
-public class BlancoApexSyntaxParserSimpleTest {
+public class BlancoApexSyntaxParser001Test {
 
 	@Test
 	public void testReadFukugen() throws Exception {
