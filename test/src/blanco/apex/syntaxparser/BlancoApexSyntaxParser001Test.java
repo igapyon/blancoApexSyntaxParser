@@ -25,6 +25,7 @@ import java.util.List;
 
 import org.junit.Test;
 
+import blanco.apex.parser.BlancoApexConstants;
 import blanco.apex.parser.BlancoApexParser;
 import blanco.apex.parser.token.BlancoApexToken;
 import blanco.apex.syntaxparser.token.AbstractBlancoApexSyntaxToken;
@@ -32,7 +33,11 @@ import blanco.apex.syntaxparser.token.AbstractBlancoApexSyntaxToken;
 public class BlancoApexSyntaxParser001Test {
 
 	@Test
-	public void testReadFukugen() throws Exception {
+	public void testMain() throws Exception {
+		System.err.println("Test simple syntax parsing.");
+		System.err.println("    lexical parser: " + BlancoApexConstants.getVersion());
+		System.err.println("     syntax parser: " + BlancoApexSyntaxConstants.getVersion());
+
 		final String fileString = file2String(new File("./test/data/apex/MySimpleTest.cls"));
 
 		final List<BlancoApexToken> sourceTokenList = new BlancoApexParser().parse(fileString);
