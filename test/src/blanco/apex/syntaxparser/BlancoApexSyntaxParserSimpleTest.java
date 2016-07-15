@@ -41,23 +41,31 @@ public class BlancoApexSyntaxParserSimpleTest {
 
 		for (BlancoApexToken token : tokenList) {
 			if (token instanceof AbstractBlancoApexSyntaxToken) {
-				System.out.println("  " + token.getClass().getSimpleName());
-				displayDebug((AbstractBlancoApexSyntaxToken) token);
+				System.out.println(token.getClass().getSimpleName());
+				displayDebug((AbstractBlancoApexSyntaxToken) token, 1);
 			} else {
 				System.out.println("    " + token.getDisplayString());
 			}
 		}
 	}
 
-	void displayDebug(AbstractBlancoApexSyntaxToken tokenParent) {
+	void displayDebug(final AbstractBlancoApexSyntaxToken tokenParent, final int indentLevel) {
 		for (BlancoApexToken token : tokenParent.getTokenList()) {
 			if (token instanceof AbstractBlancoApexSyntaxToken) {
-				System.out.println("  " + token.getClass().getSimpleName());
-				displayDebug((AbstractBlancoApexSyntaxToken) token);
+				System.out.println(getIndentString(indentLevel) + token.getClass().getSimpleName());
+				displayDebug((AbstractBlancoApexSyntaxToken) token, indentLevel + 1);
 			} else {
-				System.out.println("    " + token.getDisplayString());
+				System.out.println(getIndentString(indentLevel) + token.getDisplayString());
 			}
 		}
+	}
+
+	static final String getIndentString(final int level) {
+		final StringBuffer strbuf = new StringBuffer();
+		for (int index = 0; index < level * 4; index++) {
+			strbuf.append(' ');
+		}
+		return strbuf.toString();
 	}
 
 	static final String file2String(final File file) throws IOException {
