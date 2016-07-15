@@ -20,6 +20,7 @@ import blanco.apex.parser.token.BlancoApexToken;
 import blanco.apex.parser.token.BlancoApexWordToken;
 import blanco.apex.syntaxparser.BlancoApexSyntaxParserInput;
 import blanco.apex.syntaxparser.BlancoApexSyntaxUtil;
+import blanco.apex.syntaxparser.token.BlancoApexSyntaxBlockToken.BlockType;
 import blanco.apex.syntaxparser.token.BlancoApexSyntaxClassToken;
 
 public class BlancoApexSyntaxClassParser extends AbstractBlancoApexSyntaxSyntaxParser {
@@ -140,7 +141,7 @@ public class BlancoApexSyntaxClassParser extends AbstractBlancoApexSyntaxSyntaxP
 				} else if (specialCharToken.getValue().equals("{")) {
 					// I'm not sure, but Apex has non-named method? Is it true?
 					input.resetRead();
-					classToken.getTokenList().add(new BlancoApexSyntaxBlockParser(input).parse());
+					classToken.getTokenList().add(new BlancoApexSyntaxBlockParser(input, BlockType.UNDEFINED).parse());
 				} else {
 					System.out.println("class parser: unexpected state(L123): " + specialCharToken.getDisplayString());
 					classToken.getTokenList().add(inputToken);

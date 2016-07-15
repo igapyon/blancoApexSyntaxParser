@@ -18,6 +18,7 @@ package blanco.apex.syntaxparser.parser;
 import blanco.apex.parser.token.BlancoApexSpecialCharToken;
 import blanco.apex.parser.token.BlancoApexToken;
 import blanco.apex.syntaxparser.BlancoApexSyntaxParserInput;
+import blanco.apex.syntaxparser.token.BlancoApexSyntaxBlockToken.BlockType;
 import blanco.apex.syntaxparser.token.BlancoApexSyntaxMethodToken;
 import blanco.apex.syntaxparser.token.BlancoApexSyntaxParenthesisToken;
 
@@ -59,7 +60,8 @@ public class BlancoApexSyntaxMethodParser extends AbstractBlancoApexSyntaxSyntax
 
 						input.resetRead();
 						// start class def.
-						methodToken.getTokenList().add(new BlancoApexSyntaxBlockParser(input).parse());
+						methodToken.getTokenList()
+								.add(new BlancoApexSyntaxBlockParser(input, BlockType.METHOD_DEF).parse());
 
 						// exit process.
 						return methodToken;

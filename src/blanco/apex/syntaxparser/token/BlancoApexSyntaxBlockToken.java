@@ -18,6 +18,20 @@ package blanco.apex.syntaxparser.token;
 import blanco.apex.parser.token.BlancoApexToken;
 
 public class BlancoApexSyntaxBlockToken extends AbstractBlancoApexSyntaxToken {
+	public enum BlockType {
+		UNDEFINED, MULTI_STATEMENT, CLASS_DEF, METHOD_DEF, PROPERTY_DEF, RESERVED_VAL_INIT
+	}
+
+	protected BlockType blockType = BlockType.UNDEFINED;
+
+	public BlockType getBlockType() {
+		return blockType;
+	}
+
+	public void setBlockType(BlockType blockType) {
+		this.blockType = blockType;
+	}
+
 	@Override
 	public String getValue() {
 		final StringBuffer strbuf = new StringBuffer();
@@ -41,6 +55,6 @@ public class BlancoApexSyntaxBlockToken extends AbstractBlancoApexSyntaxToken {
 			strbuf.append(token.getDisplayString());
 		}
 
-		return "BLOCK[" + strbuf.toString() + "]";
+		return "BLOCK(" + blockType + ")[" + strbuf.toString() + "]";
 	}
 }

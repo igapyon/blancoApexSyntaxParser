@@ -20,6 +20,7 @@ import blanco.apex.parser.token.BlancoApexToken;
 import blanco.apex.parser.token.BlancoApexWordToken;
 import blanco.apex.syntaxparser.BlancoApexSyntaxParserInput;
 import blanco.apex.syntaxparser.BlancoApexSyntaxUtil;
+import blanco.apex.syntaxparser.token.BlancoApexSyntaxBlockToken.BlockType;
 import blanco.apex.syntaxparser.token.BlancoApexSyntaxIfStatementToken;
 
 public class BlancoApexSyntaxIfStatementParser extends AbstractBlancoApexSyntaxSyntaxParser {
@@ -116,7 +117,8 @@ public class BlancoApexSyntaxIfStatementParser extends AbstractBlancoApexSyntaxS
 					break;
 				} else if (nextSpecial.getValue().equals("{")) {
 					input.resetRead();
-					ifStatementToken.getTokenList().add(new BlancoApexSyntaxBlockParser(input).parse());
+					ifStatementToken.getTokenList()
+							.add(new BlancoApexSyntaxBlockParser(input, BlockType.MULTI_STATEMENT).parse());
 					break;
 				} else {
 					System.out.println("if_statement parser: Unexpected one: ");

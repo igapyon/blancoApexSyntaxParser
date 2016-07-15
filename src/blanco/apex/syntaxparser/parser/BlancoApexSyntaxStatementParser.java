@@ -18,6 +18,7 @@ package blanco.apex.syntaxparser.parser;
 import blanco.apex.parser.token.BlancoApexSpecialCharToken;
 import blanco.apex.parser.token.BlancoApexToken;
 import blanco.apex.syntaxparser.BlancoApexSyntaxParserInput;
+import blanco.apex.syntaxparser.token.BlancoApexSyntaxBlockToken.BlockType;
 import blanco.apex.syntaxparser.token.BlancoApexSyntaxStatementToken;
 
 public class BlancoApexSyntaxStatementParser extends AbstractBlancoApexSyntaxSyntaxParser {
@@ -56,7 +57,8 @@ public class BlancoApexSyntaxStatementParser extends AbstractBlancoApexSyntaxSyn
 					} else if (specialCharToken.getValue().equals("{")) {
 						// entering new nested block.
 						input.resetRead();
-						statementToken.getTokenList().add(new BlancoApexSyntaxBlockParser(input).parse());
+						statementToken.getTokenList()
+								.add(new BlancoApexSyntaxBlockParser(input, BlockType.MULTI_STATEMENT).parse());
 					} else if (specialCharToken.getValue().equals("(")) {
 						// entering new nested block.
 						input.resetRead();

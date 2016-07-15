@@ -19,6 +19,7 @@ import blanco.apex.parser.token.BlancoApexSpecialCharToken;
 import blanco.apex.parser.token.BlancoApexToken;
 import blanco.apex.syntaxparser.BlancoApexSyntaxParserInput;
 import blanco.apex.syntaxparser.BlancoApexSyntaxUtil;
+import blanco.apex.syntaxparser.token.BlancoApexSyntaxBlockToken.BlockType;
 import blanco.apex.syntaxparser.token.BlancoApexSyntaxForStatementToken;
 
 public class BlancoApexSyntaxForStatementParser extends AbstractBlancoApexSyntaxSyntaxParser {
@@ -94,7 +95,8 @@ public class BlancoApexSyntaxForStatementParser extends AbstractBlancoApexSyntax
 				} else if (nextSpecial.getValue().equals("{")) {
 					// System.out.println("FOR TRACE: block.");
 					input.resetRead();
-					forStatementToken.getTokenList().add(new BlancoApexSyntaxBlockParser(input).parse());
+					forStatementToken.getTokenList()
+							.add(new BlancoApexSyntaxBlockParser(input, BlockType.MULTI_STATEMENT).parse());
 					break;
 				} else {
 					System.out.println("for_statement parser: Unexpected one: " + inputToken.getDisplayString());

@@ -20,14 +20,16 @@ import blanco.apex.parser.token.BlancoApexToken;
 import blanco.apex.parser.token.BlancoApexWordToken;
 import blanco.apex.syntaxparser.BlancoApexSyntaxParserInput;
 import blanco.apex.syntaxparser.token.BlancoApexSyntaxBlockToken;
+import blanco.apex.syntaxparser.token.BlancoApexSyntaxBlockToken.BlockType;
 
 public class BlancoApexSyntaxBlockParser extends AbstractBlancoApexSyntaxSyntaxParser {
 	public static final boolean ISDEBUG = false;
 
 	protected final BlancoApexSyntaxBlockToken blockToken = new BlancoApexSyntaxBlockToken();
 
-	public BlancoApexSyntaxBlockParser(final BlancoApexSyntaxParserInput input) {
+	public BlancoApexSyntaxBlockParser(final BlancoApexSyntaxParserInput input, final BlockType blockType) {
 		super(input);
+		blockToken.setBlockType(blockType);
 	}
 
 	public BlancoApexSyntaxBlockToken parse() {
@@ -51,7 +53,8 @@ public class BlancoApexSyntaxBlockParser extends AbstractBlancoApexSyntaxSyntaxP
 					if (specialCharToken.getValue().equals("{")) {
 						input.resetRead();
 						// entering new nested block.
-						blockToken.getTokenList().add(new BlancoApexSyntaxBlockParser(input).parse());
+						blockToken.getTokenList()
+								.add(new BlancoApexSyntaxBlockParser(input, BlockType.MULTI_STATEMENT).parse());
 					} else if (specialCharToken.getValue().equals("}")) {
 						// end of block
 						blockToken.getTokenList().add(specialCharToken);
@@ -62,7 +65,8 @@ public class BlancoApexSyntaxBlockParser extends AbstractBlancoApexSyntaxSyntaxP
 						// return blockToken;
 					} else if (specialCharToken.getValue().equals("(")) {
 						input.resetRead();
-						blockToken.getTokenList().add(new BlancoApexSyntaxBlockParser(input).parse());
+						blockToken.getTokenList()
+								.add(new BlancoApexSyntaxBlockParser(input, BlockType.MULTI_STATEMENT).parse());
 					} else {
 						blockToken.getTokenList().add(inputToken);
 					}
