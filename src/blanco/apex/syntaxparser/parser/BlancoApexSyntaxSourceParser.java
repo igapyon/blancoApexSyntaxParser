@@ -73,17 +73,25 @@ public class BlancoApexSyntaxSourceParser extends AbstractBlancoApexSyntaxSyntax
 						parseSourceReservedKeyword();
 					} else {
 						// maybe name
-						System.out.println("SOURCE(1): Unexpected token: It should be keyword or annotations...: "
-								+ wordToken.getDisplayString());
+						System.out.println(
+								"SOURCE(76): Unexpected token: simply copy. It should be keyword or annotations...: "
+										+ wordToken.getDisplayString());
+						sourceToken.getTokenList().add(inputToken);
 					}
 				} else if (inputToken instanceof BlancoApexSpecialCharToken) {
 					final BlancoApexSpecialCharToken specialCharToken = (BlancoApexSpecialCharToken) inputToken;
 					if (specialCharToken.getValue().equals("@")) {
 						input.resetRead();
 						sourceToken.getTokenList().add(new BlancoApexSyntaxAnnotationParser(input).parse());
+					} else {
+						// copy simply.
+						System.out.println(
+								"SOURCE(88): Unexpected token. simply copy.: " + inputToken.getDisplayString());
+						sourceToken.getTokenList().add(inputToken);
 					}
 				} else {
-					System.out.println("SOURCE(2): Unexpected token.: " + inputToken.getDisplayString());
+					System.out.println("SOURCE(92): Unexpected token. simply copy.: " + inputToken.getDisplayString());
+					sourceToken.getTokenList().add(inputToken);
 				}
 			}
 		} finally {
@@ -134,7 +142,7 @@ public class BlancoApexSyntaxSourceParser extends AbstractBlancoApexSyntaxSyntax
 					return;
 
 				} else {
-					System.out.println("SOURCE(11): unexpected token.: " + inputToken.getDisplayString());
+					System.out.println("SOURCE(137): non supported token.: " + inputToken.getDisplayString());
 				}
 			} else {
 				// do nothing
@@ -142,6 +150,13 @@ public class BlancoApexSyntaxSourceParser extends AbstractBlancoApexSyntaxSyntax
 			}
 		}
 
-		// start class parsing
+		{
+			// dislike path.
+			// simply consume token.
+			input.resetRead();
+			final BlancoApexToken inputToken = input.readToken();
+			sourceToken.getTokenList().add(inputToken);
+			System.out.println("SOURCE(148): simply process given token.: " + inputToken.getDisplayString());
+		}
 	}
 }
