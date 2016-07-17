@@ -15,8 +15,10 @@
  */
 package blanco.apex.syntaxparser;
 
+import blanco.apex.parser.token.BlancoApexNewlineToken;
 import blanco.apex.parser.token.BlancoApexSpecialCharToken;
 import blanco.apex.parser.token.BlancoApexToken;
+import blanco.apex.parser.token.BlancoApexWhitespaceToken;
 
 /**
  * Util class for syntax parser.
@@ -75,12 +77,30 @@ public class BlancoApexSyntaxUtil {
 		return null;
 	}
 
+	/**
+	 * get first token by value.
+	 * 
+	 * @param input
+	 * @param stringArray
+	 * @return
+	 */
 	public static BlancoApexToken getFirstTokenByValue(final BlancoApexSyntaxParserInput input,
-			final String[] specialChars) {
+			final String[] stringArray) {
 		int index = input.getIndex();
 		for (; index < input.getTokenCount(); index++) {
 			final BlancoApexToken token = (BlancoApexToken) input.getTokenAt(index);
-			if (BlancoApexSyntaxUtil.isIncludedIgnoreCase(token.getValue(), specialChars)) {
+			if (BlancoApexSyntaxUtil.isIncludedIgnoreCase(token.getValue(), stringArray)) {
+				return token;
+			}
+		}
+		return null;
+	}
+
+	public static BlancoApexToken getFirstTokenWithoutWhitespaceNewline(final BlancoApexSyntaxParserInput input) {
+		int index = input.getIndex();
+		for (; index < input.getTokenCount(); index++) {
+			final BlancoApexToken token = (BlancoApexToken) input.getTokenAt(index);
+			if (token instanceof BlancoApexWhitespaceToken || token instanceof BlancoApexNewlineToken) {
 				return token;
 			}
 		}

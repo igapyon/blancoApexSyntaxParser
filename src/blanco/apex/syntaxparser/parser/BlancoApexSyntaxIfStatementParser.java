@@ -17,7 +17,6 @@ package blanco.apex.syntaxparser.parser;
 
 import blanco.apex.parser.token.BlancoApexSpecialCharToken;
 import blanco.apex.parser.token.BlancoApexToken;
-import blanco.apex.parser.token.BlancoApexWordToken;
 import blanco.apex.syntaxparser.BlancoApexSyntaxParserInput;
 import blanco.apex.syntaxparser.BlancoApexSyntaxUtil;
 import blanco.apex.syntaxparser.token.BlancoApexSyntaxBlockToken.BlockType;
@@ -68,24 +67,42 @@ public class BlancoApexSyntaxIfStatementParser extends AbstractBlancoApexSyntaxS
 			processIfStatementBody();
 
 			input.markRead();
-			// check else exist?
-			for (; input.availableToken();) {
-				final BlancoApexToken inputToken = input.readToken();
-				if (inputToken instanceof BlancoApexSpecialCharToken) {
+
+			// check else exist or not.
+			for (;;) {
+				final BlancoApexToken nextToken = BlancoApexSyntaxUtil.getFirstTokenWithoutWhitespaceNewline(input);
+				if (nextToken == null) {
 					input.resetRead();
 					break;
-				} else if (inputToken instanceof BlancoApexWordToken) {
-					if (inputToken.getValue().equalsIgnoreCase("else")) {
-						// else found!!!
-						input.resetRead();
-						processIfStatementBody();
-						input.markRead();
-					} else {
-						input.resetRead();
-						break;
-					}
+				}
+				if (false == nextToken.getValue().equalsIgnoreCase("else")) {
+					// non else statement
+					break;
+				}
+
+				// else found.
+				final BlancoApexToken next2Token = BlancoApexSyntaxUtil.getFirstTokenWithoutWhitespaceNewline(input);
+				if (next2Token == null) {
+					// FIXME this should not be.
+					input.resetRead();
+					break;
+				}
+
+				if (next2Token.getValue().equalsIgnoreCase("if")) {
+					// }else if{ style
+					input.resetRead();
+					processIfStatementBody();
+					input.markRead();
+					continue;
+				} else {
+					// simple }else{ token
+					input.resetRead();
+					processIfStatementBody();
+					input.markRead();
+					break;
 				}
 			}
+
 			input.resetRead();
 
 		} finally {
