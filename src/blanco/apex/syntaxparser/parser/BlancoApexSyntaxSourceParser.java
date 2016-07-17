@@ -74,7 +74,7 @@ public class BlancoApexSyntaxSourceParser extends AbstractBlancoApexSyntaxSyntax
 					} else {
 						// maybe name
 						System.out.println(
-								"SOURCE(76): Unexpected token: simply copy. It should be keyword or annotations...: "
+								"SOURCE(L77): Unexpected token: simply copy. It should be keyword or annotations...: "
 										+ wordToken.getDisplayString());
 						sourceToken.getTokenList().add(inputToken);
 					}
@@ -86,11 +86,11 @@ public class BlancoApexSyntaxSourceParser extends AbstractBlancoApexSyntaxSyntax
 					} else {
 						// copy simply.
 						System.out.println(
-								"SOURCE(88): Unexpected token. simply copy.: " + inputToken.getDisplayString());
+								"SOURCE(L89): Unexpected token. simply copy.: " + inputToken.getDisplayString());
 						sourceToken.getTokenList().add(inputToken);
 					}
 				} else {
-					System.out.println("SOURCE(92): Unexpected token. simply copy.: " + inputToken.getDisplayString());
+					System.out.println("SOURCE(L93): Unexpected token. simply copy.: " + inputToken.getDisplayString());
 					sourceToken.getTokenList().add(inputToken);
 				}
 			}
@@ -141,8 +141,18 @@ public class BlancoApexSyntaxSourceParser extends AbstractBlancoApexSyntaxSyntax
 					// exit here!
 					return;
 
+				} else if (wordToken.getValue().equalsIgnoreCase("enum")) {
+					// reset mark and parse from beginning.
+					input.resetRead();
+
+					// open class parser.
+					sourceToken.getTokenList().add(new BlancoApexSyntaxEnumParser(input).parse());
+
+					// exit here!
+					return;
+
 				} else {
-					System.out.println("SOURCE(137): non supported token.: " + inputToken.getDisplayString());
+					System.out.println("SOURCE(L155): non supported token.: " + inputToken.getDisplayString());
 				}
 			} else {
 				// do nothing
@@ -156,7 +166,7 @@ public class BlancoApexSyntaxSourceParser extends AbstractBlancoApexSyntaxSyntax
 			input.resetRead();
 			final BlancoApexToken inputToken = input.readToken();
 			sourceToken.getTokenList().add(inputToken);
-			System.out.println("SOURCE(148): simply process given token.: " + inputToken.getDisplayString());
+			System.out.println("SOURCE(L169): simply process given token.: " + inputToken.getDisplayString());
 		}
 	}
 }
