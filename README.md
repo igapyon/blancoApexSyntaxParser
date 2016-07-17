@@ -1,33 +1,38 @@
-# README #
+# blancoApexSyntaxParser
 
-This README would normally document whatever steps are necessary to get your application up and running.
+blancoApexSyntaxParser is a Apax language source code syntax parser.
+blancoApexSyntaxParser is written in Java. blancoApexSyntaxParser is provided as an OSS product.
 
-### TODO ###
-* parse []
-* Fukugen test
+## download
 
-### What is this repository for? ###
+You can download latest version of blancoApexSyntaxParser from URL below:
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+### binary distribution
 
-### How do I get set up? ###
+* https://github.com/igapyon/blancoApexSyntaxParser/releases
+  * 'Source code (zip)' contains binary jar files of blancoApexSyntaxParser.
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+### source distribution
 
-### Contribution guidelines ###
+* https://github.com/igapyon/blancoApexSyntaxParser/releases
+* https://github.com/igapyon/blancoApexParser/releases
 
-* Writing tests
-* Code review
-* Other guidelines
+## LICENSE
 
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
+```
+/*
+ * Copyright 2016 Toshiki Iga
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+```
