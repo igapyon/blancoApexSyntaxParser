@@ -22,7 +22,7 @@ import blanco.apex.syntaxparser.token.BlancoApexSyntaxBlockToken.BlockType;
 import blanco.apex.syntaxparser.token.BlancoApexSyntaxEnumToken;
 
 public class BlancoApexSyntaxEnumParser extends AbstractBlancoApexSyntaxSyntaxParser {
-	public static final boolean ISDEBUG = true;
+	public static final boolean ISDEBUG = false;
 
 	public BlancoApexSyntaxEnumParser(final BlancoApexSyntaxParserInput input) {
 		super(input);
