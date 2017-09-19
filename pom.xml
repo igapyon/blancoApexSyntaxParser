@@ -4,7 +4,7 @@
 	<groupId>jp.igapyon.blanco.apex.syntaxparser</groupId>
 	<artifactId>BlancoApexSyntaxParser</artifactId>
 	<packaging>jar</packaging>
-	<version>1.0-SNAPSHOT</version>
+	<version>1.0</version>
 	<name>BlancoApexSyntaxParser</name>
 	<url>http://maven.apache.org</url>
 
