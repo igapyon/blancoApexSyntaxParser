@@ -36,3 +36,9 @@ You can download latest version of blancoApexSyntaxParser from URL below:
  * limitations under the License.
  */
 ```
+
+## Misc
+
+```sh
+mvn archetype:generate -DgroupId=jp.igapyon.blanco.apex.syntaxparser -DartifactId=BlancoApexSyntaxParser -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
+```
