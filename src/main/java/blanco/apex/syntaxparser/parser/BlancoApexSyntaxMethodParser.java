@@ -104,9 +104,11 @@ public class BlancoApexSyntaxMethodParser extends AbstractBlancoApexSyntaxSyntax
 							methodToken.getDefineList().add(inputToken);
 						} else {
 							methodToken.getDefineList().add(inputToken);
+							methodToken.getTokenList().add(inputToken);
 						}
+					}else{
+						methodToken.getTokenList().add(inputToken);
 					}
-					methodToken.getTokenList().add(inputToken);
 				} else {
 					if (isDefineArea) {
 						methodToken.getDefineList().add(inputToken);
