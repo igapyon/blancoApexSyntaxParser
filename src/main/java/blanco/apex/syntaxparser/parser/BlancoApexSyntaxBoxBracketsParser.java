@@ -41,23 +41,7 @@ public class BlancoApexSyntaxBoxBracketsParser extends AbstractBlancoApexSyntaxS
 			System.out.println("boxbrackets parser: begin: " + input.getIndex() + ": "
 					+ input.getTokenAt(input.getIndex()).getDisplayString());
 
-		{
-			input.markRead();
-
-			for (; input.availableToken();) {
-				final BlancoApexToken token = input.readToken();
-				if (token instanceof BlancoApexWordToken) {
-					// SOQL で利用できるのは select のみ!?
-					if (BlancoApexSyntaxUtil.isIncludedIgnoreCase(token.getValue(), new String[] { "select" })) {
-						boxbracketsToken.setIsSOQL(true);
-					}
-					break;
-				}
-			}
-
-			input.resetRead();
-		}
-
+		// consume '['
 		boxbracketsToken.getTokenList().add(input.readToken());
 
 		try {
@@ -68,7 +52,14 @@ public class BlancoApexSyntaxBoxBracketsParser extends AbstractBlancoApexSyntaxS
 					System.out.println("boxbrackets parser: process(" + input.getIndex() + "): "
 							+ input.getTokenAt(input.getIndex()).getDisplayString());
 
-				if (inputToken instanceof BlancoApexSpecialCharToken) {
+				if (inputToken instanceof BlancoApexWordToken) {
+					if (BlancoApexSyntaxUtil.isIncludedIgnoreCase(inputToken.getValue(), new String[] { "select" })) {
+						input.resetRead();
+						boxbracketsToken.getTokenList().add(new BlancoApexSyntaxSOQLParser(input).parse());
+					} else {
+						boxbracketsToken.getTokenList().add(inputToken);
+					}
+				} else if (inputToken instanceof BlancoApexSpecialCharToken) {
 					final BlancoApexSpecialCharToken specialCharToken = (BlancoApexSpecialCharToken) inputToken;
 					if (specialCharToken.getValue().equals("]")) {
 						// end of boxbrackets.
@@ -78,7 +69,7 @@ public class BlancoApexSyntaxBoxBracketsParser extends AbstractBlancoApexSyntaxS
 						// entering new nested one.
 						input.resetRead();
 						boxbracketsToken.getTokenList().add(new BlancoApexSyntaxBoxBracketsParser(input).parse());
-					} else if (boxbracketsToken.getIsSOQL() == false && specialCharToken.getValue().equals("(")) {
+					} else if (specialCharToken.getValue().equals("(")) {
 						// non SOQL and starts (
 						input.resetRead();
 						boxbracketsToken.getTokenList().add(new BlancoApexSyntaxParenthesisParser(input).parse());
@@ -89,7 +80,9 @@ public class BlancoApexSyntaxBoxBracketsParser extends AbstractBlancoApexSyntaxS
 					boxbracketsToken.getTokenList().add(inputToken);
 				}
 			}
-		} finally {
+		} finally
+
+		{
 			if (ISDEBUG)
 				System.out.println("boxbrackets parser: end: " + input.getIndex());
 		}

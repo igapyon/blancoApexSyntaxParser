@@ -17,7 +17,7 @@ package blanco.apex.syntaxparser.token;
 
 import blanco.apex.parser.token.BlancoApexToken;
 
-public class BlancoApexSyntaxBoxBracketsToken extends AbstractBlancoApexSyntaxToken {
+public class BlancoApexSyntaxSOQLToken extends AbstractBlancoApexSyntaxToken {
 	@Override
 	public String getValue() {
 		final StringBuffer strbuf = new StringBuffer();
@@ -41,6 +41,6 @@ public class BlancoApexSyntaxBoxBracketsToken extends AbstractBlancoApexSyntaxTo
 			strbuf.append(token.getDisplayString());
 		}
 
-		return "BOX_BRACKETS[" + strbuf.toString() + "]";
+		return "SOQL[" + strbuf.toString() + "]";
 	}
 }
