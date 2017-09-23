@@ -59,8 +59,8 @@ public class BlancoApexSyntaxMethodParser extends AbstractBlancoApexSyntaxSyntax
 						isDefineArea = false;
 
 						// start method def.
-						final BlancoApexSyntaxParenthesisToken parenthesisToken = new BlancoApexSyntaxParenthesisParser(
-								input).parse();
+						final BlancoApexSyntaxParenthesisToken parenthesisToken = new BlancoApexSyntaxMethodParenthesisParser(
+								input, methodToken).parse();
 						methodToken.getTokenList().add(parenthesisToken);
 						methodToken.getDefineArgsList().add(parenthesisToken);
 					} else if (specialCharToken.getValue().equals("{")) {
@@ -106,7 +106,7 @@ public class BlancoApexSyntaxMethodParser extends AbstractBlancoApexSyntaxSyntax
 							methodToken.getDefineList().add(inputToken);
 							methodToken.getTokenList().add(inputToken);
 						}
-					}else{
+					} else {
 						methodToken.getTokenList().add(inputToken);
 					}
 				} else {
