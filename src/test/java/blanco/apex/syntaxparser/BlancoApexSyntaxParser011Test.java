@@ -47,7 +47,7 @@ public class BlancoApexSyntaxParser011Test {
 			System.out.println(strbuf.toString());
 
 		assertEquals("check changes.",
-				"SOURCE[CLASS[WORD[public],WHITESPACE[ ],WORD[class],WHITESPACE[ ],WORD[myOuterClass],WHITESPACE[ ],BLOCK(CLASS_DEF)[SPECIAL_CHAR[{],NEWLINE[n],WHITESPACE[    ],COMMENT(SINGLE_LINE)[// code here],NEWLINE[n],WHITESPACE[    ],PROPERTY[WORD[class],WHITESPACE[ ],WORD[myInnerClass],WHITESPACE[ ],BLOCK(PROPERTY_DEF)[SPECIAL_CHAR[{],NEWLINE[n],WHITESPACE[    ],COMMENT(SINGLE_LINE)[// inner code here],NEWLINE[n],WHITESPACE[   ],SPECIAL_CHAR[}]]],NEWLINE[n],SPECIAL_CHAR[}]]]]",
+				"SOURCE[CLASS[MODIFIER[WORD[public]],WHITESPACE[ ],WORD[class],WHITESPACE[ ],WORD[myOuterClass],WHITESPACE[ ],BLOCK(CLASS_DEF)[SPECIAL_CHAR[{],NEWLINE[n],WHITESPACE[    ],COMMENT(SINGLE_LINE)[// code here],NEWLINE[n],WHITESPACE[    ],PROPERTY[WORD[class],WHITESPACE[ ],WORD[myInnerClass],WHITESPACE[ ],BLOCK(PROPERTY_DEF)[SPECIAL_CHAR[{],NEWLINE[n],WHITESPACE[    ],COMMENT(SINGLE_LINE)[// inner code here],NEWLINE[n],WHITESPACE[   ],SPECIAL_CHAR[}]]],NEWLINE[n],SPECIAL_CHAR[}]]]]",
 				strbuf.toString());
 		// System.out.println(BlancoApexParserUtil.tokenList2String(tokenList));
 	}
