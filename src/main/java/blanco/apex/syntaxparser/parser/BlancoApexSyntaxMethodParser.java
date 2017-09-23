@@ -17,13 +17,15 @@ package blanco.apex.syntaxparser.parser;
 
 import blanco.apex.parser.token.BlancoApexSpecialCharToken;
 import blanco.apex.parser.token.BlancoApexToken;
+import blanco.apex.syntaxparser.BlancoApexSyntaxConstants;
 import blanco.apex.syntaxparser.BlancoApexSyntaxParserInput;
+import blanco.apex.syntaxparser.BlancoApexSyntaxUtil;
 import blanco.apex.syntaxparser.token.BlancoApexSyntaxBlockToken.BlockType;
 import blanco.apex.syntaxparser.token.BlancoApexSyntaxMethodToken;
 import blanco.apex.syntaxparser.token.BlancoApexSyntaxParenthesisToken;
 
 public class BlancoApexSyntaxMethodParser extends AbstractBlancoApexSyntaxSyntaxParser {
-	public static final boolean ISDEBUG = false;
+	public static final boolean ISDEBUG = true;
 
 	final BlancoApexSyntaxMethodToken methodToken = new BlancoApexSyntaxMethodToken();
 
@@ -83,6 +85,11 @@ public class BlancoApexSyntaxMethodParser extends AbstractBlancoApexSyntaxSyntax
 					methodToken.getTokenList().add(sourceToken);
 
 					if (isDefineArea) {
+						if (BlancoApexSyntaxUtil.isIncludedIgnoreCase(sourceToken.getValue(),
+								BlancoApexSyntaxConstants.MODIFIER_KEYWORDS)) {
+							System.err.println("TRACE: modifier:" + sourceToken.getValue());
+						}
+
 						methodToken.getDefineList().add(sourceToken);
 					}
 				}
