@@ -31,6 +31,7 @@ public class BlancoApexSyntaxAnnotationParser extends AbstractBlancoApexSyntaxSy
 		super(input);
 	}
 
+	@SuppressWarnings("deprecation")
 	public BlancoApexSyntaxAnnotationToken parse() {
 		if (ISDEBUG)
 			System.out.println("annotation parser: begin: " + input.getIndex() + ": "

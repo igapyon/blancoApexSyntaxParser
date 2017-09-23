@@ -32,6 +32,7 @@ public class BlancoApexSyntaxFieldParser extends AbstractBlancoApexSyntaxSyntaxP
 		super(input);
 	}
 
+	@SuppressWarnings("deprecation")
 	public BlancoApexSyntaxFieldToken parse() {
 		if (ISDEBUG)
 			System.out.println("field parser: begin: " + input.getIndex() + ": "

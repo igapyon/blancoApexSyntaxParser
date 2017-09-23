@@ -31,6 +31,7 @@ public class BlancoApexSyntaxForStatementParser extends AbstractBlancoApexSyntax
 		super(input);
 	}
 
+	@SuppressWarnings("deprecation")
 	public BlancoApexSyntaxForStatementToken parse() {
 		if (ISDEBUG)
 			System.out.println("for_statement parser: begin: " + input.getIndex() + ": "
@@ -72,6 +73,7 @@ public class BlancoApexSyntaxForStatementParser extends AbstractBlancoApexSyntax
 		return forStatementToken;
 	}
 
+	@SuppressWarnings("deprecation")
 	void processForStatementBody() {
 		for (input.markRead(); input.availableToken(); input.markRead()) {
 			final BlancoApexToken inputToken = input.readToken();

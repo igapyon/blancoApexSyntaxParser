@@ -31,6 +31,7 @@ public class BlancoApexSyntaxWhileStatementParser extends AbstractBlancoApexSynt
 		super(input);
 	}
 
+	@SuppressWarnings("deprecation")
 	public BlancoApexSyntaxWhileStatementToken parse() {
 		if (ISDEBUG)
 			System.out.println("while_statement parser: begin: " + input.getIndex() + ": "
@@ -68,6 +69,7 @@ public class BlancoApexSyntaxWhileStatementParser extends AbstractBlancoApexSynt
 		return whileStatementToken;
 	}
 
+	@SuppressWarnings("deprecation")
 	void processWhileStatementBody() {
 		for (input.markRead(); input.availableToken(); input.markRead()) {
 			final BlancoApexToken inputToken = input.readToken();

@@ -54,7 +54,17 @@ public class BlancoApexSyntaxSourceParser extends AbstractBlancoApexSyntaxSyntax
 			System.out.println("source parser: begin: " + input.getIndex());
 
 		try {
-			for (input.markRead(); input.availableToken(); input.markRead()) {
+			for (input.markRead();;) {
+				if (input.availableToken() == false) {
+					input.resetRead();
+					for (; input.availableToken(); input.markRead()) {
+						sourceToken.getTokenList().add(input.readToken());
+					}
+					// end of loop; end of source.
+					input.markRead();
+					break;
+				}
+
 				final BlancoApexToken inputToken = input.readToken();
 
 				if (inputToken instanceof BlancoApexWhitespaceToken || inputToken instanceof BlancoApexNewlineToken
@@ -63,6 +73,7 @@ public class BlancoApexSyntaxSourceParser extends AbstractBlancoApexSyntaxSyntax
 
 					// simple copy.
 					sourceToken.getTokenList().add(inputToken);
+					input.markRead();
 				} else if (inputToken instanceof BlancoApexWordToken) {
 					final BlancoApexWordToken wordToken = (BlancoApexWordToken) inputToken;
 
@@ -71,27 +82,32 @@ public class BlancoApexSyntaxSourceParser extends AbstractBlancoApexSyntaxSyntax
 							BlancoApexSyntaxConstants.RESERVED_KEYWORDS)) {
 						input.resetRead();
 						parseSourceReservedKeyword();
+						input.resetRead();
 					} else {
 						// maybe name
 						System.out.println(
 								"SOURCE(L77): Unexpected token: simply copy. It should be keyword or annotations...: "
 										+ wordToken.getDisplayString());
 						sourceToken.getTokenList().add(inputToken);
+						input.markRead();
 					}
 				} else if (inputToken instanceof BlancoApexSpecialCharToken) {
 					final BlancoApexSpecialCharToken specialCharToken = (BlancoApexSpecialCharToken) inputToken;
 					if (specialCharToken.getValue().equals("@")) {
 						input.resetRead();
 						sourceToken.getTokenList().add(new BlancoApexSyntaxAnnotationParser(input).parse());
+						input.markRead();
 					} else {
 						// copy simply.
 						System.out.println(
 								"SOURCE(L89): Unexpected token. simply copy.: " + inputToken.getDisplayString());
 						sourceToken.getTokenList().add(inputToken);
+						input.markRead();
 					}
 				} else {
 					System.out.println("SOURCE(L93): Unexpected token. simply copy.: " + inputToken.getDisplayString());
 					sourceToken.getTokenList().add(inputToken);
+					input.markRead();
 				}
 			}
 		} finally {
@@ -138,6 +154,8 @@ public class BlancoApexSyntaxSourceParser extends AbstractBlancoApexSyntaxSyntax
 					// open class parser.
 					sourceToken.getTokenList().add(new BlancoApexSyntaxClassParser(input).parse());
 
+					input.markRead();
+
 					// exit here!
 					return;
 
@@ -148,6 +166,8 @@ public class BlancoApexSyntaxSourceParser extends AbstractBlancoApexSyntaxSyntax
 					// open class parser.
 					sourceToken.getTokenList().add(new BlancoApexSyntaxEnumParser(input).parse());
 
+					input.markRead();
+
 					// exit here!
 					return;
 
@@ -157,6 +177,8 @@ public class BlancoApexSyntaxSourceParser extends AbstractBlancoApexSyntaxSyntax
 			} else {
 				// do nothing
 				// ignorable for seeking.
+				if (ISDEBUG)
+					System.out.println("source parser: do nothing: [" + inputToken.getValue() + "]");
 			}
 		}
 	}

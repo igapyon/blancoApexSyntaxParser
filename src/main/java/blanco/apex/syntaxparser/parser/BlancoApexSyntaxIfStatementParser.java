@@ -31,6 +31,7 @@ public class BlancoApexSyntaxIfStatementParser extends AbstractBlancoApexSyntaxS
 		super(input);
 	}
 
+	@SuppressWarnings("deprecation")
 	public BlancoApexSyntaxIfStatementToken parse() {
 		if (ISDEBUG)
 			System.out.println("if_statement parser: begin: " + input.getIndex() + ": "
@@ -113,6 +114,7 @@ public class BlancoApexSyntaxIfStatementParser extends AbstractBlancoApexSyntaxS
 		return ifStatementToken;
 	}
 
+	@SuppressWarnings("deprecation")
 	void processIfStatementBody() {
 		for (input.markRead(); input.availableToken(); input.markRead()) {
 			final BlancoApexToken inputToken = input.readToken();

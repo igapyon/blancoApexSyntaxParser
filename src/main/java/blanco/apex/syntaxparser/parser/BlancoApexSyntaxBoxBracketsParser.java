@@ -36,6 +36,7 @@ public class BlancoApexSyntaxBoxBracketsParser extends AbstractBlancoApexSyntaxS
 		super(input);
 	}
 
+	@SuppressWarnings("deprecation")
 	public BlancoApexSyntaxBoxBracketsToken parse() {
 		if (ISDEBUG)
 			System.out.println("boxbrackets parser: begin: " + input.getIndex() + ": "

@@ -30,6 +30,7 @@ public class BlancoApexSyntaxStatementParser extends AbstractBlancoApexSyntaxSyn
 		super(input);
 	}
 
+	@SuppressWarnings("deprecation")
 	public BlancoApexSyntaxStatementToken parse() {
 		if (ISDEBUG)
 			System.out.println("statement parser: begin: " + input.getIndex() + ": "

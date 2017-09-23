@@ -34,6 +34,7 @@ public class BlancoApexSyntaxParenthesisParser extends AbstractBlancoApexSyntaxS
 		super(input);
 	}
 
+	@SuppressWarnings("deprecation")
 	public BlancoApexSyntaxParenthesisToken parse() {
 		if (ISDEBUG)
 			System.out.println("parenthesis parser: begin: " + input.getIndex() + ": "

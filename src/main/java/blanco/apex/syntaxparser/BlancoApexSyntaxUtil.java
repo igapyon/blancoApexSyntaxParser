@@ -63,6 +63,7 @@ public class BlancoApexSyntaxUtil {
 		return null;
 	}
 
+	@SuppressWarnings("deprecation")
 	public static BlancoApexSpecialCharToken getFirstSpecialCharTokenWithPreviousOne(
 			final BlancoApexSyntaxParserInput input, final String[] specialChars) {
 		int index = input.getIndex() - 1;
@@ -84,6 +85,7 @@ public class BlancoApexSyntaxUtil {
 	 * @param stringArray
 	 * @return
 	 */
+	@SuppressWarnings("deprecation")
 	public static BlancoApexToken getFirstTokenByValue(final BlancoApexSyntaxParserInput input,
 			final String[] stringArray) {
 		int index = input.getIndex();
@@ -96,6 +98,7 @@ public class BlancoApexSyntaxUtil {
 		return null;
 	}
 
+	@SuppressWarnings("deprecation")
 	public static BlancoApexToken getFirstTokenWithoutWhitespaceNewline(final BlancoApexSyntaxParserInput input) {
 		int index = input.getIndex();
 		for (; index < input.getTokenCount(); index++) {

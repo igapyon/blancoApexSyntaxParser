@@ -32,6 +32,7 @@ public class BlancoApexSyntaxBlockParser extends AbstractBlancoApexSyntaxSyntaxP
 		blockToken.setBlockType(blockType);
 	}
 
+	@SuppressWarnings("deprecation")
 	public BlancoApexSyntaxBlockToken parse() {
 		if (ISDEBUG)
 			System.out.println("block parser: begin: " + input.getIndex() + ": "

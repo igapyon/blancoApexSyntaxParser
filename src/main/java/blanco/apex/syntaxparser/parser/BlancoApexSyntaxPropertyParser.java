@@ -33,6 +33,7 @@ public class BlancoApexSyntaxPropertyParser extends AbstractBlancoApexSyntaxSynt
 		super(input);
 	}
 
+	@SuppressWarnings("deprecation")
 	public BlancoApexSyntaxPropertyToken parse() {
 		if (ISDEBUG)
 			System.out.println("property parser: begin: " + input.getIndex() + ": "
