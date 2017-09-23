@@ -50,17 +50,18 @@ public class BlancoApexSyntaxModifierParser extends AbstractBlancoApexSyntaxSynt
 				final BlancoApexToken inputToken = input.readToken();
 
 				if (ISDEBUG)
-					System.out.println("modifier parser: process(" + input.getIndex() + "): "
-							+ input.getTokenAt(input.getIndex()).getDisplayString());
+					System.out.println(
+							"modifier parser: process(" + input.getIndex() + "): " + inputToken.getDisplayString());
 
 				if (inputToken instanceof BlancoApexWordToken) {
-					if (BlancoApexSyntaxUtil.isIncludedIgnoreCase(inputToken.getValue(),
+					final String valueLookup = inputToken.getValue();
+					if (BlancoApexSyntaxUtil.isIncludedIgnoreCase(valueLookup,
 							BlancoApexSyntaxConstants.MODIFIER_KEYWORDS) == false) {
-						System.out.println("modifier終わり."+ inputToken.getValue());
+						System.out.println("modifier終わり." + valueLookup);
 						input.resetRead();
 						break;
 					}
-					System.out.println("modifier続く." + inputToken.getValue());
+					System.out.println("modifier続く." + valueLookup);
 
 					keepTokenList.add(inputToken);
 					modifierList.add(inputToken);
