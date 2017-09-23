@@ -17,7 +17,10 @@ package blanco.apex.syntaxparser.parser;
 
 import blanco.apex.parser.token.BlancoApexSpecialCharToken;
 import blanco.apex.parser.token.BlancoApexToken;
+import blanco.apex.parser.token.BlancoApexWordToken;
+import blanco.apex.syntaxparser.BlancoApexSyntaxConstants;
 import blanco.apex.syntaxparser.BlancoApexSyntaxParserInput;
+import blanco.apex.syntaxparser.BlancoApexSyntaxUtil;
 import blanco.apex.syntaxparser.token.BlancoApexSyntaxBlockToken.BlockType;
 import blanco.apex.syntaxparser.token.BlancoApexSyntaxPropertyToken;
 
@@ -35,7 +38,7 @@ public class BlancoApexSyntaxPropertyParser extends AbstractBlancoApexSyntaxSynt
 			System.out.println("property parser: begin: " + input.getIndex() + ": "
 					+ input.getTokenAt(input.getIndex()).getDisplayString());
 
-		propertyToken.getTokenList().add(input.readToken());
+		// propertyToken.getTokenList().add(input.readToken());
 
 		try {
 			for (input.markRead(); input.availableToken(); input.markRead()) {
@@ -45,7 +48,23 @@ public class BlancoApexSyntaxPropertyParser extends AbstractBlancoApexSyntaxSynt
 					System.out.println("property parser: process(" + input.getIndex() + "): "
 							+ input.getTokenAt(input.getIndex()).getDisplayString());
 
-				if (inputToken instanceof BlancoApexSpecialCharToken) {
+				if (inputToken instanceof BlancoApexWordToken) {
+					if (propertyToken.getType() == null) {
+						// before method name.
+						if (BlancoApexSyntaxUtil.isIncludedIgnoreCase(inputToken.getValue(),
+								BlancoApexSyntaxConstants.MODIFIER_KEYWORDS)) {
+							input.resetRead();
+							propertyToken.setModifiers(new BlancoApexSyntaxModifierParser(input).parse());
+							propertyToken.getTokenList().add(propertyToken.getModifiers());
+						} else {
+							input.resetRead();
+							propertyToken.setType(new BlancoApexSyntaxTypeParser(input).parse());
+							propertyToken.getTokenList().add(propertyToken.getType());
+						}
+					} else {
+						propertyToken.getTokenList().add(inputToken);
+					}
+				} else if (inputToken instanceof BlancoApexSpecialCharToken) {
 					final BlancoApexSpecialCharToken specialCharToken = (BlancoApexSpecialCharToken) inputToken;
 					if (specialCharToken.getValue().equals("{")) {
 						// entering new nested block.
