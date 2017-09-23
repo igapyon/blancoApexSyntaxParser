@@ -122,8 +122,8 @@ public class BlancoApexSyntaxSourceParser extends AbstractBlancoApexSyntaxSyntax
 					wordToken.setReservedKeyword(true);
 				}
 
-				if (BlancoApexSyntaxUtil.isIncludedIgnoreCase(wordToken.getValue(), new String[] { "global", "public",
-						"protected", "private", "abstract", "virtual", "with", "without", "sharing" })) {
+				if (BlancoApexSyntaxUtil.isIncludedIgnoreCase(wordToken.getValue(),
+						BlancoApexSyntaxConstants.MODIFIER_KEYWORDS)) {
 					// will be modifier of class.
 					// skip and read next
 				} else if (wordToken.getValue().equalsIgnoreCase("class")
