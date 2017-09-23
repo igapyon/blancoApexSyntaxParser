@@ -100,18 +100,28 @@ public class BlancoApexSyntaxClassParser extends AbstractBlancoApexSyntaxSyntaxP
 		final BlancoApexSyntaxBlockToken blockToken = new BlancoApexSyntaxBlockToken();
 		blockToken.setBlockType(BlockType.CLASS_DEF);
 
-		// consume {
+		if (ISDEBUG)
+			System.out.println("class parser: block: begin: " + input.getIndex());
+
+		// consume '{'
 		blockToken.getTokenList().add(input.readToken());
 
 		for (; input.availableToken(); input.markRead()) {
-			if (ISDEBUG)
-				System.out.println("class parser: process(" + input.getIndex() + "): "
-						+ input.getTokenAt(input.getIndex()).getDisplayString());
 
 			final BlancoApexToken inputToken = input.readToken();
 
+			if (ISDEBUG)
+				System.out.println("class parser: process(" + input.getIndex() + "): " + inputToken.getDisplayString());
+
 			if (inputToken instanceof BlancoApexWordToken) {
 				final BlancoApexWordToken wordToken = (BlancoApexWordToken) inputToken;
+				if (BlancoApexSyntaxUtil.isIncludedIgnoreCase(wordToken.getValue(), new String[] { "class" })) {
+					// inner class found.
+					input.resetRead();
+					blockToken.getTokenList().add(new BlancoApexSyntaxClassParser(input).parse());
+					continue;
+				}
+
 				final BlancoApexSpecialCharToken nextSpecial = BlancoApexSyntaxUtil
 						.getFirstSpecialCharTokenWithPreviousOne(input, new String[] { ";", "=", "(", "{" });
 				if (nextSpecial == null) {
@@ -123,14 +133,23 @@ public class BlancoApexSyntaxClassParser extends AbstractBlancoApexSyntaxSyntaxP
 						input.resetRead();
 						blockToken.getTokenList().add(new BlancoApexSyntaxFieldParser(input).parse());
 					} else if (nextSpecial.getValue().equals("=")) {
+						if (ISDEBUG)
+							System.out.println("class parser: block: =: " + input.getIndex());
+
 						// field with load value
 						input.resetRead();
 						blockToken.getTokenList().add(new BlancoApexSyntaxFieldParser(input).parse());
 					} else if (nextSpecial.getValue().equals("(")) {
+						if (ISDEBUG)
+							System.out.println("class parser: block: (: " + input.getIndex());
+
 						// method
 						input.resetRead();
 						blockToken.getTokenList().add(new BlancoApexSyntaxMethodParser(input).parse());
 					} else if (nextSpecial.getValue().equals("{")) {
+						if (ISDEBUG)
+							System.out.println("class parser: block: {: " + input.getIndex());
+
 						// will be class or property.
 						final BlancoApexToken checkNextToken = BlancoApexSyntaxUtil.getFirstTokenByValue(input,
 								new String[] { "class", "interface", "{" });
