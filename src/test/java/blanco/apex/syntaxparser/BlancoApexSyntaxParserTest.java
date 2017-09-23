@@ -38,10 +38,12 @@ import blanco.apex.syntaxparser.token.BlancoApexSyntaxFieldToken;
 import blanco.apex.syntaxparser.token.BlancoApexSyntaxForStatementToken;
 import blanco.apex.syntaxparser.token.BlancoApexSyntaxIfStatementToken;
 import blanco.apex.syntaxparser.token.BlancoApexSyntaxMethodToken;
+import blanco.apex.syntaxparser.token.BlancoApexSyntaxModifierToken;
 import blanco.apex.syntaxparser.token.BlancoApexSyntaxParenthesisToken;
 import blanco.apex.syntaxparser.token.BlancoApexSyntaxPropertyToken;
 import blanco.apex.syntaxparser.token.BlancoApexSyntaxSourceToken;
 import blanco.apex.syntaxparser.token.BlancoApexSyntaxStatementToken;
+import blanco.apex.syntaxparser.token.BlancoApexSyntaxTypeToken;
 
 public class BlancoApexSyntaxParserTest {
 	static final String file2String(final File file) throws IOException {
@@ -90,7 +92,8 @@ public class BlancoApexSyntaxParserTest {
 	public void testSingleFile() throws Exception {
 		// TODO change apex class filename to adapt your environment.
 		final List<BlancoApexToken> sourceTokenList = new BlancoApexParser()
-				.parse(new File("./test/data/apex/MySimpleTest.cls"));
+				// .parse(new File("./test/data/apex/MySimpleTest.cls"));
+				.parse(new File("./test/data/apex/MySimpleTest4.cls"));
 
 		final List<BlancoApexToken> tokenList = new BlancoApexSyntaxParser().parse(sourceTokenList);
 
@@ -139,6 +142,10 @@ public class BlancoApexSyntaxParserTest {
 					displayDebug((AbstractBlancoApexSyntaxToken) token2);
 				}
 			}
+		} else if (token instanceof BlancoApexSyntaxTypeToken) {
+			System.out.println("  TYPE: " + token.getValue());
+		} else if (token instanceof BlancoApexSyntaxModifierToken) {
+			System.out.println("  MODIFIER: " + token.getValue());
 		} else if (token instanceof BlancoApexSyntaxFieldToken) {
 			System.out.println("  FIELD: " + token.getValue());
 		} else if (token instanceof BlancoApexSyntaxIfStatementToken) {
