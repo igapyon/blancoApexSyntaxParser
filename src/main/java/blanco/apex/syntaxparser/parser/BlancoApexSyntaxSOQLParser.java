@@ -34,6 +34,7 @@ public class BlancoApexSyntaxSOQLParser extends AbstractBlancoApexSyntaxSyntaxPa
 		super(input);
 	}
 
+	@SuppressWarnings("deprecation")
 	public BlancoApexSyntaxSOQLToken parse() {
 		if (ISDEBUG)
 			System.out.println("soql parser: begin: " + input.getIndex() + ": "
@@ -48,26 +49,13 @@ public class BlancoApexSyntaxSOQLParser extends AbstractBlancoApexSyntaxSyntaxPa
 							+ input.getTokenAt(input.getIndex()).getDisplayString());
 
 				if (inputToken instanceof BlancoApexSpecialCharToken) {
+					// ' is already processed by lexical parser.
+
 					final BlancoApexSpecialCharToken specialCharToken = (BlancoApexSpecialCharToken) inputToken;
 					if (specialCharToken.getValue().equals("]")) {
-						// end of boxbrackets.
+						// end of boxbrackets. = end of SOQL.
 						input.resetRead();
 						return soqlToken;
-					} else if (specialCharToken.getValue().equals("'")) {
-						// Literal in SOQL
-
-						soqlToken.getTokenList().add(inputToken);
-						// Literal reader.
-						for (input.markRead(); input.availableToken(); input.markRead()) {
-							final BlancoApexToken literalToken = input.readToken();
-							if (literalToken instanceof BlancoApexSpecialCharToken
-									&& inputToken.getValue().equals("'")) {
-								// end of literalo
-								soqlToken.getTokenList().add(inputToken);
-								break;
-							}
-							soqlToken.getTokenList().add(inputToken);
-						}
 					} else {
 						soqlToken.getTokenList().add(inputToken);
 					}
