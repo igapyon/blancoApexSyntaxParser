@@ -9,3 +9,4 @@ public without sharing class MySimpleTest {
         return acctList;
     }
 }
+// Tail comment.
