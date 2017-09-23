@@ -61,6 +61,8 @@ public class BlancoApexSyntaxTypeParser extends AbstractBlancoApexSyntaxSyntaxPa
 							break;
 						}
 					}
+					typeName += inputToken.getValue();
+					typeToken.getTokenList().add(inputToken);
 				} else if (inputToken instanceof BlancoApexWordToken) {
 					if (deapthDiamond == 0) {
 						if (typeName.trim().length() > 0) {
@@ -69,11 +71,12 @@ public class BlancoApexSyntaxTypeParser extends AbstractBlancoApexSyntaxSyntaxPa
 							break;
 						}
 					}
+
 					input.markRead();
+					typeName += inputToken.getValue();
+					typeToken.getTokenList().add(inputToken);
 				} else {
 				}
-				typeName += inputToken.getValue();
-				typeToken.getTokenList().add(inputToken);
 			}
 			typeToken.setValue(typeName);
 		} finally {
