@@ -92,8 +92,7 @@ public class BlancoApexSyntaxParserTest {
 	public void testSingleFile() throws Exception {
 		// TODO change apex class filename to adapt your environment.
 		final List<BlancoApexToken> sourceTokenList = new BlancoApexParser()
-				// .parse(new File("./test/data/apex/MySimpleTest.cls"));
-				.parse(new File("./test/data/apex/MySimpleTest4.cls"));
+				.parse(new File("./test/data/apex/MySimpleTest.cls"));
 
 		final List<BlancoApexToken> tokenList = new BlancoApexSyntaxParser().parse(sourceTokenList);
 

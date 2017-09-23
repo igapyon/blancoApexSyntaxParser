@@ -38,7 +38,8 @@ public class BlancoApexSyntaxParser001Test {
 		System.err.println("    lexical parser: " + BlancoApexConstants.getVersion());
 		System.err.println("     syntax parser: " + BlancoApexSyntaxConstants.getVersion());
 
-		final String fileString = file2String(new File("./test/data/apex/MySimpleTest.cls"));
+//		final String fileString = file2String(new File("./test/data/apex/MySimpleTest.cls"));
+		final String fileString = file2String(new File("./test/data/apex/MySimpleTest3.cls"));
 
 		final List<BlancoApexToken> sourceTokenList = new BlancoApexParser().parse(fileString);
 

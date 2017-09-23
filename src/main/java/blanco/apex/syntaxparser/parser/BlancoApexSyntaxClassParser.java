@@ -56,6 +56,8 @@ public class BlancoApexSyntaxClassParser extends AbstractBlancoApexSyntaxSyntaxP
 
 						classToken.getTokenList().add(parseClassBlock());
 
+						input.resetRead();
+
 						// prevent process.
 						return classToken;
 					} else {
@@ -175,6 +177,7 @@ public class BlancoApexSyntaxClassParser extends AbstractBlancoApexSyntaxSyntaxP
 				if (specialCharToken.getValue().equals("}")) {
 					// end of class def.
 					blockToken.getTokenList().add(inputToken);
+					input.markRead();
 					return blockToken;
 				} else if (specialCharToken.getValue().equals("@")) {
 					input.resetRead();
