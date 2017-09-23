@@ -15,6 +15,9 @@
  */
 package blanco.apex.syntaxparser.parser;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import blanco.apex.parser.token.BlancoApexSpecialCharToken;
 import blanco.apex.parser.token.BlancoApexToken;
 import blanco.apex.parser.token.BlancoApexWordToken;
@@ -41,6 +44,7 @@ public class BlancoApexSyntaxTypeParser extends AbstractBlancoApexSyntaxSyntaxPa
 			// 2つめのWORDが来たら終わる。<>ではないところでカンマが来ても終わる。
 			String typeName = "";
 			int deapthDiamond = 0;
+			final List<BlancoApexToken> keepTokenList = new ArrayList<BlancoApexToken>();
 			for (input.markRead(); input.availableToken();) {
 				final BlancoApexToken inputToken = input.readToken();
 
@@ -61,9 +65,11 @@ public class BlancoApexSyntaxTypeParser extends AbstractBlancoApexSyntaxSyntaxPa
 							break;
 						}
 					}
+					keepTokenList.add(inputToken);
+					typeToken.getTokenList().addAll(keepTokenList);
+					keepTokenList.clear();
 					input.markRead();
 					typeName += inputToken.getValue();
-					typeToken.getTokenList().add(inputToken);
 				} else if (inputToken instanceof BlancoApexWordToken) {
 					if (deapthDiamond == 0) {
 						if (typeName.trim().length() > 0) {
@@ -73,10 +79,13 @@ public class BlancoApexSyntaxTypeParser extends AbstractBlancoApexSyntaxSyntaxPa
 						}
 					}
 
+					keepTokenList.add(inputToken);
+					typeToken.getTokenList().addAll(keepTokenList);
+					keepTokenList.clear();
 					input.markRead();
 					typeName += inputToken.getValue();
-					typeToken.getTokenList().add(inputToken);
 				} else {
+					keepTokenList.add(inputToken);
 				}
 			}
 			typeToken.setValue(typeName);
