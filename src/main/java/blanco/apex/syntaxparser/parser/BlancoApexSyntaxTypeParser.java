@@ -22,7 +22,7 @@ import blanco.apex.syntaxparser.BlancoApexSyntaxParserInput;
 import blanco.apex.syntaxparser.token.BlancoApexSyntaxTypeToken;
 
 public class BlancoApexSyntaxTypeParser extends AbstractBlancoApexSyntaxSyntaxParser {
-	public static final boolean ISDEBUG = true;
+	public static final boolean ISDEBUG = false;
 
 	final BlancoApexSyntaxTypeToken typeToken = new BlancoApexSyntaxTypeToken();
 

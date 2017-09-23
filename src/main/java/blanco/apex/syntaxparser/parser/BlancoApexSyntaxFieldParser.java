@@ -17,7 +17,10 @@ package blanco.apex.syntaxparser.parser;
 
 import blanco.apex.parser.token.BlancoApexSpecialCharToken;
 import blanco.apex.parser.token.BlancoApexToken;
+import blanco.apex.parser.token.BlancoApexWordToken;
+import blanco.apex.syntaxparser.BlancoApexSyntaxConstants;
 import blanco.apex.syntaxparser.BlancoApexSyntaxParserInput;
+import blanco.apex.syntaxparser.BlancoApexSyntaxUtil;
 import blanco.apex.syntaxparser.token.BlancoApexSyntaxFieldToken;
 
 public class BlancoApexSyntaxFieldParser extends AbstractBlancoApexSyntaxSyntaxParser {
@@ -34,7 +37,7 @@ public class BlancoApexSyntaxFieldParser extends AbstractBlancoApexSyntaxSyntaxP
 			System.out.println("field parser: begin: " + input.getIndex() + ": "
 					+ input.getTokenAt(input.getIndex()).getDisplayString());
 
-		fieldToken.getTokenList().add(input.readToken());
+		// fieldToken.getTokenList().add(input.readToken());
 
 		try {
 			for (input.markRead(); input.availableToken(); input.markRead()) {
@@ -44,7 +47,23 @@ public class BlancoApexSyntaxFieldParser extends AbstractBlancoApexSyntaxSyntaxP
 					System.out.println("field parser: process(" + input.getIndex() + "): "
 							+ input.getTokenAt(input.getIndex()).getDisplayString());
 
-				if (inputToken instanceof BlancoApexSpecialCharToken) {
+				if (inputToken instanceof BlancoApexWordToken) {
+					if (fieldToken.getType() == null) {
+						// before method name.
+						if (BlancoApexSyntaxUtil.isIncludedIgnoreCase(inputToken.getValue(),
+								BlancoApexSyntaxConstants.MODIFIER_KEYWORDS)) {
+							input.resetRead();
+							fieldToken.setModifiers(new BlancoApexSyntaxModifierParser(input).parse());
+							fieldToken.getTokenList().add(fieldToken.getModifiers());
+						} else {
+							input.resetRead();
+							fieldToken.setType(new BlancoApexSyntaxTypeParser(input).parse());
+							fieldToken.getTokenList().add(fieldToken.getType());
+						}
+					} else {
+						fieldToken.getTokenList().add(inputToken);
+					}
+				} else if (inputToken instanceof BlancoApexSpecialCharToken) {
 					final BlancoApexSpecialCharToken specialCharToken = (BlancoApexSpecialCharToken) inputToken;
 					if (specialCharToken.getValue().equals(";")) {
 						// end of statement.

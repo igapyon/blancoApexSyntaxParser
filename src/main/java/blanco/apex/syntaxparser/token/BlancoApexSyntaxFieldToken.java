@@ -18,6 +18,26 @@ package blanco.apex.syntaxparser.token;
 import blanco.apex.parser.token.BlancoApexToken;
 
 public class BlancoApexSyntaxFieldToken extends AbstractBlancoApexSyntaxToken {
+	protected BlancoApexSyntaxTypeToken typeToken;
+
+	protected BlancoApexSyntaxModifierToken modifiers = new BlancoApexSyntaxModifierToken();
+
+	public BlancoApexSyntaxTypeToken getType() {
+		return typeToken;
+	}
+
+	public void setType(BlancoApexSyntaxTypeToken typeToken) {
+		this.typeToken = typeToken;
+	}
+
+	public BlancoApexSyntaxModifierToken getModifiers() {
+		return modifiers;
+	}
+
+	public void setModifiers(BlancoApexSyntaxModifierToken modifiers) {
+		this.modifiers = modifiers;
+	}
+
 	@Override
 	public String getValue() {
 		final StringBuffer strbuf = new StringBuffer();
