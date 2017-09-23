@@ -17,6 +17,7 @@ package blanco.apex.syntaxparser.parser;
 
 import blanco.apex.parser.token.BlancoApexSpecialCharToken;
 import blanco.apex.parser.token.BlancoApexToken;
+import blanco.apex.parser.token.BlancoApexWordToken;
 import blanco.apex.syntaxparser.BlancoApexSyntaxConstants;
 import blanco.apex.syntaxparser.BlancoApexSyntaxParserInput;
 import blanco.apex.syntaxparser.BlancoApexSyntaxUtil;
@@ -41,9 +42,14 @@ public class BlancoApexSyntaxMethodParser extends AbstractBlancoApexSyntaxSyntax
 
 		try {
 			for (input.markRead(); input.availableToken(); input.markRead()) {
-				final BlancoApexToken sourceToken = input.readToken();
-				if (sourceToken instanceof BlancoApexSpecialCharToken) {
-					final BlancoApexSpecialCharToken specialCharToken = (BlancoApexSpecialCharToken) sourceToken;
+				final BlancoApexToken inputToken = input.readToken();
+
+				if (ISDEBUG)
+					System.out.println(
+							"method parser: process(" + input.getIndex() + "): " + inputToken.getDisplayString());
+
+				if (inputToken instanceof BlancoApexSpecialCharToken) {
+					final BlancoApexSpecialCharToken specialCharToken = (BlancoApexSpecialCharToken) inputToken;
 
 					// processing () needed.
 
@@ -71,21 +77,21 @@ public class BlancoApexSyntaxMethodParser extends AbstractBlancoApexSyntaxSyntax
 						isDefineArea = false;
 
 						// seems non body method.
-						methodToken.getTokenList().add(sourceToken);
+						methodToken.getTokenList().add(inputToken);
 						// exit process.
 						return methodToken;
 					} else {
-						methodToken.getTokenList().add(sourceToken);
+						methodToken.getTokenList().add(inputToken);
 
 						if (isDefineArea) {
-							methodToken.getDefineList().add(sourceToken);
+							methodToken.getDefineList().add(inputToken);
 						}
 					}
-				} else {
+				} else if (inputToken instanceof BlancoApexWordToken) {
 					if (isDefineArea) {
 						if (methodToken.getReturn() == null) {
 							// before method name.
-							if (BlancoApexSyntaxUtil.isIncludedIgnoreCase(sourceToken.getValue(),
+							if (BlancoApexSyntaxUtil.isIncludedIgnoreCase(inputToken.getValue(),
 									BlancoApexSyntaxConstants.MODIFIER_KEYWORDS)) {
 								input.resetRead();
 								methodToken.setModifiers(new BlancoApexSyntaxModifierParser(input).parse());
@@ -95,12 +101,17 @@ public class BlancoApexSyntaxMethodParser extends AbstractBlancoApexSyntaxSyntax
 								methodToken.setReturn(new BlancoApexSyntaxTypeParser(input).parse());
 								methodToken.getTokenList().add(methodToken.getReturn());
 							}
-							methodToken.getDefineList().add(sourceToken);
+							methodToken.getDefineList().add(inputToken);
 						} else {
-							methodToken.getDefineList().add(sourceToken);
+							methodToken.getDefineList().add(inputToken);
 						}
 					}
-					methodToken.getTokenList().add(sourceToken);
+					methodToken.getTokenList().add(inputToken);
+				} else {
+					if (isDefineArea) {
+						methodToken.getDefineList().add(inputToken);
+					}
+					methodToken.getTokenList().add(inputToken);
 				}
 			}
 		} finally {
