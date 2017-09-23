@@ -28,7 +28,10 @@ public class BlancoApexSyntaxMethodToken extends AbstractBlancoApexSyntaxToken {
 
 	protected BlancoApexSyntaxModifierToken modifiers = new BlancoApexSyntaxModifierToken();
 
-	protected BlancoApexSyntaxTypeToken returnType = new BlancoApexSyntaxTypeToken();
+	/**
+	 * default be null.
+	 */
+	protected BlancoApexSyntaxTypeToken returnType = null;
 
 	protected List<BlancoApexToken> defineArgsList = new ArrayList<BlancoApexToken>();
 
@@ -86,6 +89,7 @@ public class BlancoApexSyntaxMethodToken extends AbstractBlancoApexSyntaxToken {
 
 	public String getDefineArgsString() {
 		final StringBuffer strbuf = new StringBuffer();
+
 		boolean isFirst = true;
 		for (BlancoApexToken defineArgsToken : getDefineArgsList()) {
 			if (isFirst) {

@@ -82,9 +82,7 @@ public class BlancoApexSyntaxMethodParser extends AbstractBlancoApexSyntaxSyntax
 						}
 					}
 				} else {
-					System.out.println("TRACE: non special");
 					if (isDefineArea) {
-						System.out.println("TRACE: define area");
 						if (methodToken.getReturn() == null) {
 							// before method name.
 							if (BlancoApexSyntaxUtil.isIncludedIgnoreCase(sourceToken.getValue(),
@@ -105,9 +103,7 @@ public class BlancoApexSyntaxMethodParser extends AbstractBlancoApexSyntaxSyntax
 					methodToken.getTokenList().add(sourceToken);
 				}
 			}
-		} finally
-
-		{
+		} finally {
 			if (ISDEBUG)
 				System.out.println(
 						"method parser: end: " + methodToken.getDefineString() + methodToken.getDefineArgsString());
