@@ -22,11 +22,34 @@ import blanco.apex.parser.token.BlancoApexToken;
 
 public class BlancoApexSyntaxClassToken extends AbstractBlancoApexSyntaxToken {
 	/**
+	 * Class name
+	 */
+	protected String name;
+
+	/**
 	 * area of definition.
 	 */
 	protected List<BlancoApexToken> defineList = new ArrayList<BlancoApexToken>();
 
 	protected BlancoApexSyntaxModifierToken modifiers = new BlancoApexSyntaxModifierToken();
+
+	/**
+	 * class Name
+	 * 
+	 * @return
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * class name
+	 * 
+	 * @param name
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
 
 	public BlancoApexSyntaxModifierToken getModifiers() {
 		return modifiers;

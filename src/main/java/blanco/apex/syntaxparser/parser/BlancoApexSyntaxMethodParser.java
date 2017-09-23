@@ -22,16 +22,22 @@ import blanco.apex.syntaxparser.BlancoApexSyntaxConstants;
 import blanco.apex.syntaxparser.BlancoApexSyntaxParserInput;
 import blanco.apex.syntaxparser.BlancoApexSyntaxUtil;
 import blanco.apex.syntaxparser.token.BlancoApexSyntaxBlockToken.BlockType;
+import blanco.apex.syntaxparser.token.BlancoApexSyntaxClassToken;
 import blanco.apex.syntaxparser.token.BlancoApexSyntaxMethodToken;
 import blanco.apex.syntaxparser.token.BlancoApexSyntaxParenthesisToken;
+import blanco.apex.syntaxparser.token.BlancoApexSyntaxTypeToken;
 
 public class BlancoApexSyntaxMethodParser extends AbstractBlancoApexSyntaxSyntaxParser {
 	public static final boolean ISDEBUG = false;
 
-	final BlancoApexSyntaxMethodToken methodToken = new BlancoApexSyntaxMethodToken();
+	protected BlancoApexSyntaxMethodToken methodToken = new BlancoApexSyntaxMethodToken();
 
-	public BlancoApexSyntaxMethodParser(final BlancoApexSyntaxParserInput input) {
+	protected BlancoApexSyntaxClassToken classToken = null;
+
+	public BlancoApexSyntaxMethodParser(final BlancoApexSyntaxParserInput input,
+			final BlancoApexSyntaxClassToken classToken) {
 		super(input);
+		this.classToken = classToken;
 	}
 
 	public BlancoApexSyntaxMethodToken parse() {
@@ -97,8 +103,25 @@ public class BlancoApexSyntaxMethodParser extends AbstractBlancoApexSyntaxSyntax
 								methodToken.setModifiers(new BlancoApexSyntaxModifierParser(input).parse());
 								methodToken.getTokenList().add(methodToken.getModifiers());
 							} else {
+								// System.out.println("TRACE: コンストラクタかどうかを判定。:["
+								// + inputToken.getValue() + "], クラス名:["
+								// + classToken.getName() + "]");
+								boolean isConstructor = false;
+								if (inputToken.getValue().equalsIgnoreCase(classToken.getName())) {
+									// Constructor
+									// System.out.println("TRACE: コンストラクタ!");
+									isConstructor = true;
+								}
+
 								input.resetRead();
-								methodToken.setReturn(new BlancoApexSyntaxTypeParser(input).parse());
+								if (isConstructor == false) {
+									methodToken.setReturn(new BlancoApexSyntaxTypeParser(input).parse());
+								} else {
+									final BlancoApexSyntaxTypeToken typeToken = new BlancoApexSyntaxTypeToken();
+									// 実際はコンストラクター。表現は未決定。
+									typeToken.setValue("");
+									methodToken.setReturn(typeToken);
+								}
 								methodToken.getTokenList().add(methodToken.getReturn());
 							}
 							methodToken.getDefineList().add(inputToken);

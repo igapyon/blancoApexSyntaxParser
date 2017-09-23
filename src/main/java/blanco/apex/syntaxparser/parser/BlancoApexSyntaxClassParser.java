@@ -28,6 +28,8 @@ import blanco.apex.syntaxparser.token.BlancoApexSyntaxClassToken;
 public class BlancoApexSyntaxClassParser extends AbstractBlancoApexSyntaxSyntaxParser {
 	public static final boolean ISDEBUG = false;
 
+	protected final BlancoApexSyntaxClassToken classToken = new BlancoApexSyntaxClassToken();
+
 	public BlancoApexSyntaxClassParser(final BlancoApexSyntaxParserInput input) {
 		super(input);
 	}
@@ -37,8 +39,6 @@ public class BlancoApexSyntaxClassParser extends AbstractBlancoApexSyntaxSyntaxP
 			System.out.println("class parser: begin: " + input.getIndex());
 
 		boolean isDefineArea = true;
-
-		final BlancoApexSyntaxClassToken classToken = new BlancoApexSyntaxClassToken();
 
 		try {
 			for (input.markRead(); input.availableToken(); input.markRead()) {
@@ -75,6 +75,10 @@ public class BlancoApexSyntaxClassParser extends AbstractBlancoApexSyntaxSyntaxP
 					} else {
 						// will be class name or something.
 						classToken.getTokenList().add(sourceToken);
+						if (classToken.getName() == null && false == sourceToken.getValue().equalsIgnoreCase("class")) {
+							// save first name.
+							classToken.setName(sourceToken.getValue());
+						}
 					}
 
 					if (isDefineArea) {
@@ -145,7 +149,7 @@ public class BlancoApexSyntaxClassParser extends AbstractBlancoApexSyntaxSyntaxP
 
 						// method
 						input.resetRead();
-						blockToken.getTokenList().add(new BlancoApexSyntaxMethodParser(input).parse());
+						blockToken.getTokenList().add(new BlancoApexSyntaxMethodParser(input, classToken).parse());
 					} else if (nextSpecial.getValue().equals("{")) {
 						if (ISDEBUG)
 							System.out.println("class parser: block: {: " + input.getIndex());
