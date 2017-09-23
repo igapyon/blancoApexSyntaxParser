@@ -159,14 +159,5 @@ public class BlancoApexSyntaxSourceParser extends AbstractBlancoApexSyntaxSyntax
 				// ignorable for seeking.
 			}
 		}
-
-		{
-			// dislike path.
-			// simply consume token.
-			input.resetRead();
-			final BlancoApexToken inputToken = input.readToken();
-			sourceToken.getTokenList().add(inputToken);
-			System.out.println("SOURCE(L169): simply process given token.: " + inputToken.getDisplayString());
-		}
 	}
 }
