@@ -22,66 +22,66 @@ import blanco.apex.syntaxparser.BlancoApexSyntaxParserInput;
 import blanco.apex.syntaxparser.token.BlancoApexSyntaxTypeToken;
 
 public class BlancoApexSyntaxTypeParser extends AbstractBlancoApexSyntaxSyntaxParser {
-    public static final boolean ISDEBUG = true;
+	public static final boolean ISDEBUG = true;
 
-    final BlancoApexSyntaxTypeToken typeToken = new BlancoApexSyntaxTypeToken();
+	final BlancoApexSyntaxTypeToken typeToken = new BlancoApexSyntaxTypeToken();
 
-    public BlancoApexSyntaxTypeParser(final BlancoApexSyntaxParserInput input) {
-        super(input);
-    }
+	public BlancoApexSyntaxTypeParser(final BlancoApexSyntaxParserInput input) {
+		super(input);
+	}
 
-    public BlancoApexSyntaxTypeToken parse() {
-        if (ISDEBUG)
-            System.out.println("type parser: begin: " + input.getIndex() + ": "
-                    + input.getTokenAt(input.getIndex()).getDisplayString());
+	public BlancoApexSyntaxTypeToken parse() {
+		if (ISDEBUG)
+			System.out.println("type parser: begin: " + input.getIndex() + ": "
+					+ input.getTokenAt(input.getIndex()).getDisplayString());
 
-        typeToken.getTokenList().add(input.readToken());
+		// 最初の読み込みはなし。
+		// typeToken.getTokenList().add(input.readToken());
 
-        try {
-            // 2つめのWORDが来たら終わる。<>ではないところでカンマが来ても終わる。
-            String typeName = "";
-            int deapthDiamond = 0;
-            for (input.markRead(); input.availableToken(); input.markRead()) {
-                final BlancoApexToken inputToken = input.readToken();
+		try {
+			// 2つめのWORDが来たら終わる。<>ではないところでカンマが来ても終わる。
+			String typeName = "";
+			int deapthDiamond = 0;
+			for (input.markRead(); input.availableToken(); ) {
+				final BlancoApexToken inputToken = input.readToken();
 
-                if (ISDEBUG)
-                    System.out.println("type parser: process(" + input.getIndex() + "): "
-                            + input.getTokenAt(input.getIndex()).getDisplayString());
+				if (ISDEBUG)
+					System.out.println("type parser: process(" + input.getIndex() + "): "
+							+ input.getTokenAt(input.getIndex()).getDisplayString());
 
-                if (inputToken instanceof BlancoApexSpecialCharToken) {
-                    final BlancoApexSpecialCharToken specialCharToken = (BlancoApexSpecialCharToken) inputToken;
-                    if (specialCharToken.getValue().equals("<")) {
-                        deapthDiamond++;
-                    } else if (specialCharToken.getValue().equals(">")) {
-                        deapthDiamond--;
-                    } else if (specialCharToken.getValue().equals(",") || specialCharToken.getValue().equals(";")) {
-                        if (deapthDiamond == 0) {
-                            // end!
-                            input.resetRead();
-                            break;
-                        }
-                    }
-                    typeToken.getTokenList().add(inputToken);
-                    typeName += inputToken.getValue();
-                } else if (inputToken instanceof BlancoApexWordToken) {
-                    if (deapthDiamond == 0) {
-                        if (typeName.trim().length() > 0) {
-                            // end!
-                            input.resetRead();
-                            break;
-                        }
-                    }
-                } else {
-                    typeToken.getTokenList().add(inputToken);
-                    typeName += inputToken.getValue();
-                }
-            }
-            typeToken.setValue(typeName);
-        } finally {
-            if (ISDEBUG)
-                System.out.println("type parser: end: " + input.getIndex());
-        }
+				if (inputToken instanceof BlancoApexSpecialCharToken) {
+					final BlancoApexSpecialCharToken specialCharToken = (BlancoApexSpecialCharToken) inputToken;
+					if (specialCharToken.getValue().equals("<")) {
+						deapthDiamond++;
+					} else if (specialCharToken.getValue().equals(">")) {
+						deapthDiamond--;
+					} else if (specialCharToken.getValue().equals(",") || specialCharToken.getValue().equals(";")) {
+						if (deapthDiamond == 0) {
+							// end!
+							input.resetRead();
+							break;
+						}
+					}
+				} else if (inputToken instanceof BlancoApexWordToken) {
+					if (deapthDiamond == 0) {
+						if (typeName.trim().length() > 0) {
+							// end!
+							input.resetRead();
+							break;
+						}
+					}
+					input.markRead();
+				} else {
+				}
+				typeName += inputToken.getValue();
+				typeToken.getTokenList().add(inputToken);
+			}
+			typeToken.setValue(typeName);
+		} finally {
+			if (ISDEBUG)
+				System.out.println("type parser: end: " + input.getIndex());
+		}
 
-        return typeToken;
-    }
+		return typeToken;
+	}
 }

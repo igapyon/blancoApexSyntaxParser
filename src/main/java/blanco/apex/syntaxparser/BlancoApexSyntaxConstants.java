@@ -84,7 +84,7 @@ public class BlancoApexSyntaxConstants {
 			, "after", "before", "count", "excludes", "first", "includes", "last", "order", "sharing", "with" };
 
 	public static final String[] MODIFIER_KEYWORDS = new String[] { "global", "public", "protected", "private",
-			"without", "with", "static" };
+			"without", "with", "static", "virtual", "testMethod" };
 
 	/**
 	 * keywords that seems to be reserved keywords.

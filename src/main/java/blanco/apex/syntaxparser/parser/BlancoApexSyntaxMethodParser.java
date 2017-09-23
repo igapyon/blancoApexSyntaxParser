@@ -82,19 +82,32 @@ public class BlancoApexSyntaxMethodParser extends AbstractBlancoApexSyntaxSyntax
 						}
 					}
 				} else {
-					methodToken.getTokenList().add(sourceToken);
-
+					System.out.println("TRACE: non special");
 					if (isDefineArea) {
-						if (BlancoApexSyntaxUtil.isIncludedIgnoreCase(sourceToken.getValue(),
-								BlancoApexSyntaxConstants.MODIFIER_KEYWORDS)) {
-							System.err.println("TRACE: modifier:" + sourceToken.getValue());
+						System.out.println("TRACE: define area");
+						if (methodToken.getReturn() == null) {
+							// before method name.
+							if (BlancoApexSyntaxUtil.isIncludedIgnoreCase(sourceToken.getValue(),
+									BlancoApexSyntaxConstants.MODIFIER_KEYWORDS)) {
+								input.resetRead();
+								methodToken.setModifiers(new BlancoApexSyntaxModifierParser(input).parse());
+								methodToken.getTokenList().add(methodToken.getModifiers());
+							} else {
+								input.resetRead();
+								methodToken.setReturn(new BlancoApexSyntaxTypeParser(input).parse());
+								methodToken.getTokenList().add(methodToken.getReturn());
+							}
+							methodToken.getDefineList().add(sourceToken);
+						} else {
+							methodToken.getDefineList().add(sourceToken);
 						}
-
-						methodToken.getDefineList().add(sourceToken);
 					}
+					methodToken.getTokenList().add(sourceToken);
 				}
 			}
-		} finally {
+		} finally
+
+		{
 			if (ISDEBUG)
 				System.out.println(
 						"method parser: end: " + methodToken.getDefineString() + methodToken.getDefineArgsString());
