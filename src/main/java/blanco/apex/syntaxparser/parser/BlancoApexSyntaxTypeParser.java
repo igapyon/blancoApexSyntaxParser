@@ -61,6 +61,7 @@ public class BlancoApexSyntaxTypeParser extends AbstractBlancoApexSyntaxSyntaxPa
 							break;
 						}
 					}
+					input.markRead();
 					typeName += inputToken.getValue();
 					typeToken.getTokenList().add(inputToken);
 				} else if (inputToken instanceof BlancoApexWordToken) {
