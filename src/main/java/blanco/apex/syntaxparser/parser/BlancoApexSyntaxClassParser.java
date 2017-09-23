@@ -43,6 +43,11 @@ public class BlancoApexSyntaxClassParser extends AbstractBlancoApexSyntaxSyntaxP
 		try {
 			for (input.markRead(); input.availableToken(); input.markRead()) {
 				final BlancoApexToken sourceToken = input.readToken();
+
+				if (ISDEBUG)
+					System.out.println(
+							"class parser: process(" + input.getIndex() + "): " + sourceToken.getDisplayString());
+
 				if (sourceToken instanceof BlancoApexSpecialCharToken) {
 					final BlancoApexSpecialCharToken specialCharToken = (BlancoApexSpecialCharToken) sourceToken;
 					if (specialCharToken.getValue().equals("{")) {
@@ -76,6 +81,8 @@ public class BlancoApexSyntaxClassParser extends AbstractBlancoApexSyntaxSyntaxP
 						// save define area.
 						classToken.getDefineList().add(sourceToken);
 					}
+				} else {
+					classToken.getTokenList().add(sourceToken);
 				}
 			}
 		} finally {

@@ -32,8 +32,7 @@ public class BlancoApexSyntaxTypeParser extends AbstractBlancoApexSyntaxSyntaxPa
 
 	public BlancoApexSyntaxTypeToken parse() {
 		if (ISDEBUG)
-			System.out.println("type parser: begin: " + input.getIndex() + ": "
-					+ input.getTokenAt(input.getIndex()).getDisplayString());
+			System.out.println("type parser: begin");
 
 		// 最初の読み込みはなし。
 		// typeToken.getTokenList().add(input.readToken());
@@ -42,12 +41,12 @@ public class BlancoApexSyntaxTypeParser extends AbstractBlancoApexSyntaxSyntaxPa
 			// 2つめのWORDが来たら終わる。<>ではないところでカンマが来ても終わる。
 			String typeName = "";
 			int deapthDiamond = 0;
-			for (input.markRead(); input.availableToken(); ) {
+			for (input.markRead(); input.availableToken();) {
 				final BlancoApexToken inputToken = input.readToken();
 
 				if (ISDEBUG)
-					System.out.println("type parser: process(" + input.getIndex() + "): "
-							+ input.getTokenAt(input.getIndex()).getDisplayString());
+					System.out.println(
+							"type parser: process(" + input.getIndex() + "): " + inputToken.getDisplayString());
 
 				if (inputToken instanceof BlancoApexSpecialCharToken) {
 					final BlancoApexSpecialCharToken specialCharToken = (BlancoApexSpecialCharToken) inputToken;

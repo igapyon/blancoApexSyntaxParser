@@ -26,7 +26,7 @@ import blanco.apex.syntaxparser.BlancoApexSyntaxUtil;
 import blanco.apex.syntaxparser.token.BlancoApexSyntaxModifierToken;
 
 public class BlancoApexSyntaxModifierParser extends AbstractBlancoApexSyntaxSyntaxParser {
-	public static final boolean ISDEBUG = true;
+	public static final boolean ISDEBUG = false;
 
 	final BlancoApexSyntaxModifierToken modifierToken = new BlancoApexSyntaxModifierToken();
 
@@ -57,11 +57,9 @@ public class BlancoApexSyntaxModifierParser extends AbstractBlancoApexSyntaxSynt
 					final String valueLookup = inputToken.getValue();
 					if (BlancoApexSyntaxUtil.isIncludedIgnoreCase(valueLookup,
 							BlancoApexSyntaxConstants.MODIFIER_KEYWORDS) == false) {
-						System.out.println("modifier終わり." + valueLookup);
 						input.resetRead();
 						break;
 					}
-					System.out.println("modifier続く." + valueLookup);
 
 					keepTokenList.add(inputToken);
 					modifierList.add(inputToken);
