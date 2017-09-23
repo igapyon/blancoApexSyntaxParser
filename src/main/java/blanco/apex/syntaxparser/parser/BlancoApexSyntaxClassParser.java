@@ -18,6 +18,7 @@ package blanco.apex.syntaxparser.parser;
 import blanco.apex.parser.token.BlancoApexSpecialCharToken;
 import blanco.apex.parser.token.BlancoApexToken;
 import blanco.apex.parser.token.BlancoApexWordToken;
+import blanco.apex.syntaxparser.BlancoApexSyntaxConstants;
 import blanco.apex.syntaxparser.BlancoApexSyntaxParserInput;
 import blanco.apex.syntaxparser.BlancoApexSyntaxUtil;
 import blanco.apex.syntaxparser.token.BlancoApexSyntaxBlockToken;
@@ -60,9 +61,16 @@ public class BlancoApexSyntaxClassParser extends AbstractBlancoApexSyntaxSyntaxP
 							classToken.getDefineList().add(sourceToken);
 						}
 					}
-				} else {
-					// will be class name or something.
-					classToken.getTokenList().add(sourceToken);
+				} else if (sourceToken instanceof BlancoApexWordToken) {
+					if (BlancoApexSyntaxUtil.isIncludedIgnoreCase(sourceToken.getValue(),
+							BlancoApexSyntaxConstants.MODIFIER_KEYWORDS)) {
+						input.resetRead();
+						classToken.setModifiers(new BlancoApexSyntaxModifierParser(input).parse());
+						classToken.getTokenList().add(classToken.getModifiers());
+					} else {
+						// will be class name or something.
+						classToken.getTokenList().add(sourceToken);
+					}
 
 					if (isDefineArea) {
 						// save define area.

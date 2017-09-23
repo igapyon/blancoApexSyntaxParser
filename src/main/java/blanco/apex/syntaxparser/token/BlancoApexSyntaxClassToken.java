@@ -26,6 +26,16 @@ public class BlancoApexSyntaxClassToken extends AbstractBlancoApexSyntaxToken {
 	 */
 	protected List<BlancoApexToken> defineList = new ArrayList<BlancoApexToken>();
 
+	protected BlancoApexSyntaxModifierToken modifiers = new BlancoApexSyntaxModifierToken();
+
+	public BlancoApexSyntaxModifierToken getModifiers() {
+		return modifiers;
+	}
+
+	public void setModifiers(BlancoApexSyntaxModifierToken modifiers) {
+		this.modifiers = modifiers;
+	}
+
 	public List<BlancoApexToken> getDefineList() {
 		return defineList;
 	}
