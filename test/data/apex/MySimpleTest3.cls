@@ -4,6 +4,8 @@ public without sharing class MySimpleTest {
 
     public Integer myValue = 5;
 
-    public List<String> myMethod(Map<String, Integer> arg1) throws Exception {
+    public List<Account> myMethod(Map<String, Integer> arg1) throws Exception {
+        List<Account> acctList = [SELECT Id, Name FROM Account WHERE Name = 'Taro'];
+        return acctList;
     }
 }
