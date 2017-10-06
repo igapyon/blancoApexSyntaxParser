@@ -121,33 +121,33 @@ public class BlancoApexSyntaxUtil {
 	 * 
 	 * @param tokenList
 	 */
-    public static void dumpAsTokenTree(final List<BlancoApexToken> tokenList) {
-        for (BlancoApexToken token : tokenList) {
-            if (token instanceof AbstractBlancoApexSyntaxToken) {
-                System.err.println(token.getClass().getSimpleName());
-                dumpAsTokenTreeInternal((AbstractBlancoApexSyntaxToken) token, 1);
-            } else {
-                System.err.println("    " + token.getDisplayString());
-            }
-        }
-    }
+	public static void dumpAsTokenTree(final List<BlancoApexToken> tokenList) {
+		for (BlancoApexToken token : tokenList) {
+			if (token instanceof AbstractBlancoApexSyntaxToken) {
+				System.err.println(token.getClass().getSimpleName());
+				dumpAsTokenTreeInternal((AbstractBlancoApexSyntaxToken) token, 1);
+			} else {
+				System.err.println("    " + token.getDisplayString());
+			}
+		}
+	}
 
-    static void dumpAsTokenTreeInternal(final AbstractBlancoApexSyntaxToken tokenParent, final int indentLevel) {
-        for (BlancoApexToken token : tokenParent.getTokenList()) {
-            if (token instanceof AbstractBlancoApexSyntaxToken) {
-                System.err.println(getIndentString(indentLevel) + token.getClass().getSimpleName());
-                dumpAsTokenTreeInternal((AbstractBlancoApexSyntaxToken) token, indentLevel + 1);
-            } else {
-                System.err.println(getIndentString(indentLevel) + token.getDisplayString());
-            }
-        }
-    }
+	static void dumpAsTokenTreeInternal(final AbstractBlancoApexSyntaxToken tokenParent, final int indentLevel) {
+		for (BlancoApexToken token : tokenParent.getTokenList()) {
+			if (token instanceof AbstractBlancoApexSyntaxToken) {
+				System.err.println(getIndentString(indentLevel) + token.getClass().getSimpleName());
+				dumpAsTokenTreeInternal((AbstractBlancoApexSyntaxToken) token, indentLevel + 1);
+			} else {
+				System.err.println(getIndentString(indentLevel) + token.getDisplayString());
+			}
+		}
+	}
 
-    static final String getIndentString(final int level) {
-        final StringBuffer strbuf = new StringBuffer();
-        for (int index = 0; index < level * 2; index++) {
-            strbuf.append(' ');
-        }
-        return strbuf.toString();
-    }
+	static final String getIndentString(final int level) {
+		final StringBuffer strbuf = new StringBuffer();
+		for (int index = 0; index < level * 2; index++) {
+			strbuf.append(' ');
+		}
+		return strbuf.toString();
+	}
 }
