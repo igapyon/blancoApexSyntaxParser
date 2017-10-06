@@ -28,74 +28,74 @@ import blanco.apex.syntaxparser.token.BlancoApexSyntaxParenthesisToken;
  * @author Toshiki Iga
  */
 public class BlancoApexSyntaxMethodParenthesisParser extends AbstractBlancoApexSyntaxSyntaxParser {
-	public static final boolean ISDEBUG = false;
+    public static final boolean ISDEBUG = false;
 
-	final BlancoApexSyntaxParenthesisToken methodParenthesisToken = new BlancoApexSyntaxParenthesisToken();
+    final BlancoApexSyntaxParenthesisToken methodParenthesisToken = new BlancoApexSyntaxParenthesisToken();
 
-	protected BlancoApexSyntaxMethodToken methodToken = null;
+    protected BlancoApexSyntaxMethodToken methodToken = null;
 
-	public BlancoApexSyntaxMethodParenthesisParser(final BlancoApexSyntaxParserInput input,
-			final BlancoApexSyntaxMethodToken methodToken) {
-		super(input);
-		this.methodToken = methodToken;
-	}
+    public BlancoApexSyntaxMethodParenthesisParser(final BlancoApexSyntaxParserInput input,
+            final BlancoApexSyntaxMethodToken methodToken) {
+        super(input);
+        this.methodToken = methodToken;
+    }
 
-	@SuppressWarnings("deprecation")
-	public BlancoApexSyntaxParenthesisToken parse() {
-		if (ISDEBUG)
-			System.out.println("parenthesis parser: begin: " + input.getIndex() + ": "
-					+ input.getTokenAt(input.getIndex()).getDisplayString());
+    @SuppressWarnings("deprecation")
+    public BlancoApexSyntaxParenthesisToken parse() {
+        if (ISDEBUG)
+            System.out.println("parenthesis parser: begin: " + input.getIndex() + ": "
+                    + input.getTokenAt(input.getIndex()).getDisplayString());
 
-		// カッコ開始を消費。
-		methodParenthesisToken.getTokenList().add(input.readToken());
+        // カッコ開始を消費。
+        methodParenthesisToken.getTokenList().add(input.readToken());
 
-		try {
-			boolean isTypeParsed = false;
-			for (input.markRead(); input.availableToken(); input.markRead()) {
-				final BlancoApexToken inputToken = input.readToken();
+        try {
+            boolean isTypeParsed = false;
+            for (input.markRead(); input.availableToken(); input.markRead()) {
+                final BlancoApexToken inputToken = input.readToken();
 
-				if (ISDEBUG)
-					System.out.println("method-parenthesis parser: process(" + input.getIndex() + "): "
-							+ inputToken.getDisplayString());
+                if (ISDEBUG)
+                    System.out.println("method-parenthesis parser: process(" + input.getIndex() + "): "
+                            + inputToken.getDisplayString());
 
-				if (inputToken instanceof BlancoApexWordToken) {
-					if (isTypeParsed == false) {
-						// 型をパース。
-						input.resetRead();
-						methodParenthesisToken.getTokenList().add(new BlancoApexSyntaxTypeParser(input).parse());
-						isTypeParsed = true;
-					} else {
-						methodParenthesisToken.getTokenList().add(inputToken);
-					}
-				} else if (inputToken instanceof BlancoApexSpecialCharToken) {
-					final BlancoApexSpecialCharToken specialCharToken = (BlancoApexSpecialCharToken) inputToken;
-					if (specialCharToken.getValue().equals(")")) {
-						// end of parenthesis.
-						methodParenthesisToken.getTokenList().add(inputToken);
-						if (ISDEBUG)
-							System.out.println("method-parenthesis parser: ) given: " + input.getIndex());
-						return methodParenthesisToken;
-					} else if (specialCharToken.getValue().equals("(")) {
-						// entering new nested one.
-						input.resetRead();
-						// ここではメソッドではなく普通のトークン。
-						methodParenthesisToken.getTokenList().add(new BlancoApexSyntaxParenthesisParser(input).parse());
-					} else if (specialCharToken.getValue().equals(",")) {
-						// カンマの場合は、引数が次に。
-						isTypeParsed = false;
-						methodParenthesisToken.getTokenList().add(inputToken);
-					} else {
-						methodParenthesisToken.getTokenList().add(inputToken);
-					}
-				} else {
-					methodParenthesisToken.getTokenList().add(inputToken);
-				}
-			}
-		} finally {
-			if (ISDEBUG)
-				System.out.println("method-parenthesis parser: end: " + input.getIndex());
-		}
+                if (inputToken instanceof BlancoApexWordToken) {
+                    if (isTypeParsed == false) {
+                        // 型をパース。
+                        input.resetRead();
+                        methodParenthesisToken.getTokenList().add(new BlancoApexSyntaxTypeParser(input).parse());
+                        isTypeParsed = true;
+                    } else {
+                        methodParenthesisToken.getTokenList().add(inputToken);
+                    }
+                } else if (inputToken instanceof BlancoApexSpecialCharToken) {
+                    final BlancoApexSpecialCharToken specialCharToken = (BlancoApexSpecialCharToken) inputToken;
+                    if (specialCharToken.getValue().equals(")")) {
+                        // end of parenthesis.
+                        methodParenthesisToken.getTokenList().add(inputToken);
+                        if (ISDEBUG)
+                            System.out.println("method-parenthesis parser: ) given: " + input.getIndex());
+                        return methodParenthesisToken;
+                    } else if (specialCharToken.getValue().equals("(")) {
+                        // entering new nested one.
+                        input.resetRead();
+                        // ここではメソッドではなく普通のトークン。
+                        methodParenthesisToken.getTokenList().add(new BlancoApexSyntaxParenthesisParser(input).parse());
+                    } else if (specialCharToken.getValue().equals(",")) {
+                        // カンマの場合は、引数が次に。
+                        isTypeParsed = false;
+                        methodParenthesisToken.getTokenList().add(inputToken);
+                    } else {
+                        methodParenthesisToken.getTokenList().add(inputToken);
+                    }
+                } else {
+                    methodParenthesisToken.getTokenList().add(inputToken);
+                }
+            }
+        } finally {
+            if (ISDEBUG)
+                System.out.println("method-parenthesis parser: end: " + input.getIndex());
+        }
 
-		return methodParenthesisToken;
-	}
+        return methodParenthesisToken;
+    }
 }

@@ -26,55 +26,55 @@ import blanco.apex.syntaxparser.BlancoApexSyntaxUtil;
 import blanco.apex.syntaxparser.token.BlancoApexSyntaxModifierToken;
 
 public class BlancoApexSyntaxModifierParser extends AbstractBlancoApexSyntaxSyntaxParser {
-	public static final boolean ISDEBUG = false;
+    public static final boolean ISDEBUG = false;
 
-	final BlancoApexSyntaxModifierToken modifierToken = new BlancoApexSyntaxModifierToken();
+    final BlancoApexSyntaxModifierToken modifierToken = new BlancoApexSyntaxModifierToken();
 
-	public BlancoApexSyntaxModifierParser(final BlancoApexSyntaxParserInput input) {
-		super(input);
-	}
+    public BlancoApexSyntaxModifierParser(final BlancoApexSyntaxParserInput input) {
+        super(input);
+    }
 
-	@SuppressWarnings("deprecation")
-	public BlancoApexSyntaxModifierToken parse() {
-		if (ISDEBUG)
-			System.out.println("modifier parser: begin: " + input.getIndex() + ": "
-					+ input.getTokenAt(input.getIndex()).getDisplayString());
+    @SuppressWarnings("deprecation")
+    public BlancoApexSyntaxModifierToken parse() {
+        if (ISDEBUG)
+            System.out.println("modifier parser: begin: " + input.getIndex() + ": "
+                    + input.getTokenAt(input.getIndex()).getDisplayString());
 
-		// modifierToken.getTokenList().add(input.readToken());
+        // modifierToken.getTokenList().add(input.readToken());
 
-		List<BlancoApexToken> modifierList = new ArrayList<BlancoApexToken>();
+        List<BlancoApexToken> modifierList = new ArrayList<BlancoApexToken>();
 
-		try {
-			final List<BlancoApexToken> keepTokenList = new ArrayList<BlancoApexToken>();
-			for (input.markRead(); input.availableToken();) {
-				final BlancoApexToken inputToken = input.readToken();
+        try {
+            final List<BlancoApexToken> keepTokenList = new ArrayList<BlancoApexToken>();
+            for (input.markRead(); input.availableToken();) {
+                final BlancoApexToken inputToken = input.readToken();
 
-				if (ISDEBUG)
-					System.out.println(
-							"modifier parser: process(" + input.getIndex() + "): " + inputToken.getDisplayString());
+                if (ISDEBUG)
+                    System.out.println(
+                            "modifier parser: process(" + input.getIndex() + "): " + inputToken.getDisplayString());
 
-				if (inputToken instanceof BlancoApexWordToken) {
-					final String valueLookup = inputToken.getValue();
-					if (BlancoApexSyntaxUtil.isIncludedIgnoreCase(valueLookup,
-							BlancoApexSyntaxConstants.MODIFIER_KEYWORDS) == false) {
-						input.resetRead();
-						break;
-					}
+                if (inputToken instanceof BlancoApexWordToken) {
+                    final String valueLookup = inputToken.getValue();
+                    if (BlancoApexSyntaxUtil.isIncludedIgnoreCase(valueLookup,
+                            BlancoApexSyntaxConstants.MODIFIER_KEYWORDS) == false) {
+                        input.resetRead();
+                        break;
+                    }
 
-					keepTokenList.add(inputToken);
-					modifierList.add(inputToken);
-					modifierToken.getTokenList().addAll(keepTokenList);
-					keepTokenList.clear();
-					input.markRead();
-				} else {
-					keepTokenList.add(inputToken);
-				}
-			}
-		} finally {
-			if (ISDEBUG)
-				System.out.println("modifier parser: end: " + input.getIndex());
-		}
+                    keepTokenList.add(inputToken);
+                    modifierList.add(inputToken);
+                    modifierToken.getTokenList().addAll(keepTokenList);
+                    keepTokenList.clear();
+                    input.markRead();
+                } else {
+                    keepTokenList.add(inputToken);
+                }
+            }
+        } finally {
+            if (ISDEBUG)
+                System.out.println("modifier parser: end: " + input.getIndex());
+        }
 
-		return modifierToken;
-	}
+        return modifierToken;
+    }
 }

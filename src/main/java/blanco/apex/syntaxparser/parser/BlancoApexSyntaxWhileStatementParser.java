@@ -23,83 +23,83 @@ import blanco.apex.syntaxparser.token.BlancoApexSyntaxBlockToken.BlockType;
 import blanco.apex.syntaxparser.token.BlancoApexSyntaxWhileStatementToken;
 
 public class BlancoApexSyntaxWhileStatementParser extends AbstractBlancoApexSyntaxSyntaxParser {
-	public static final boolean ISDEBUG = false;
+    public static final boolean ISDEBUG = false;
 
-	protected final BlancoApexSyntaxWhileStatementToken whileStatementToken = new BlancoApexSyntaxWhileStatementToken();
+    protected final BlancoApexSyntaxWhileStatementToken whileStatementToken = new BlancoApexSyntaxWhileStatementToken();
 
-	public BlancoApexSyntaxWhileStatementParser(final BlancoApexSyntaxParserInput input) {
-		super(input);
-	}
+    public BlancoApexSyntaxWhileStatementParser(final BlancoApexSyntaxParserInput input) {
+        super(input);
+    }
 
-	@SuppressWarnings("deprecation")
-	public BlancoApexSyntaxWhileStatementToken parse() {
-		if (ISDEBUG)
-			System.out.println("while_statement parser: begin: " + input.getIndex() + ": "
-					+ input.getTokenAt(input.getIndex()).getDisplayString());
+    @SuppressWarnings("deprecation")
+    public BlancoApexSyntaxWhileStatementToken parse() {
+        if (ISDEBUG)
+            System.out.println("while_statement parser: begin: " + input.getIndex() + ": "
+                    + input.getTokenAt(input.getIndex()).getDisplayString());
 
-		try {
-			for (input.markRead(); input.availableToken(); input.markRead()) {
-				final BlancoApexToken inputToken = input.readToken();
+        try {
+            for (input.markRead(); input.availableToken(); input.markRead()) {
+                final BlancoApexToken inputToken = input.readToken();
 
-				if (ISDEBUG)
-					System.out.println("while_statement parser: process(" + input.getIndex() + "): "
-							+ input.getTokenAt(input.getIndex()).getDisplayString());
+                if (ISDEBUG)
+                    System.out.println("while_statement parser: process(" + input.getIndex() + "): "
+                            + input.getTokenAt(input.getIndex()).getDisplayString());
 
-				if (inputToken instanceof BlancoApexSpecialCharToken) {
-					final BlancoApexSpecialCharToken specialCharToken = (BlancoApexSpecialCharToken) inputToken;
-					if (specialCharToken.getValue().equals("(")) {
-						input.resetRead();
-						whileStatementToken.getTokenList().add(new BlancoApexSyntaxParenthesisParser(input).parse());
-						// () processed.
-						break;
-					} else {
-						whileStatementToken.getTokenList().add(inputToken);
-					}
-				} else {
-					whileStatementToken.getTokenList().add(inputToken);
-				}
-			}
+                if (inputToken instanceof BlancoApexSpecialCharToken) {
+                    final BlancoApexSpecialCharToken specialCharToken = (BlancoApexSpecialCharToken) inputToken;
+                    if (specialCharToken.getValue().equals("(")) {
+                        input.resetRead();
+                        whileStatementToken.getTokenList().add(new BlancoApexSyntaxParenthesisParser(input).parse());
+                        // () processed.
+                        break;
+                    } else {
+                        whileStatementToken.getTokenList().add(inputToken);
+                    }
+                } else {
+                    whileStatementToken.getTokenList().add(inputToken);
+                }
+            }
 
-			processWhileStatementBody();
-		} finally {
-			if (ISDEBUG)
-				System.out.println("while_statement parser: end: " + input.getIndex());
-		}
+            processWhileStatementBody();
+        } finally {
+            if (ISDEBUG)
+                System.out.println("while_statement parser: end: " + input.getIndex());
+        }
 
-		return whileStatementToken;
-	}
+        return whileStatementToken;
+    }
 
-	@SuppressWarnings("deprecation")
-	void processWhileStatementBody() {
-		for (input.markRead(); input.availableToken(); input.markRead()) {
-			final BlancoApexToken inputToken = input.readToken();
+    @SuppressWarnings("deprecation")
+    void processWhileStatementBody() {
+        for (input.markRead(); input.availableToken(); input.markRead()) {
+            final BlancoApexToken inputToken = input.readToken();
 
-			if (ISDEBUG)
-				System.out.println("while_statement parser: process(" + input.getIndex() + "): "
-						+ input.getTokenAt(input.getIndex()).getDisplayString());
+            if (ISDEBUG)
+                System.out.println("while_statement parser: process(" + input.getIndex() + "): "
+                        + input.getTokenAt(input.getIndex()).getDisplayString());
 
-			if (inputToken instanceof BlancoApexSpecialCharToken) {
-				final BlancoApexSpecialCharToken nextSpecial = BlancoApexSyntaxUtil
-						.getFirstSpecialCharTokenWithPreviousOne(input,
-								new String[] { ";"/* simple statement */, "{"/* block */ });
-				if (nextSpecial == null) {
-					whileStatementToken.getTokenList().add(inputToken);
-					System.out.println("block parser: Unexpected: " + input.getIndex());
-				} else if (nextSpecial.getValue().equals(";")) {
-					input.resetRead();
-					whileStatementToken.getTokenList().add(new BlancoApexSyntaxStatementParser(input).parse());
-					break;
-				} else if (nextSpecial.getValue().equals("{")) {
-					input.resetRead();
-					whileStatementToken.getTokenList()
-							.add(new BlancoApexSyntaxBlockParser(input, BlockType.MULTI_STATEMENT).parse());
-					break;
-				} else {
-					System.out.println("while_statement parser: Unexpected one: ");
-				}
-			} else {
-				whileStatementToken.getTokenList().add(inputToken);
-			}
-		}
-	}
+            if (inputToken instanceof BlancoApexSpecialCharToken) {
+                final BlancoApexSpecialCharToken nextSpecial = BlancoApexSyntaxUtil
+                        .getFirstSpecialCharTokenWithPreviousOne(input,
+                                new String[] { ";"/* simple statement */, "{"/* block */ });
+                if (nextSpecial == null) {
+                    whileStatementToken.getTokenList().add(inputToken);
+                    System.out.println("block parser: Unexpected: " + input.getIndex());
+                } else if (nextSpecial.getValue().equals(";")) {
+                    input.resetRead();
+                    whileStatementToken.getTokenList().add(new BlancoApexSyntaxStatementParser(input).parse());
+                    break;
+                } else if (nextSpecial.getValue().equals("{")) {
+                    input.resetRead();
+                    whileStatementToken.getTokenList()
+                            .add(new BlancoApexSyntaxBlockParser(input, BlockType.MULTI_STATEMENT).parse());
+                    break;
+                } else {
+                    System.out.println("while_statement parser: Unexpected one: ");
+                }
+            } else {
+                whileStatementToken.getTokenList().add(inputToken);
+            }
+        }
+    }
 }

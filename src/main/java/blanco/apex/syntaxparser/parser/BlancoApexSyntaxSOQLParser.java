@@ -26,49 +26,49 @@ import blanco.apex.syntaxparser.token.BlancoApexSyntaxSOQLToken;
  * @author Toshiki Iga
  */
 public class BlancoApexSyntaxSOQLParser extends AbstractBlancoApexSyntaxSyntaxParser {
-	public static final boolean ISDEBUG = false;
+    public static final boolean ISDEBUG = false;
 
-	final BlancoApexSyntaxSOQLToken soqlToken = new BlancoApexSyntaxSOQLToken();
+    final BlancoApexSyntaxSOQLToken soqlToken = new BlancoApexSyntaxSOQLToken();
 
-	public BlancoApexSyntaxSOQLParser(final BlancoApexSyntaxParserInput input) {
-		super(input);
-	}
+    public BlancoApexSyntaxSOQLParser(final BlancoApexSyntaxParserInput input) {
+        super(input);
+    }
 
-	@SuppressWarnings("deprecation")
-	public BlancoApexSyntaxSOQLToken parse() {
-		if (ISDEBUG)
-			System.out.println("soql parser: begin: " + input.getIndex() + ": "
-					+ input.getTokenAt(input.getIndex()).getDisplayString());
+    @SuppressWarnings("deprecation")
+    public BlancoApexSyntaxSOQLToken parse() {
+        if (ISDEBUG)
+            System.out.println("soql parser: begin: " + input.getIndex() + ": "
+                    + input.getTokenAt(input.getIndex()).getDisplayString());
 
-		try {
-			for (input.markRead(); input.availableToken(); input.markRead()) {
-				final BlancoApexToken inputToken = input.readToken();
+        try {
+            for (input.markRead(); input.availableToken(); input.markRead()) {
+                final BlancoApexToken inputToken = input.readToken();
 
-				if (ISDEBUG)
-					System.out.println("soql parser: process(" + input.getIndex() + "): "
-							+ input.getTokenAt(input.getIndex()).getDisplayString());
+                if (ISDEBUG)
+                    System.out.println("soql parser: process(" + input.getIndex() + "): "
+                            + input.getTokenAt(input.getIndex()).getDisplayString());
 
-				if (inputToken instanceof BlancoApexSpecialCharToken) {
-					// ' is already processed by lexical parser.
+                if (inputToken instanceof BlancoApexSpecialCharToken) {
+                    // ' is already processed by lexical parser.
 
-					final BlancoApexSpecialCharToken specialCharToken = (BlancoApexSpecialCharToken) inputToken;
-					if (specialCharToken.getValue().equals("]")) {
-						// end of boxbrackets. = end of SOQL.
-						input.resetRead();
-						return soqlToken;
-					} else {
-						soqlToken.getTokenList().add(inputToken);
-					}
-				} else {
-					soqlToken.getTokenList().add(inputToken);
-				}
-			}
-		} finally {
-			if (ISDEBUG)
-				System.out.println("soql parser: end: " + input.getIndex());
-		}
+                    final BlancoApexSpecialCharToken specialCharToken = (BlancoApexSpecialCharToken) inputToken;
+                    if (specialCharToken.getValue().equals("]")) {
+                        // end of boxbrackets. = end of SOQL.
+                        input.resetRead();
+                        return soqlToken;
+                    } else {
+                        soqlToken.getTokenList().add(inputToken);
+                    }
+                } else {
+                    soqlToken.getTokenList().add(inputToken);
+                }
+            }
+        } finally {
+            if (ISDEBUG)
+                System.out.println("soql parser: end: " + input.getIndex());
+        }
 
-		// ここには来ないはず。
-		return soqlToken;
-	}
+        // ここには来ないはず。
+        return soqlToken;
+    }
 }

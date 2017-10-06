@@ -25,79 +25,79 @@ import blanco.apex.parser.token.BlancoApexToken;
  * @author Toshiki Iga
  */
 public class BlancoApexSyntaxParserInput {
-	private List<BlancoApexToken> inputTokenList = null;
+    private List<BlancoApexToken> inputTokenList = null;
 
-	private int inputTokenIndex = 0;
+    private int inputTokenIndex = 0;
 
-	private int inputTokenMarkedIndex = 0;
+    private int inputTokenMarkedIndex = 0;
 
-	/**
-	 * Constructor.
-	 * 
-	 * @param inputTokenList
-	 */
-	public BlancoApexSyntaxParserInput(final List<BlancoApexToken> inputTokenList) {
-		this.inputTokenList = inputTokenList;
-	}
+    /**
+     * Constructor.
+     * 
+     * @param inputTokenList
+     */
+    public BlancoApexSyntaxParserInput(final List<BlancoApexToken> inputTokenList) {
+        this.inputTokenList = inputTokenList;
+    }
 
-	/**
-	 * Check token available or not.
-	 * 
-	 * @return
-	 */
-	public boolean availableToken() {
-		if (inputTokenIndex < inputTokenList.size()) {
-			return true;
-		} else {
-			return false;
-		}
-	}
+    /**
+     * Check token available or not.
+     * 
+     * @return
+     */
+    public boolean availableToken() {
+        if (inputTokenIndex < inputTokenList.size()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
-	/**
-	 * Read token and go to next.
-	 * 
-	 * @return
-	 */
-	public BlancoApexToken readToken() {
-		return inputTokenList.get(inputTokenIndex++);
-	}
+    /**
+     * Read token and go to next.
+     * 
+     * @return
+     */
+    public BlancoApexToken readToken() {
+        return inputTokenList.get(inputTokenIndex++);
+    }
 
-	/**
-	 * 
-	 * @param index
-	 * @return
-	 * @deprecated for internal use only.
-	 */
-	public BlancoApexToken getTokenAt(int index) {
-		return inputTokenList.get(index);
-	}
+    /**
+     * 
+     * @param index
+     * @return
+     * @deprecated for internal use only.
+     */
+    public BlancoApexToken getTokenAt(int index) {
+        return inputTokenList.get(index);
+    }
 
-	/**
-	 * @deprecated for internal use only.
-	 * @return
-	 */
-	public int getTokenCount() {
-		return inputTokenList.size();
-	}
+    /**
+     * @deprecated for internal use only.
+     * @return
+     */
+    public int getTokenCount() {
+        return inputTokenList.size();
+    }
 
-	///////////////////////////////////////////
-	// methods for index
+    ///////////////////////////////////////////
+    // methods for index
 
-	public int getIndex() {
-		return inputTokenIndex;
-	}
+    public int getIndex() {
+        return inputTokenIndex;
+    }
 
-	/**
-	 * Mark token point.
-	 */
-	public void markRead() {
-		inputTokenMarkedIndex = inputTokenIndex;
-	}
+    /**
+     * Mark token point.
+     */
+    public void markRead() {
+        inputTokenMarkedIndex = inputTokenIndex;
+    }
 
-	/**
-	 * Reset token point to previous marked.
-	 */
-	public void resetRead() {
-		inputTokenIndex = inputTokenMarkedIndex;
-	}
+    /**
+     * Reset token point to previous marked.
+     */
+    public void resetRead() {
+        inputTokenIndex = inputTokenMarkedIndex;
+    }
 }

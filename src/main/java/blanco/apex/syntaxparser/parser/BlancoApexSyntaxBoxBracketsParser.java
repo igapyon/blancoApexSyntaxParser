@@ -28,66 +28,66 @@ import blanco.apex.syntaxparser.token.BlancoApexSyntaxBoxBracketsToken;
  * @author Toshiki Iga
  */
 public class BlancoApexSyntaxBoxBracketsParser extends AbstractBlancoApexSyntaxSyntaxParser {
-	public static final boolean ISDEBUG = false;
+    public static final boolean ISDEBUG = false;
 
-	final BlancoApexSyntaxBoxBracketsToken boxbracketsToken = new BlancoApexSyntaxBoxBracketsToken();
+    final BlancoApexSyntaxBoxBracketsToken boxbracketsToken = new BlancoApexSyntaxBoxBracketsToken();
 
-	public BlancoApexSyntaxBoxBracketsParser(final BlancoApexSyntaxParserInput input) {
-		super(input);
-	}
+    public BlancoApexSyntaxBoxBracketsParser(final BlancoApexSyntaxParserInput input) {
+        super(input);
+    }
 
-	@SuppressWarnings("deprecation")
-	public BlancoApexSyntaxBoxBracketsToken parse() {
-		if (ISDEBUG)
-			System.out.println("boxbrackets parser: begin: " + input.getIndex() + ": "
-					+ input.getTokenAt(input.getIndex()).getDisplayString());
+    @SuppressWarnings("deprecation")
+    public BlancoApexSyntaxBoxBracketsToken parse() {
+        if (ISDEBUG)
+            System.out.println("boxbrackets parser: begin: " + input.getIndex() + ": "
+                    + input.getTokenAt(input.getIndex()).getDisplayString());
 
-		// consume '['
-		boxbracketsToken.getTokenList().add(input.readToken());
+        // consume '['
+        boxbracketsToken.getTokenList().add(input.readToken());
 
-		try {
-			for (input.markRead(); input.availableToken(); input.markRead()) {
-				final BlancoApexToken inputToken = input.readToken();
+        try {
+            for (input.markRead(); input.availableToken(); input.markRead()) {
+                final BlancoApexToken inputToken = input.readToken();
 
-				if (ISDEBUG)
-					System.out.println("boxbrackets parser: process(" + input.getIndex() + "): "
-							+ input.getTokenAt(input.getIndex()).getDisplayString());
+                if (ISDEBUG)
+                    System.out.println("boxbrackets parser: process(" + input.getIndex() + "): "
+                            + input.getTokenAt(input.getIndex()).getDisplayString());
 
-				if (inputToken instanceof BlancoApexWordToken) {
-					if (BlancoApexSyntaxUtil.isIncludedIgnoreCase(inputToken.getValue(), new String[] { "select" })) {
-						input.resetRead();
-						boxbracketsToken.getTokenList().add(new BlancoApexSyntaxSOQLParser(input).parse());
-					} else {
-						boxbracketsToken.getTokenList().add(inputToken);
-					}
-				} else if (inputToken instanceof BlancoApexSpecialCharToken) {
-					final BlancoApexSpecialCharToken specialCharToken = (BlancoApexSpecialCharToken) inputToken;
-					if (specialCharToken.getValue().equals("]")) {
-						// end of boxbrackets.
-						boxbracketsToken.getTokenList().add(inputToken);
-						return boxbracketsToken;
-					} else if (specialCharToken.getValue().equals("[")) {
-						// entering new nested one.
-						input.resetRead();
-						boxbracketsToken.getTokenList().add(new BlancoApexSyntaxBoxBracketsParser(input).parse());
-					} else if (specialCharToken.getValue().equals("(")) {
-						// non SOQL and starts (
-						input.resetRead();
-						boxbracketsToken.getTokenList().add(new BlancoApexSyntaxParenthesisParser(input).parse());
-					} else {
-						boxbracketsToken.getTokenList().add(inputToken);
-					}
-				} else {
-					boxbracketsToken.getTokenList().add(inputToken);
-				}
-			}
-		} finally
+                if (inputToken instanceof BlancoApexWordToken) {
+                    if (BlancoApexSyntaxUtil.isIncludedIgnoreCase(inputToken.getValue(), new String[] { "select" })) {
+                        input.resetRead();
+                        boxbracketsToken.getTokenList().add(new BlancoApexSyntaxSOQLParser(input).parse());
+                    } else {
+                        boxbracketsToken.getTokenList().add(inputToken);
+                    }
+                } else if (inputToken instanceof BlancoApexSpecialCharToken) {
+                    final BlancoApexSpecialCharToken specialCharToken = (BlancoApexSpecialCharToken) inputToken;
+                    if (specialCharToken.getValue().equals("]")) {
+                        // end of boxbrackets.
+                        boxbracketsToken.getTokenList().add(inputToken);
+                        return boxbracketsToken;
+                    } else if (specialCharToken.getValue().equals("[")) {
+                        // entering new nested one.
+                        input.resetRead();
+                        boxbracketsToken.getTokenList().add(new BlancoApexSyntaxBoxBracketsParser(input).parse());
+                    } else if (specialCharToken.getValue().equals("(")) {
+                        // non SOQL and starts (
+                        input.resetRead();
+                        boxbracketsToken.getTokenList().add(new BlancoApexSyntaxParenthesisParser(input).parse());
+                    } else {
+                        boxbracketsToken.getTokenList().add(inputToken);
+                    }
+                } else {
+                    boxbracketsToken.getTokenList().add(inputToken);
+                }
+            }
+        } finally
 
-		{
-			if (ISDEBUG)
-				System.out.println("boxbrackets parser: end: " + input.getIndex());
-		}
+        {
+            if (ISDEBUG)
+                System.out.println("boxbrackets parser: end: " + input.getIndex());
+        }
 
-		return boxbracketsToken;
-	}
+        return boxbracketsToken;
+    }
 }

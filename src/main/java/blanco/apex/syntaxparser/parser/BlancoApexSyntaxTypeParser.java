@@ -25,75 +25,75 @@ import blanco.apex.syntaxparser.BlancoApexSyntaxParserInput;
 import blanco.apex.syntaxparser.token.BlancoApexSyntaxTypeToken;
 
 public class BlancoApexSyntaxTypeParser extends AbstractBlancoApexSyntaxSyntaxParser {
-	public static final boolean ISDEBUG = false;
+    public static final boolean ISDEBUG = false;
 
-	final BlancoApexSyntaxTypeToken typeToken = new BlancoApexSyntaxTypeToken();
+    final BlancoApexSyntaxTypeToken typeToken = new BlancoApexSyntaxTypeToken();
 
-	public BlancoApexSyntaxTypeParser(final BlancoApexSyntaxParserInput input) {
-		super(input);
-	}
+    public BlancoApexSyntaxTypeParser(final BlancoApexSyntaxParserInput input) {
+        super(input);
+    }
 
-	public BlancoApexSyntaxTypeToken parse() {
-		if (ISDEBUG)
-			System.out.println("type parser: begin");
+    public BlancoApexSyntaxTypeToken parse() {
+        if (ISDEBUG)
+            System.out.println("type parser: begin");
 
-		// 最初の読み込みはなし。
-		// typeToken.getTokenList().add(input.readToken());
+        // 最初の読み込みはなし。
+        // typeToken.getTokenList().add(input.readToken());
 
-		try {
-			// 2つめのWORDが来たら終わる。<>ではないところでカンマが来ても終わる。
-			String typeName = "";
-			int deapthDiamond = 0;
-			final List<BlancoApexToken> keepTokenList = new ArrayList<BlancoApexToken>();
-			for (input.markRead(); input.availableToken();) {
-				final BlancoApexToken inputToken = input.readToken();
+        try {
+            // 2つめのWORDが来たら終わる。<>ではないところでカンマが来ても終わる。
+            String typeName = "";
+            int deapthDiamond = 0;
+            final List<BlancoApexToken> keepTokenList = new ArrayList<BlancoApexToken>();
+            for (input.markRead(); input.availableToken();) {
+                final BlancoApexToken inputToken = input.readToken();
 
-				if (ISDEBUG)
-					System.out.println(
-							"type parser: process(" + input.getIndex() + "): " + inputToken.getDisplayString());
+                if (ISDEBUG)
+                    System.out.println(
+                            "type parser: process(" + input.getIndex() + "): " + inputToken.getDisplayString());
 
-				if (inputToken instanceof BlancoApexSpecialCharToken) {
-					final BlancoApexSpecialCharToken specialCharToken = (BlancoApexSpecialCharToken) inputToken;
-					if (specialCharToken.getValue().equals("<")) {
-						deapthDiamond++;
-					} else if (specialCharToken.getValue().equals(">")) {
-						deapthDiamond--;
-					} else if (specialCharToken.getValue().equals(",") || specialCharToken.getValue().equals(";")) {
-						if (deapthDiamond == 0) {
-							// end!
-							input.resetRead();
-							break;
-						}
-					}
-					keepTokenList.add(inputToken);
-					typeToken.getTokenList().addAll(keepTokenList);
-					keepTokenList.clear();
-					input.markRead();
-					typeName += inputToken.getValue();
-				} else if (inputToken instanceof BlancoApexWordToken) {
-					if (deapthDiamond == 0) {
-						if (typeName.trim().length() > 0) {
-							// end!
-							input.resetRead();
-							break;
-						}
-					}
+                if (inputToken instanceof BlancoApexSpecialCharToken) {
+                    final BlancoApexSpecialCharToken specialCharToken = (BlancoApexSpecialCharToken) inputToken;
+                    if (specialCharToken.getValue().equals("<")) {
+                        deapthDiamond++;
+                    } else if (specialCharToken.getValue().equals(">")) {
+                        deapthDiamond--;
+                    } else if (specialCharToken.getValue().equals(",") || specialCharToken.getValue().equals(";")) {
+                        if (deapthDiamond == 0) {
+                            // end!
+                            input.resetRead();
+                            break;
+                        }
+                    }
+                    keepTokenList.add(inputToken);
+                    typeToken.getTokenList().addAll(keepTokenList);
+                    keepTokenList.clear();
+                    input.markRead();
+                    typeName += inputToken.getValue();
+                } else if (inputToken instanceof BlancoApexWordToken) {
+                    if (deapthDiamond == 0) {
+                        if (typeName.trim().length() > 0) {
+                            // end!
+                            input.resetRead();
+                            break;
+                        }
+                    }
 
-					keepTokenList.add(inputToken);
-					typeToken.getTokenList().addAll(keepTokenList);
-					keepTokenList.clear();
-					input.markRead();
-					typeName += inputToken.getValue();
-				} else {
-					keepTokenList.add(inputToken);
-				}
-			}
-			typeToken.setValue(typeName);
-		} finally {
-			if (ISDEBUG)
-				System.out.println("type parser: end: " + input.getIndex());
-		}
+                    keepTokenList.add(inputToken);
+                    typeToken.getTokenList().addAll(keepTokenList);
+                    keepTokenList.clear();
+                    input.markRead();
+                    typeName += inputToken.getValue();
+                } else {
+                    keepTokenList.add(inputToken);
+                }
+            }
+            typeToken.setValue(typeName);
+        } finally {
+            if (ISDEBUG)
+                System.out.println("type parser: end: " + input.getIndex());
+        }
 
-		return typeToken;
-	}
+        return typeToken;
+    }
 }

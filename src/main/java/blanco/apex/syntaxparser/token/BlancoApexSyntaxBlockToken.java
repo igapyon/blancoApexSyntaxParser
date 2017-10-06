@@ -18,43 +18,43 @@ package blanco.apex.syntaxparser.token;
 import blanco.apex.parser.token.BlancoApexToken;
 
 public class BlancoApexSyntaxBlockToken extends AbstractBlancoApexSyntaxToken {
-	public enum BlockType {
-		UNDEFINED, MULTI_STATEMENT, CLASS_DEF, METHOD_DEF, PROPERTY_DEF, ENUM_DEF, RESERVED_VAL_INIT
-	}
+    public enum BlockType {
+        UNDEFINED, MULTI_STATEMENT, CLASS_DEF, METHOD_DEF, PROPERTY_DEF, ENUM_DEF, RESERVED_VAL_INIT
+    }
 
-	protected BlockType blockType = BlockType.UNDEFINED;
+    protected BlockType blockType = BlockType.UNDEFINED;
 
-	public BlockType getBlockType() {
-		return blockType;
-	}
+    public BlockType getBlockType() {
+        return blockType;
+    }
 
-	public void setBlockType(BlockType blockType) {
-		this.blockType = blockType;
-	}
+    public void setBlockType(BlockType blockType) {
+        this.blockType = blockType;
+    }
 
-	@Override
-	public String getValue() {
-		final StringBuffer strbuf = new StringBuffer();
-		for (BlancoApexToken token : tokenList) {
-			strbuf.append(token.getValue());
-		}
+    @Override
+    public String getValue() {
+        final StringBuffer strbuf = new StringBuffer();
+        for (BlancoApexToken token : tokenList) {
+            strbuf.append(token.getValue());
+        }
 
-		return strbuf.toString();
-	}
+        return strbuf.toString();
+    }
 
-	@Override
-	public String getDisplayString() {
-		final StringBuffer strbuf = new StringBuffer();
-		boolean isFirst = true;
-		for (BlancoApexToken token : tokenList) {
-			if (isFirst) {
-				isFirst = false;
-			} else {
-				strbuf.append(',');
-			}
-			strbuf.append(token.getDisplayString());
-		}
+    @Override
+    public String getDisplayString() {
+        final StringBuffer strbuf = new StringBuffer();
+        boolean isFirst = true;
+        for (BlancoApexToken token : tokenList) {
+            if (isFirst) {
+                isFirst = false;
+            } else {
+                strbuf.append(',');
+            }
+            strbuf.append(token.getDisplayString());
+        }
 
-		return "BLOCK(" + blockType + ")[" + strbuf.toString() + "]";
-	}
+        return "BLOCK(" + blockType + ")[" + strbuf.toString() + "]";
+    }
 }

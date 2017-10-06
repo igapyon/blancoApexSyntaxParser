@@ -22,48 +22,48 @@ import blanco.apex.syntaxparser.token.BlancoApexSyntaxBlockToken.BlockType;
 import blanco.apex.syntaxparser.token.BlancoApexSyntaxEnumToken;
 
 public class BlancoApexSyntaxEnumParser extends AbstractBlancoApexSyntaxSyntaxParser {
-	public static final boolean ISDEBUG = false;
+    public static final boolean ISDEBUG = false;
 
-	public BlancoApexSyntaxEnumParser(final BlancoApexSyntaxParserInput input) {
-		super(input);
-	}
+    public BlancoApexSyntaxEnumParser(final BlancoApexSyntaxParserInput input) {
+        super(input);
+    }
 
-	public BlancoApexSyntaxEnumToken parse() {
-		if (ISDEBUG)
-			System.out.println("enum parser: begin: " + input.getIndex());
+    public BlancoApexSyntaxEnumToken parse() {
+        if (ISDEBUG)
+            System.out.println("enum parser: begin: " + input.getIndex());
 
-		final BlancoApexSyntaxEnumToken enumToken = new BlancoApexSyntaxEnumToken();
+        final BlancoApexSyntaxEnumToken enumToken = new BlancoApexSyntaxEnumToken();
 
-		try {
-			for (input.markRead(); input.availableToken(); input.markRead()) {
-				final BlancoApexToken sourceToken = input.readToken();
-				if (sourceToken instanceof BlancoApexSpecialCharToken) {
-					final BlancoApexSpecialCharToken specialCharToken = (BlancoApexSpecialCharToken) sourceToken;
+        try {
+            for (input.markRead(); input.availableToken(); input.markRead()) {
+                final BlancoApexToken sourceToken = input.readToken();
+                if (sourceToken instanceof BlancoApexSpecialCharToken) {
+                    final BlancoApexSpecialCharToken specialCharToken = (BlancoApexSpecialCharToken) sourceToken;
 
-					if (specialCharToken.getValue().equals("{")) {
-						input.resetRead();
-						// start enum def.
-						enumToken.getTokenList()
-								.add(new BlancoApexSyntaxBlockParser(input, BlockType.ENUM_DEF).parse());
+                    if (specialCharToken.getValue().equals("{")) {
+                        input.resetRead();
+                        // start enum def.
+                        enumToken.getTokenList()
+                                .add(new BlancoApexSyntaxBlockParser(input, BlockType.ENUM_DEF).parse());
 
-						// exit process.
-						return enumToken;
-					} else {
-						enumToken.getTokenList().add(sourceToken);
+                        // exit process.
+                        return enumToken;
+                    } else {
+                        enumToken.getTokenList().add(sourceToken);
 
-					}
-				} else {
-					enumToken.getTokenList().add(sourceToken);
-				}
-			}
-		} finally {
-			if (ISDEBUG)
-				System.out.println("enum parser: end: " + input.getIndex());
+                    }
+                } else {
+                    enumToken.getTokenList().add(sourceToken);
+                }
+            }
+        } finally {
+            if (ISDEBUG)
+                System.out.println("enum parser: end: " + input.getIndex());
 
-			// update mark
-			input.markRead();
-		}
+            // update mark
+            input.markRead();
+        }
 
-		return enumToken;
-	}
+        return enumToken;
+    }
 }

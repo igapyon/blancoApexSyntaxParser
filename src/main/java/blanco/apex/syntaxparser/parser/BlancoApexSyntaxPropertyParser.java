@@ -25,66 +25,66 @@ import blanco.apex.syntaxparser.token.BlancoApexSyntaxBlockToken.BlockType;
 import blanco.apex.syntaxparser.token.BlancoApexSyntaxPropertyToken;
 
 public class BlancoApexSyntaxPropertyParser extends AbstractBlancoApexSyntaxSyntaxParser {
-	public static final boolean ISDEBUG = false;
+    public static final boolean ISDEBUG = false;
 
-	final BlancoApexSyntaxPropertyToken propertyToken = new BlancoApexSyntaxPropertyToken();
+    final BlancoApexSyntaxPropertyToken propertyToken = new BlancoApexSyntaxPropertyToken();
 
-	public BlancoApexSyntaxPropertyParser(final BlancoApexSyntaxParserInput input) {
-		super(input);
-	}
+    public BlancoApexSyntaxPropertyParser(final BlancoApexSyntaxParserInput input) {
+        super(input);
+    }
 
-	@SuppressWarnings("deprecation")
-	public BlancoApexSyntaxPropertyToken parse() {
-		if (ISDEBUG)
-			System.out.println("property parser: begin: " + input.getIndex() + ": "
-					+ input.getTokenAt(input.getIndex()).getDisplayString());
+    @SuppressWarnings("deprecation")
+    public BlancoApexSyntaxPropertyToken parse() {
+        if (ISDEBUG)
+            System.out.println("property parser: begin: " + input.getIndex() + ": "
+                    + input.getTokenAt(input.getIndex()).getDisplayString());
 
-		// propertyToken.getTokenList().add(input.readToken());
+        // propertyToken.getTokenList().add(input.readToken());
 
-		try {
-			for (input.markRead(); input.availableToken(); input.markRead()) {
-				final BlancoApexToken inputToken = input.readToken();
+        try {
+            for (input.markRead(); input.availableToken(); input.markRead()) {
+                final BlancoApexToken inputToken = input.readToken();
 
-				if (ISDEBUG)
-					System.out.println("property parser: process(" + input.getIndex() + "): "
-							+ input.getTokenAt(input.getIndex()).getDisplayString());
+                if (ISDEBUG)
+                    System.out.println("property parser: process(" + input.getIndex() + "): "
+                            + input.getTokenAt(input.getIndex()).getDisplayString());
 
-				if (inputToken instanceof BlancoApexWordToken) {
-					if (propertyToken.getType() == null) {
-						// before method name.
-						if (BlancoApexSyntaxUtil.isIncludedIgnoreCase(inputToken.getValue(),
-								BlancoApexSyntaxConstants.MODIFIER_KEYWORDS)) {
-							input.resetRead();
-							propertyToken.setModifiers(new BlancoApexSyntaxModifierParser(input).parse());
-							propertyToken.getTokenList().add(propertyToken.getModifiers());
-						} else {
-							input.resetRead();
-							propertyToken.setType(new BlancoApexSyntaxTypeParser(input).parse());
-							propertyToken.getTokenList().add(propertyToken.getType());
-						}
-					} else {
-						propertyToken.getTokenList().add(inputToken);
-					}
-				} else if (inputToken instanceof BlancoApexSpecialCharToken) {
-					final BlancoApexSpecialCharToken specialCharToken = (BlancoApexSpecialCharToken) inputToken;
-					if (specialCharToken.getValue().equals("{")) {
-						// entering new nested block.
-						input.resetRead();
-						propertyToken.getTokenList()
-								.add(new BlancoApexSyntaxBlockParser(input, BlockType.PROPERTY_DEF).parse());
-						return propertyToken;
-					} else {
-						propertyToken.getTokenList().add(inputToken);
-					}
-				} else {
-					propertyToken.getTokenList().add(inputToken);
-				}
-			}
-		} finally {
-			if (ISDEBUG)
-				System.out.println("property parser: end: " + input.getIndex());
-		}
+                if (inputToken instanceof BlancoApexWordToken) {
+                    if (propertyToken.getType() == null) {
+                        // before method name.
+                        if (BlancoApexSyntaxUtil.isIncludedIgnoreCase(inputToken.getValue(),
+                                BlancoApexSyntaxConstants.MODIFIER_KEYWORDS)) {
+                            input.resetRead();
+                            propertyToken.setModifiers(new BlancoApexSyntaxModifierParser(input).parse());
+                            propertyToken.getTokenList().add(propertyToken.getModifiers());
+                        } else {
+                            input.resetRead();
+                            propertyToken.setType(new BlancoApexSyntaxTypeParser(input).parse());
+                            propertyToken.getTokenList().add(propertyToken.getType());
+                        }
+                    } else {
+                        propertyToken.getTokenList().add(inputToken);
+                    }
+                } else if (inputToken instanceof BlancoApexSpecialCharToken) {
+                    final BlancoApexSpecialCharToken specialCharToken = (BlancoApexSpecialCharToken) inputToken;
+                    if (specialCharToken.getValue().equals("{")) {
+                        // entering new nested block.
+                        input.resetRead();
+                        propertyToken.getTokenList()
+                                .add(new BlancoApexSyntaxBlockParser(input, BlockType.PROPERTY_DEF).parse());
+                        return propertyToken;
+                    } else {
+                        propertyToken.getTokenList().add(inputToken);
+                    }
+                } else {
+                    propertyToken.getTokenList().add(inputToken);
+                }
+            }
+        } finally {
+            if (ISDEBUG)
+                System.out.println("property parser: end: " + input.getIndex());
+        }
 
-		return propertyToken;
-	}
+        return propertyToken;
+    }
 }

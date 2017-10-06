@@ -20,39 +20,39 @@ import java.io.File;
 import blanco.apex.parser.token.BlancoApexToken;
 
 public class BlancoApexSyntaxSourceToken extends AbstractBlancoApexSyntaxToken {
-	File sourceFile = null;
+    File sourceFile = null;
 
-	public void setSourceFile(final File sourceFile) {
-		this.sourceFile = sourceFile;
-	}
+    public void setSourceFile(final File sourceFile) {
+        this.sourceFile = sourceFile;
+    }
 
-	public File getSourceFile() {
-		return sourceFile;
-	}
+    public File getSourceFile() {
+        return sourceFile;
+    }
 
-	@Override
-	public String getValue() {
-		final StringBuffer strbuf = new StringBuffer();
-		for (BlancoApexToken token : tokenList) {
-			strbuf.append(token.getValue());
-		}
+    @Override
+    public String getValue() {
+        final StringBuffer strbuf = new StringBuffer();
+        for (BlancoApexToken token : tokenList) {
+            strbuf.append(token.getValue());
+        }
 
-		return strbuf.toString();
-	}
+        return strbuf.toString();
+    }
 
-	@Override
-	public String getDisplayString() {
-		final StringBuffer strbuf = new StringBuffer();
-		boolean isFirst = true;
-		for (BlancoApexToken token : tokenList) {
-			if (isFirst) {
-				isFirst = false;
-			} else {
-				strbuf.append(',');
-			}
-			strbuf.append(token.getDisplayString());
-		}
+    @Override
+    public String getDisplayString() {
+        final StringBuffer strbuf = new StringBuffer();
+        boolean isFirst = true;
+        for (BlancoApexToken token : tokenList) {
+            if (isFirst) {
+                isFirst = false;
+            } else {
+                strbuf.append(',');
+            }
+            strbuf.append(token.getDisplayString());
+        }
 
-		return "SOURCE[" + strbuf.toString() + "]";
-	}
+        return "SOURCE[" + strbuf.toString() + "]";
+    }
 }

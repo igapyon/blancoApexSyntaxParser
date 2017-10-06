@@ -28,24 +28,24 @@ import blanco.apex.syntaxparser.parser.BlancoApexSyntaxSourceParser;
  * @author Toshiki Iga
  */
 public class BlancoApexSyntaxParser {
-	/**
-	 * output token list.
-	 */
-	protected List<BlancoApexToken> tokenList = new ArrayList<BlancoApexToken>();
+    /**
+     * output token list.
+     */
+    protected List<BlancoApexToken> tokenList = new ArrayList<BlancoApexToken>();
 
-	public List<BlancoApexToken> parse(final List<BlancoApexToken> sourceTokenList) {
-		final BlancoApexSyntaxParserInput input = new BlancoApexSyntaxParserInput(sourceTokenList);
+    public List<BlancoApexToken> parse(final List<BlancoApexToken> sourceTokenList) {
+        final BlancoApexSyntaxParserInput input = new BlancoApexSyntaxParserInput(sourceTokenList);
 
-		tokenList.add(new BlancoApexSyntaxSourceParser(input).parse());
+        tokenList.add(new BlancoApexSyntaxSourceParser(input).parse());
 
-		return tokenList;
-	}
+        return tokenList;
+    }
 
-	public List<BlancoApexToken> parse(final List<BlancoApexToken> sourceTokenList, final File sourceFile) {
-		final BlancoApexSyntaxParserInput input = new BlancoApexSyntaxParserInput(sourceTokenList);
+    public List<BlancoApexToken> parse(final List<BlancoApexToken> sourceTokenList, final File sourceFile) {
+        final BlancoApexSyntaxParserInput input = new BlancoApexSyntaxParserInput(sourceTokenList);
 
-		tokenList.add(new BlancoApexSyntaxSourceParser(input, sourceFile).parse());
+        tokenList.add(new BlancoApexSyntaxSourceParser(input, sourceFile).parse());
 
-		return tokenList;
-	}
+        return tokenList;
+    }
 }

@@ -26,176 +26,176 @@ import blanco.apex.syntaxparser.token.BlancoApexSyntaxBlockToken.BlockType;
 import blanco.apex.syntaxparser.token.BlancoApexSyntaxClassToken;
 
 public class BlancoApexSyntaxClassParser extends AbstractBlancoApexSyntaxSyntaxParser {
-	public static final boolean ISDEBUG = false;
+    public static final boolean ISDEBUG = false;
 
-	protected final BlancoApexSyntaxClassToken classToken = new BlancoApexSyntaxClassToken();
+    protected final BlancoApexSyntaxClassToken classToken = new BlancoApexSyntaxClassToken();
 
-	public BlancoApexSyntaxClassParser(final BlancoApexSyntaxParserInput input) {
-		super(input);
-	}
+    public BlancoApexSyntaxClassParser(final BlancoApexSyntaxParserInput input) {
+        super(input);
+    }
 
-	public BlancoApexSyntaxClassToken parse() {
-		if (ISDEBUG)
-			System.out.println("class parser: begin: " + input.getIndex());
+    public BlancoApexSyntaxClassToken parse() {
+        if (ISDEBUG)
+            System.out.println("class parser: begin: " + input.getIndex());
 
-		boolean isDefineArea = true;
+        boolean isDefineArea = true;
 
-		try {
-			for (input.markRead(); input.availableToken(); input.markRead()) {
-				final BlancoApexToken sourceToken = input.readToken();
+        try {
+            for (input.markRead(); input.availableToken(); input.markRead()) {
+                final BlancoApexToken sourceToken = input.readToken();
 
-				if (ISDEBUG)
-					System.out.println(
-							"class parser: process(" + input.getIndex() + "): " + sourceToken.getDisplayString());
+                if (ISDEBUG)
+                    System.out.println(
+                            "class parser: process(" + input.getIndex() + "): " + sourceToken.getDisplayString());
 
-				if (sourceToken instanceof BlancoApexSpecialCharToken) {
-					final BlancoApexSpecialCharToken specialCharToken = (BlancoApexSpecialCharToken) sourceToken;
-					if (specialCharToken.getValue().equals("{")) {
-						input.resetRead();
-						isDefineArea = false;
+                if (sourceToken instanceof BlancoApexSpecialCharToken) {
+                    final BlancoApexSpecialCharToken specialCharToken = (BlancoApexSpecialCharToken) sourceToken;
+                    if (specialCharToken.getValue().equals("{")) {
+                        input.resetRead();
+                        isDefineArea = false;
 
-						classToken.getTokenList().add(parseClassBlock());
+                        classToken.getTokenList().add(parseClassBlock());
 
-						input.resetRead();
+                        input.resetRead();
 
-						// prevent process.
-						return classToken;
-					} else {
-						classToken.getTokenList().add(sourceToken);
+                        // prevent process.
+                        return classToken;
+                    } else {
+                        classToken.getTokenList().add(sourceToken);
 
-						if (isDefineArea) {
-							// save define area.
-							classToken.getDefineList().add(sourceToken);
-						}
-					}
-				} else if (sourceToken instanceof BlancoApexWordToken) {
-					if (BlancoApexSyntaxUtil.isIncludedIgnoreCase(sourceToken.getValue(),
-							BlancoApexSyntaxConstants.MODIFIER_KEYWORDS)) {
-						input.resetRead();
-						classToken.setModifiers(new BlancoApexSyntaxModifierParser(input).parse());
-						classToken.getTokenList().add(classToken.getModifiers());
-					} else {
-						// will be class name or something.
-						classToken.getTokenList().add(sourceToken);
-						if (classToken.getName() == null && false == sourceToken.getValue().equalsIgnoreCase("class")) {
-							// save first name.
-							classToken.setName(sourceToken.getValue());
-						}
-					}
+                        if (isDefineArea) {
+                            // save define area.
+                            classToken.getDefineList().add(sourceToken);
+                        }
+                    }
+                } else if (sourceToken instanceof BlancoApexWordToken) {
+                    if (BlancoApexSyntaxUtil.isIncludedIgnoreCase(sourceToken.getValue(),
+                            BlancoApexSyntaxConstants.MODIFIER_KEYWORDS)) {
+                        input.resetRead();
+                        classToken.setModifiers(new BlancoApexSyntaxModifierParser(input).parse());
+                        classToken.getTokenList().add(classToken.getModifiers());
+                    } else {
+                        // will be class name or something.
+                        classToken.getTokenList().add(sourceToken);
+                        if (classToken.getName() == null && false == sourceToken.getValue().equalsIgnoreCase("class")) {
+                            // save first name.
+                            classToken.setName(sourceToken.getValue());
+                        }
+                    }
 
-					if (isDefineArea) {
-						// save define area.
-						classToken.getDefineList().add(sourceToken);
-					}
-				} else {
-					classToken.getTokenList().add(sourceToken);
-				}
-			}
-		} finally {
-			if (ISDEBUG)
-				System.out.println("class parser: end: " + input.getIndex());
+                    if (isDefineArea) {
+                        // save define area.
+                        classToken.getDefineList().add(sourceToken);
+                    }
+                } else {
+                    classToken.getTokenList().add(sourceToken);
+                }
+            }
+        } finally {
+            if (ISDEBUG)
+                System.out.println("class parser: end: " + input.getIndex());
 
-			// update mark
-			input.markRead();
-		}
+            // update mark
+            input.markRead();
+        }
 
-		return classToken;
-	}
+        return classToken;
+    }
 
-	protected BlancoApexSyntaxBlockToken parseClassBlock() {
-		final BlancoApexSyntaxBlockToken blockToken = new BlancoApexSyntaxBlockToken();
-		blockToken.setBlockType(BlockType.CLASS_DEF);
+    protected BlancoApexSyntaxBlockToken parseClassBlock() {
+        final BlancoApexSyntaxBlockToken blockToken = new BlancoApexSyntaxBlockToken();
+        blockToken.setBlockType(BlockType.CLASS_DEF);
 
-		if (ISDEBUG)
-			System.out.println("class parser: block: begin: " + input.getIndex());
+        if (ISDEBUG)
+            System.out.println("class parser: block: begin: " + input.getIndex());
 
-		// consume '{'
-		blockToken.getTokenList().add(input.readToken());
+        // consume '{'
+        blockToken.getTokenList().add(input.readToken());
 
-		for (; input.availableToken(); input.markRead()) {
+        for (; input.availableToken(); input.markRead()) {
 
-			final BlancoApexToken inputToken = input.readToken();
+            final BlancoApexToken inputToken = input.readToken();
 
-			if (ISDEBUG)
-				System.out.println("class parser: process(" + input.getIndex() + "): " + inputToken.getDisplayString());
+            if (ISDEBUG)
+                System.out.println("class parser: process(" + input.getIndex() + "): " + inputToken.getDisplayString());
 
-			if (inputToken instanceof BlancoApexWordToken) {
-				final BlancoApexWordToken wordToken = (BlancoApexWordToken) inputToken;
-				if (BlancoApexSyntaxUtil.isIncludedIgnoreCase(wordToken.getValue(), new String[] { "class" })) {
-					// inner class found.
-					input.resetRead();
-					blockToken.getTokenList().add(new BlancoApexSyntaxClassParser(input).parse());
-					continue;
-				}
+            if (inputToken instanceof BlancoApexWordToken) {
+                final BlancoApexWordToken wordToken = (BlancoApexWordToken) inputToken;
+                if (BlancoApexSyntaxUtil.isIncludedIgnoreCase(wordToken.getValue(), new String[] { "class" })) {
+                    // inner class found.
+                    input.resetRead();
+                    blockToken.getTokenList().add(new BlancoApexSyntaxClassParser(input).parse());
+                    continue;
+                }
 
-				final BlancoApexSpecialCharToken nextSpecial = BlancoApexSyntaxUtil
-						.getFirstSpecialCharTokenWithPreviousOne(input, new String[] { ";", "=", "(", "{" });
-				if (nextSpecial == null) {
-					blockToken.getTokenList().add(inputToken);
-					System.out.println("class parser: Unexpected (L88): " + input.getIndex());
-				} else {
-					if (nextSpecial.getValue().equals(";")) {
-						// field
-						input.resetRead();
-						blockToken.getTokenList().add(new BlancoApexSyntaxFieldParser(input).parse());
-					} else if (nextSpecial.getValue().equals("=")) {
-						if (ISDEBUG)
-							System.out.println("class parser: block: =: " + input.getIndex());
+                final BlancoApexSpecialCharToken nextSpecial = BlancoApexSyntaxUtil
+                        .getFirstSpecialCharTokenWithPreviousOne(input, new String[] { ";", "=", "(", "{" });
+                if (nextSpecial == null) {
+                    blockToken.getTokenList().add(inputToken);
+                    System.out.println("class parser: Unexpected (L88): " + input.getIndex());
+                } else {
+                    if (nextSpecial.getValue().equals(";")) {
+                        // field
+                        input.resetRead();
+                        blockToken.getTokenList().add(new BlancoApexSyntaxFieldParser(input).parse());
+                    } else if (nextSpecial.getValue().equals("=")) {
+                        if (ISDEBUG)
+                            System.out.println("class parser: block: =: " + input.getIndex());
 
-						// field with load value
-						input.resetRead();
-						blockToken.getTokenList().add(new BlancoApexSyntaxFieldParser(input).parse());
-					} else if (nextSpecial.getValue().equals("(")) {
-						if (ISDEBUG)
-							System.out.println("class parser: block: (: " + input.getIndex());
+                        // field with load value
+                        input.resetRead();
+                        blockToken.getTokenList().add(new BlancoApexSyntaxFieldParser(input).parse());
+                    } else if (nextSpecial.getValue().equals("(")) {
+                        if (ISDEBUG)
+                            System.out.println("class parser: block: (: " + input.getIndex());
 
-						// method
-						input.resetRead();
-						blockToken.getTokenList().add(new BlancoApexSyntaxMethodParser(input, classToken).parse());
-					} else if (nextSpecial.getValue().equals("{")) {
-						if (ISDEBUG)
-							System.out.println("class parser: block: {: " + input.getIndex());
+                        // method
+                        input.resetRead();
+                        blockToken.getTokenList().add(new BlancoApexSyntaxMethodParser(input, classToken).parse());
+                    } else if (nextSpecial.getValue().equals("{")) {
+                        if (ISDEBUG)
+                            System.out.println("class parser: block: {: " + input.getIndex());
 
-						// will be class or property.
-						final BlancoApexToken checkNextToken = BlancoApexSyntaxUtil.getFirstTokenByValue(input,
-								new String[] { "class", "interface", "{" });
-						if (checkNextToken == null) {
-							System.out.println("class parser: unexpected (L101)state: " + input.getIndex());
-							blockToken.getTokenList().add(inputToken);
-						} else if (checkNextToken.getValue().equals("{")) {
-							// property;
-							input.resetRead();
-							blockToken.getTokenList().add(new BlancoApexSyntaxPropertyParser(input).parse());
-						} else {
-							input.resetRead();
-							blockToken.getTokenList().add(new BlancoApexSyntaxClassParser(input).parse());
-						}
-					}
-				}
-			} else if (inputToken instanceof BlancoApexSpecialCharToken) {
-				final BlancoApexSpecialCharToken specialCharToken = (BlancoApexSpecialCharToken) inputToken;
-				if (specialCharToken.getValue().equals("}")) {
-					// end of class def.
-					blockToken.getTokenList().add(inputToken);
-					input.markRead();
-					return blockToken;
-				} else if (specialCharToken.getValue().equals("@")) {
-					input.resetRead();
-					blockToken.getTokenList().add(new BlancoApexSyntaxAnnotationParser(input).parse());
-				} else if (specialCharToken.getValue().equals("{")) {
-					// I'm not sure, but Apex has non-named method? Is it
-					// true?
-					input.resetRead();
-					blockToken.getTokenList().add(new BlancoApexSyntaxBlockParser(input, BlockType.UNDEFINED).parse());
-				} else {
-					System.out.println("class parser: unexpected state(L123): " + specialCharToken.getDisplayString());
-					blockToken.getTokenList().add(inputToken);
-				}
-			} else {
-				blockToken.getTokenList().add(inputToken);
-			}
-		}
+                        // will be class or property.
+                        final BlancoApexToken checkNextToken = BlancoApexSyntaxUtil.getFirstTokenByValue(input,
+                                new String[] { "class", "interface", "{" });
+                        if (checkNextToken == null) {
+                            System.out.println("class parser: unexpected (L101)state: " + input.getIndex());
+                            blockToken.getTokenList().add(inputToken);
+                        } else if (checkNextToken.getValue().equals("{")) {
+                            // property;
+                            input.resetRead();
+                            blockToken.getTokenList().add(new BlancoApexSyntaxPropertyParser(input).parse());
+                        } else {
+                            input.resetRead();
+                            blockToken.getTokenList().add(new BlancoApexSyntaxClassParser(input).parse());
+                        }
+                    }
+                }
+            } else if (inputToken instanceof BlancoApexSpecialCharToken) {
+                final BlancoApexSpecialCharToken specialCharToken = (BlancoApexSpecialCharToken) inputToken;
+                if (specialCharToken.getValue().equals("}")) {
+                    // end of class def.
+                    blockToken.getTokenList().add(inputToken);
+                    input.markRead();
+                    return blockToken;
+                } else if (specialCharToken.getValue().equals("@")) {
+                    input.resetRead();
+                    blockToken.getTokenList().add(new BlancoApexSyntaxAnnotationParser(input).parse());
+                } else if (specialCharToken.getValue().equals("{")) {
+                    // I'm not sure, but Apex has non-named method? Is it
+                    // true?
+                    input.resetRead();
+                    blockToken.getTokenList().add(new BlancoApexSyntaxBlockParser(input, BlockType.UNDEFINED).parse());
+                } else {
+                    System.out.println("class parser: unexpected state(L123): " + specialCharToken.getDisplayString());
+                    blockToken.getTokenList().add(inputToken);
+                }
+            } else {
+                blockToken.getTokenList().add(inputToken);
+            }
+        }
 
-		return blockToken;
-	}
+        return blockToken;
+    }
 }

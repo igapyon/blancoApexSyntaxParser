@@ -21,79 +21,79 @@ import java.util.List;
 import blanco.apex.parser.token.BlancoApexToken;
 
 public class BlancoApexSyntaxClassToken extends AbstractBlancoApexSyntaxToken {
-	/**
-	 * Class name
-	 */
-	protected String name;
+    /**
+     * Class name
+     */
+    protected String name;
 
-	/**
-	 * area of definition.
-	 */
-	protected List<BlancoApexToken> defineList = new ArrayList<BlancoApexToken>();
+    /**
+     * area of definition.
+     */
+    protected List<BlancoApexToken> defineList = new ArrayList<BlancoApexToken>();
 
-	protected BlancoApexSyntaxModifierToken modifiers = new BlancoApexSyntaxModifierToken();
+    protected BlancoApexSyntaxModifierToken modifiers = new BlancoApexSyntaxModifierToken();
 
-	/**
-	 * class Name
-	 * 
-	 * @return
-	 */
-	public String getName() {
-		return name;
-	}
+    /**
+     * class Name
+     * 
+     * @return
+     */
+    public String getName() {
+        return name;
+    }
 
-	/**
-	 * class name
-	 * 
-	 * @param name
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
+    /**
+     * class name
+     * 
+     * @param name
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public BlancoApexSyntaxModifierToken getModifiers() {
-		return modifiers;
-	}
+    public BlancoApexSyntaxModifierToken getModifiers() {
+        return modifiers;
+    }
 
-	public void setModifiers(BlancoApexSyntaxModifierToken modifiers) {
-		this.modifiers = modifiers;
-	}
+    public void setModifiers(BlancoApexSyntaxModifierToken modifiers) {
+        this.modifiers = modifiers;
+    }
 
-	public List<BlancoApexToken> getDefineList() {
-		return defineList;
-	}
+    public List<BlancoApexToken> getDefineList() {
+        return defineList;
+    }
 
-	@Override
-	public String getValue() {
-		final StringBuffer strbuf = new StringBuffer();
-		for (BlancoApexToken token : tokenList) {
-			strbuf.append(token.getValue());
-		}
+    @Override
+    public String getValue() {
+        final StringBuffer strbuf = new StringBuffer();
+        for (BlancoApexToken token : tokenList) {
+            strbuf.append(token.getValue());
+        }
 
-		return strbuf.toString();
-	}
+        return strbuf.toString();
+    }
 
-	@Override
-	public String getDisplayString() {
-		final StringBuffer strbuf = new StringBuffer();
-		boolean isFirst = true;
-		for (BlancoApexToken token : tokenList) {
-			if (isFirst) {
-				isFirst = false;
-			} else {
-				strbuf.append(',');
-			}
-			strbuf.append(token.getDisplayString());
-		}
+    @Override
+    public String getDisplayString() {
+        final StringBuffer strbuf = new StringBuffer();
+        boolean isFirst = true;
+        for (BlancoApexToken token : tokenList) {
+            if (isFirst) {
+                isFirst = false;
+            } else {
+                strbuf.append(',');
+            }
+            strbuf.append(token.getDisplayString());
+        }
 
-		return "CLASS[" + strbuf.toString() + "]";
-	}
+        return "CLASS[" + strbuf.toString() + "]";
+    }
 
-	public String getDefineString() {
-		final StringBuffer strbuf = new StringBuffer();
-		for (BlancoApexToken defineToken : getDefineList()) {
-			strbuf.append(defineToken.getValue());
-		}
-		return strbuf.toString();
-	}
+    public String getDefineString() {
+        final StringBuffer strbuf = new StringBuffer();
+        for (BlancoApexToken defineToken : getDefineList()) {
+            strbuf.append(defineToken.getValue());
+        }
+        return strbuf.toString();
+    }
 }

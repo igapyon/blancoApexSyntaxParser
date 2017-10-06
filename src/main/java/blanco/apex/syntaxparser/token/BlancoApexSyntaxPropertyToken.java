@@ -18,49 +18,49 @@ package blanco.apex.syntaxparser.token;
 import blanco.apex.parser.token.BlancoApexToken;
 
 public class BlancoApexSyntaxPropertyToken extends AbstractBlancoApexSyntaxToken {
-	protected BlancoApexSyntaxTypeToken typeToken;
+    protected BlancoApexSyntaxTypeToken typeToken;
 
-	protected BlancoApexSyntaxModifierToken modifiers = new BlancoApexSyntaxModifierToken();
+    protected BlancoApexSyntaxModifierToken modifiers = new BlancoApexSyntaxModifierToken();
 
-	public BlancoApexSyntaxModifierToken getModifiers() {
-		return modifiers;
-	}
+    public BlancoApexSyntaxModifierToken getModifiers() {
+        return modifiers;
+    }
 
-	public void setModifiers(BlancoApexSyntaxModifierToken modifiers) {
-		this.modifiers = modifiers;
-	}
+    public void setModifiers(BlancoApexSyntaxModifierToken modifiers) {
+        this.modifiers = modifiers;
+    }
 
-	public BlancoApexSyntaxTypeToken getType() {
-		return typeToken;
-	}
+    public BlancoApexSyntaxTypeToken getType() {
+        return typeToken;
+    }
 
-	public void setType(BlancoApexSyntaxTypeToken type) {
-		this.typeToken = type;
-	}
+    public void setType(BlancoApexSyntaxTypeToken type) {
+        this.typeToken = type;
+    }
 
-	@Override
-	public String getValue() {
-		final StringBuffer strbuf = new StringBuffer();
-		for (BlancoApexToken token : tokenList) {
-			strbuf.append(token.getValue());
-		}
+    @Override
+    public String getValue() {
+        final StringBuffer strbuf = new StringBuffer();
+        for (BlancoApexToken token : tokenList) {
+            strbuf.append(token.getValue());
+        }
 
-		return strbuf.toString();
-	}
+        return strbuf.toString();
+    }
 
-	@Override
-	public String getDisplayString() {
-		final StringBuffer strbuf = new StringBuffer();
-		boolean isFirst = true;
-		for (BlancoApexToken token : tokenList) {
-			if (isFirst) {
-				isFirst = false;
-			} else {
-				strbuf.append(',');
-			}
-			strbuf.append(token.getDisplayString());
-		}
+    @Override
+    public String getDisplayString() {
+        final StringBuffer strbuf = new StringBuffer();
+        boolean isFirst = true;
+        for (BlancoApexToken token : tokenList) {
+            if (isFirst) {
+                isFirst = false;
+            } else {
+                strbuf.append(',');
+            }
+            strbuf.append(token.getDisplayString());
+        }
 
-		return "PROPERTY[" + strbuf.toString() + "]";
-	}
+        return "PROPERTY[" + strbuf.toString() + "]";
+    }
 }

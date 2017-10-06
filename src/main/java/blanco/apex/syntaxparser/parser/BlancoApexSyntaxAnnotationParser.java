@@ -23,61 +23,61 @@ import blanco.apex.syntaxparser.token.BlancoApexSyntaxAnnotationToken;
 import blanco.apex.syntaxparser.token.BlancoApexSyntaxParenthesisToken;
 
 public class BlancoApexSyntaxAnnotationParser extends AbstractBlancoApexSyntaxSyntaxParser {
-	public static final boolean ISDEBUG = false;
+    public static final boolean ISDEBUG = false;
 
-	final BlancoApexSyntaxAnnotationToken annotationToken = new BlancoApexSyntaxAnnotationToken();
+    final BlancoApexSyntaxAnnotationToken annotationToken = new BlancoApexSyntaxAnnotationToken();
 
-	public BlancoApexSyntaxAnnotationParser(final BlancoApexSyntaxParserInput input) {
-		super(input);
-	}
+    public BlancoApexSyntaxAnnotationParser(final BlancoApexSyntaxParserInput input) {
+        super(input);
+    }
 
-	@SuppressWarnings("deprecation")
-	public BlancoApexSyntaxAnnotationToken parse() {
-		if (ISDEBUG)
-			System.out.println("annotation parser: begin: " + input.getIndex() + ": "
-					+ input.getTokenAt(input.getIndex()).getDisplayString());
+    @SuppressWarnings("deprecation")
+    public BlancoApexSyntaxAnnotationToken parse() {
+        if (ISDEBUG)
+            System.out.println("annotation parser: begin: " + input.getIndex() + ": "
+                    + input.getTokenAt(input.getIndex()).getDisplayString());
 
-		annotationToken.getTokenList().add(input.readToken());
+        annotationToken.getTokenList().add(input.readToken());
 
-		boolean isAlreadyAnnotationNameRead = false;
+        boolean isAlreadyAnnotationNameRead = false;
 
-		try {
-			for (input.markRead(); input.availableToken(); input.markRead()) {
-				final BlancoApexToken inputToken = input.readToken();
+        try {
+            for (input.markRead(); input.availableToken(); input.markRead()) {
+                final BlancoApexToken inputToken = input.readToken();
 
-				if (ISDEBUG)
-					System.out.println("annotation parser: process(" + input.getIndex() + "): "
-							+ input.getTokenAt(input.getIndex()).getDisplayString());
+                if (ISDEBUG)
+                    System.out.println("annotation parser: process(" + input.getIndex() + "): "
+                            + input.getTokenAt(input.getIndex()).getDisplayString());
 
-				if (inputToken instanceof BlancoApexSpecialCharToken) {
-					final BlancoApexSpecialCharToken specialCharToken = (BlancoApexSpecialCharToken) inputToken;
-					if (specialCharToken.getValue().equals("(")) {
-						input.resetRead();
+                if (inputToken instanceof BlancoApexSpecialCharToken) {
+                    final BlancoApexSpecialCharToken specialCharToken = (BlancoApexSpecialCharToken) inputToken;
+                    if (specialCharToken.getValue().equals("(")) {
+                        input.resetRead();
 
-						final BlancoApexSyntaxParenthesisToken parenthesisToken = new BlancoApexSyntaxParenthesisParser(
-								input).parse();
-						annotationToken.getTokenList().add(parenthesisToken);
+                        final BlancoApexSyntaxParenthesisToken parenthesisToken = new BlancoApexSyntaxParenthesisParser(
+                                input).parse();
+                        annotationToken.getTokenList().add(parenthesisToken);
 
-						return annotationToken;
-					} else {
-						annotationToken.getTokenList().add(inputToken);
-					}
-				} else if (inputToken instanceof BlancoApexWordToken) {
-					if (isAlreadyAnnotationNameRead) {
-						input.resetRead();
-						return annotationToken;
-					}
-					isAlreadyAnnotationNameRead = true;
-					annotationToken.getTokenList().add(inputToken);
-				} else {
-					annotationToken.getTokenList().add(inputToken);
-				}
-			}
-		} finally {
-			if (ISDEBUG)
-				System.out.println("annotation parser: end: " + input.getIndex());
-		}
+                        return annotationToken;
+                    } else {
+                        annotationToken.getTokenList().add(inputToken);
+                    }
+                } else if (inputToken instanceof BlancoApexWordToken) {
+                    if (isAlreadyAnnotationNameRead) {
+                        input.resetRead();
+                        return annotationToken;
+                    }
+                    isAlreadyAnnotationNameRead = true;
+                    annotationToken.getTokenList().add(inputToken);
+                } else {
+                    annotationToken.getTokenList().add(inputToken);
+                }
+            }
+        } finally {
+            if (ISDEBUG)
+                System.out.println("annotation parser: end: " + input.getIndex());
+        }
 
-		return annotationToken;
-	}
+        return annotationToken;
+    }
 }

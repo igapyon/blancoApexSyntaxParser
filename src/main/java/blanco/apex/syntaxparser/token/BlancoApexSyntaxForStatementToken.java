@@ -18,29 +18,29 @@ package blanco.apex.syntaxparser.token;
 import blanco.apex.parser.token.BlancoApexToken;
 
 public class BlancoApexSyntaxForStatementToken extends AbstractBlancoApexSyntaxToken {
-	@Override
-	public String getValue() {
-		final StringBuffer strbuf = new StringBuffer();
-		for (BlancoApexToken token : tokenList) {
-			strbuf.append(token.getValue());
-		}
+    @Override
+    public String getValue() {
+        final StringBuffer strbuf = new StringBuffer();
+        for (BlancoApexToken token : tokenList) {
+            strbuf.append(token.getValue());
+        }
 
-		return strbuf.toString();
-	}
+        return strbuf.toString();
+    }
 
-	@Override
-	public String getDisplayString() {
-		final StringBuffer strbuf = new StringBuffer();
-		boolean isFirst = true;
-		for (BlancoApexToken token : tokenList) {
-			if (isFirst) {
-				isFirst = false;
-			} else {
-				strbuf.append(',');
-			}
-			strbuf.append(token.getDisplayString());
-		}
+    @Override
+    public String getDisplayString() {
+        final StringBuffer strbuf = new StringBuffer();
+        boolean isFirst = true;
+        for (BlancoApexToken token : tokenList) {
+            if (isFirst) {
+                isFirst = false;
+            } else {
+                strbuf.append(',');
+            }
+            strbuf.append(token.getDisplayString());
+        }
 
-		return "FOR_STATEMENT[" + strbuf.toString() + "]";
-	}
+        return "FOR_STATEMENT[" + strbuf.toString() + "]";
+    }
 }

@@ -26,29 +26,29 @@ import blanco.apex.parser.token.BlancoApexToken;
 
 public class BlancoApexSyntaxParser011Test {
 
-	@Test
-	public void test() throws Exception {
-		// TODO change apex class filename to adapt your environment.
-		final List<BlancoApexToken> sourceTokenList = new BlancoApexParser().parse( //
-				"public class myOuterClass {\n" //
-						+ "    // code here\n" //
-						+ "    class myInnerClass {\n" //
-						+ "    // inner code here\n" //
-						+ "   }\n" //
-						+ "}"); //
+    @Test
+    public void test() throws Exception {
+        // TODO change apex class filename to adapt your environment.
+        final List<BlancoApexToken> sourceTokenList = new BlancoApexParser().parse( //
+                "public class myOuterClass {\n" //
+                        + "    // code here\n" //
+                        + "    class myInnerClass {\n" //
+                        + "    // inner code here\n" //
+                        + "   }\n" //
+                        + "}"); //
 
-		final List<BlancoApexToken> tokenList = new BlancoApexSyntaxParser().parse(sourceTokenList);
-		final StringBuffer strbuf = new StringBuffer();
-		for (BlancoApexToken token : tokenList) {
-			strbuf.append(token.getDisplayString());
-		}
+        final List<BlancoApexToken> tokenList = new BlancoApexSyntaxParser().parse(sourceTokenList);
+        final StringBuffer strbuf = new StringBuffer();
+        for (BlancoApexToken token : tokenList) {
+            strbuf.append(token.getDisplayString());
+        }
 
-		if (false)
-			System.out.println(strbuf.toString());
+        if (false)
+            System.out.println(strbuf.toString());
 
-		assertEquals("check changes.",
-				"SOURCE[CLASS[MODIFIER[WORD[public]],WHITESPACE[ ],WORD[class],WHITESPACE[ ],WORD[myOuterClass],WHITESPACE[ ],BLOCK(CLASS_DEF)[SPECIAL_CHAR[{],NEWLINE[n],WHITESPACE[    ],COMMENT(SINGLE_LINE)[// code here],NEWLINE[n],WHITESPACE[    ],CLASS[WORD[class],WHITESPACE[ ],WORD[myInnerClass],WHITESPACE[ ],BLOCK(CLASS_DEF)[SPECIAL_CHAR[{],NEWLINE[n],WHITESPACE[    ],COMMENT(SINGLE_LINE)[// inner code here],NEWLINE[n],WHITESPACE[   ],SPECIAL_CHAR[}]]],NEWLINE[n],SPECIAL_CHAR[}]]]]",
-				strbuf.toString());
-		// System.out.println(BlancoApexParserUtil.tokenList2String(tokenList));
-	}
+        assertEquals("check changes.",
+                "SOURCE[CLASS[MODIFIER[WORD[public]],WHITESPACE[ ],WORD[class],WHITESPACE[ ],WORD[myOuterClass],WHITESPACE[ ],BLOCK(CLASS_DEF)[SPECIAL_CHAR[{],NEWLINE[n],WHITESPACE[    ],COMMENT(SINGLE_LINE)[// code here],NEWLINE[n],WHITESPACE[    ],CLASS[WORD[class],WHITESPACE[ ],WORD[myInnerClass],WHITESPACE[ ],BLOCK(CLASS_DEF)[SPECIAL_CHAR[{],NEWLINE[n],WHITESPACE[    ],COMMENT(SINGLE_LINE)[// inner code here],NEWLINE[n],WHITESPACE[   ],SPECIAL_CHAR[}]]],NEWLINE[n],SPECIAL_CHAR[}]]]]",
+                strbuf.toString());
+        // System.out.println(BlancoApexParserUtil.tokenList2String(tokenList));
+    }
 }

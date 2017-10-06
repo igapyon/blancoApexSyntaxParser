@@ -24,64 +24,64 @@ import blanco.apex.syntaxparser.BlancoApexSyntaxUtil;
 import blanco.apex.syntaxparser.token.BlancoApexSyntaxFieldToken;
 
 public class BlancoApexSyntaxFieldParser extends AbstractBlancoApexSyntaxSyntaxParser {
-	public static final boolean ISDEBUG = false;
+    public static final boolean ISDEBUG = false;
 
-	final BlancoApexSyntaxFieldToken fieldToken = new BlancoApexSyntaxFieldToken();
+    final BlancoApexSyntaxFieldToken fieldToken = new BlancoApexSyntaxFieldToken();
 
-	public BlancoApexSyntaxFieldParser(final BlancoApexSyntaxParserInput input) {
-		super(input);
-	}
+    public BlancoApexSyntaxFieldParser(final BlancoApexSyntaxParserInput input) {
+        super(input);
+    }
 
-	@SuppressWarnings("deprecation")
-	public BlancoApexSyntaxFieldToken parse() {
-		if (ISDEBUG)
-			System.out.println("field parser: begin: " + input.getIndex() + ": "
-					+ input.getTokenAt(input.getIndex()).getDisplayString());
+    @SuppressWarnings("deprecation")
+    public BlancoApexSyntaxFieldToken parse() {
+        if (ISDEBUG)
+            System.out.println("field parser: begin: " + input.getIndex() + ": "
+                    + input.getTokenAt(input.getIndex()).getDisplayString());
 
-		// fieldToken.getTokenList().add(input.readToken());
+        // fieldToken.getTokenList().add(input.readToken());
 
-		try {
-			for (input.markRead(); input.availableToken(); input.markRead()) {
-				final BlancoApexToken inputToken = input.readToken();
+        try {
+            for (input.markRead(); input.availableToken(); input.markRead()) {
+                final BlancoApexToken inputToken = input.readToken();
 
-				if (ISDEBUG)
-					System.out.println("field parser: process(" + input.getIndex() + "): "
-							+ input.getTokenAt(input.getIndex()).getDisplayString());
+                if (ISDEBUG)
+                    System.out.println("field parser: process(" + input.getIndex() + "): "
+                            + input.getTokenAt(input.getIndex()).getDisplayString());
 
-				if (inputToken instanceof BlancoApexWordToken) {
-					if (fieldToken.getType() == null) {
-						// before method name.
-						if (BlancoApexSyntaxUtil.isIncludedIgnoreCase(inputToken.getValue(),
-								BlancoApexSyntaxConstants.MODIFIER_KEYWORDS)) {
-							input.resetRead();
-							fieldToken.setModifiers(new BlancoApexSyntaxModifierParser(input).parse());
-							fieldToken.getTokenList().add(fieldToken.getModifiers());
-						} else {
-							input.resetRead();
-							fieldToken.setType(new BlancoApexSyntaxTypeParser(input).parse());
-							fieldToken.getTokenList().add(fieldToken.getType());
-						}
-					} else {
-						fieldToken.getTokenList().add(inputToken);
-					}
-				} else if (inputToken instanceof BlancoApexSpecialCharToken) {
-					final BlancoApexSpecialCharToken specialCharToken = (BlancoApexSpecialCharToken) inputToken;
-					if (specialCharToken.getValue().equals(";")) {
-						// end of statement.
-						fieldToken.getTokenList().add(inputToken);
-						return fieldToken;
-					} else {
-						fieldToken.getTokenList().add(inputToken);
-					}
-				} else {
-					fieldToken.getTokenList().add(inputToken);
-				}
-			}
-		} finally {
-			if (ISDEBUG)
-				System.out.println("field parser: end: " + input.getIndex());
-		}
+                if (inputToken instanceof BlancoApexWordToken) {
+                    if (fieldToken.getType() == null) {
+                        // before method name.
+                        if (BlancoApexSyntaxUtil.isIncludedIgnoreCase(inputToken.getValue(),
+                                BlancoApexSyntaxConstants.MODIFIER_KEYWORDS)) {
+                            input.resetRead();
+                            fieldToken.setModifiers(new BlancoApexSyntaxModifierParser(input).parse());
+                            fieldToken.getTokenList().add(fieldToken.getModifiers());
+                        } else {
+                            input.resetRead();
+                            fieldToken.setType(new BlancoApexSyntaxTypeParser(input).parse());
+                            fieldToken.getTokenList().add(fieldToken.getType());
+                        }
+                    } else {
+                        fieldToken.getTokenList().add(inputToken);
+                    }
+                } else if (inputToken instanceof BlancoApexSpecialCharToken) {
+                    final BlancoApexSpecialCharToken specialCharToken = (BlancoApexSpecialCharToken) inputToken;
+                    if (specialCharToken.getValue().equals(";")) {
+                        // end of statement.
+                        fieldToken.getTokenList().add(inputToken);
+                        return fieldToken;
+                    } else {
+                        fieldToken.getTokenList().add(inputToken);
+                    }
+                } else {
+                    fieldToken.getTokenList().add(inputToken);
+                }
+            }
+        } finally {
+            if (ISDEBUG)
+                System.out.println("field parser: end: " + input.getIndex());
+        }
 
-		return fieldToken;
-	}
+        return fieldToken;
+    }
 }

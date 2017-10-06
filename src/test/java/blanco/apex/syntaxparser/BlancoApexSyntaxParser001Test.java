@@ -31,36 +31,37 @@ import blanco.apex.parser.token.BlancoApexToken;
 
 public class BlancoApexSyntaxParser001Test {
 
-	@Test
-	public void testMain() throws Exception {
-		System.err.println("Test simple syntax parsing.");
-		System.err.println("    lexical parser: " + BlancoApexConstants.getVersion());
-		System.err.println("     syntax parser: " + BlancoApexSyntaxConstants.getVersion());
+    @Test
+    public void testMain() throws Exception {
+        System.err.println("Test simple syntax parsing.");
+        System.err.println("    lexical parser: " + BlancoApexConstants.getVersion());
+        System.err.println("     syntax parser: " + BlancoApexSyntaxConstants.getVersion());
 
-//		final String fileString = file2String(new File("./test/data/apex/MySimpleTest.cls"));
-		final String fileString = file2String(new File("./test/data/apex/MySimpleTest3.cls"));
+        // final String fileString = file2String(new
+        // File("./test/data/apex/MySimpleTest.cls"));
+        final String fileString = file2String(new File("./test/data/apex/MySimpleTest3.cls"));
 
-		final List<BlancoApexToken> sourceTokenList = new BlancoApexParser().parse(fileString);
+        final List<BlancoApexToken> sourceTokenList = new BlancoApexParser().parse(fileString);
 
-		final List<BlancoApexToken> tokenList = new BlancoApexSyntaxParser().parse(sourceTokenList);
+        final List<BlancoApexToken> tokenList = new BlancoApexSyntaxParser().parse(sourceTokenList);
 
-		BlancoApexSyntaxUtil.dumpAsTokenTree(tokenList);
-	}
+        BlancoApexSyntaxUtil.dumpAsTokenTree(tokenList);
+    }
 
-	static final String file2String(final File file) throws IOException {
-		final StringWriter writer = new StringWriter();
-		final BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
-		final char[] cbuf = new char[4096];
-		for (;;) {
-			final int length = reader.read(cbuf);
-			if (length <= 0) {
-				break;
-			}
-			writer.write(cbuf, 0, length);
-		}
-		reader.close();
-		writer.close();
+    static final String file2String(final File file) throws IOException {
+        final StringWriter writer = new StringWriter();
+        final BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
+        final char[] cbuf = new char[4096];
+        for (;;) {
+            final int length = reader.read(cbuf);
+            if (length <= 0) {
+                break;
+            }
+            writer.write(cbuf, 0, length);
+        }
+        reader.close();
+        writer.close();
 
-		return writer.toString();
-	}
+        return writer.toString();
+    }
 }

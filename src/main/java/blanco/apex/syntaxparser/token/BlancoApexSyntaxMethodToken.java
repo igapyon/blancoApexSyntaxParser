@@ -21,84 +21,84 @@ import java.util.List;
 import blanco.apex.parser.token.BlancoApexToken;
 
 public class BlancoApexSyntaxMethodToken extends AbstractBlancoApexSyntaxToken {
-	/**
-	 * area of definition.
-	 */
-	protected List<BlancoApexToken> defineList = new ArrayList<BlancoApexToken>();
+    /**
+     * area of definition.
+     */
+    protected List<BlancoApexToken> defineList = new ArrayList<BlancoApexToken>();
 
-	protected BlancoApexSyntaxModifierToken modifiers = new BlancoApexSyntaxModifierToken();
+    protected BlancoApexSyntaxModifierToken modifiers = new BlancoApexSyntaxModifierToken();
 
-	/**
-	 * default be null.
-	 */
-	protected BlancoApexSyntaxTypeToken returnType = null;
+    /**
+     * default be null.
+     */
+    protected BlancoApexSyntaxTypeToken returnType = null;
 
-	protected List<BlancoApexToken> defineArgsList = new ArrayList<BlancoApexToken>();
+    protected List<BlancoApexToken> defineArgsList = new ArrayList<BlancoApexToken>();
 
-	public BlancoApexSyntaxModifierToken getModifiers() {
-		return modifiers;
-	}
+    public BlancoApexSyntaxModifierToken getModifiers() {
+        return modifiers;
+    }
 
-	public void setModifiers(BlancoApexSyntaxModifierToken modifier) {
-		this.modifiers = modifier;
-	}
+    public void setModifiers(BlancoApexSyntaxModifierToken modifier) {
+        this.modifiers = modifier;
+    }
 
-	public BlancoApexSyntaxTypeToken getReturn() {
-		return returnType;
-	}
+    public BlancoApexSyntaxTypeToken getReturn() {
+        return returnType;
+    }
 
-	public void setReturn(BlancoApexSyntaxTypeToken returnType) {
-		this.returnType = returnType;
-	}
+    public void setReturn(BlancoApexSyntaxTypeToken returnType) {
+        this.returnType = returnType;
+    }
 
-	public List<BlancoApexToken> getDefineList() {
-		return defineList;
-	}
+    public List<BlancoApexToken> getDefineList() {
+        return defineList;
+    }
 
-	public List<BlancoApexToken> getDefineArgsList() {
-		return defineArgsList;
-	}
+    public List<BlancoApexToken> getDefineArgsList() {
+        return defineArgsList;
+    }
 
-	@Override
-	public String getValue() {
-		final StringBuffer strbuf = new StringBuffer();
-		for (BlancoApexToken token : tokenList) {
-			strbuf.append(token.getValue());
-		}
+    @Override
+    public String getValue() {
+        final StringBuffer strbuf = new StringBuffer();
+        for (BlancoApexToken token : tokenList) {
+            strbuf.append(token.getValue());
+        }
 
-		return strbuf.toString();
-	}
+        return strbuf.toString();
+    }
 
-	@Override
-	public String getDisplayString() {
-		final StringBuffer strbuf = new StringBuffer();
-		for (BlancoApexToken token : tokenList) {
-			strbuf.append(token.getDisplayString());
-		}
+    @Override
+    public String getDisplayString() {
+        final StringBuffer strbuf = new StringBuffer();
+        for (BlancoApexToken token : tokenList) {
+            strbuf.append(token.getDisplayString());
+        }
 
-		return "METHOD[" + strbuf.toString() + "]";
-	}
+        return "METHOD[" + strbuf.toString() + "]";
+    }
 
-	public String getDefineString() {
-		final StringBuffer strbuf = new StringBuffer();
-		for (BlancoApexToken defineToken : getDefineList()) {
-			strbuf.append(defineToken.getValue());
-		}
-		return strbuf.toString();
-	}
+    public String getDefineString() {
+        final StringBuffer strbuf = new StringBuffer();
+        for (BlancoApexToken defineToken : getDefineList()) {
+            strbuf.append(defineToken.getValue());
+        }
+        return strbuf.toString();
+    }
 
-	public String getDefineArgsString() {
-		final StringBuffer strbuf = new StringBuffer();
+    public String getDefineArgsString() {
+        final StringBuffer strbuf = new StringBuffer();
 
-		boolean isFirst = true;
-		for (BlancoApexToken defineArgsToken : getDefineArgsList()) {
-			if (isFirst) {
-				isFirst = false;
-			} else {
-				strbuf.append(',');
-			}
-			strbuf.append(defineArgsToken.getValue());
-		}
-		return strbuf.toString();
-	}
+        boolean isFirst = true;
+        for (BlancoApexToken defineArgsToken : getDefineArgsList()) {
+            if (isFirst) {
+                isFirst = false;
+            } else {
+                strbuf.append(',');
+            }
+            strbuf.append(defineArgsToken.getValue());
+        }
+        return strbuf.toString();
+    }
 }

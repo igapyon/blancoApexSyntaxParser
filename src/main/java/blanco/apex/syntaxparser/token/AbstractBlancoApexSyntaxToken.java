@@ -21,9 +21,9 @@ import java.util.List;
 import blanco.apex.parser.token.BlancoApexToken;
 
 public abstract class AbstractBlancoApexSyntaxToken extends BlancoApexToken {
-	protected List<BlancoApexToken> tokenList = new ArrayList<BlancoApexToken>();
+    protected List<BlancoApexToken> tokenList = new ArrayList<BlancoApexToken>();
 
-	public List<BlancoApexToken> getTokenList() {
-		return tokenList;
-	}
+    public List<BlancoApexToken> getTokenList() {
+        return tokenList;
+    }
 }

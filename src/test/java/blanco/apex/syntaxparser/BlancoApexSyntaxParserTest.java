@@ -46,120 +46,120 @@ import blanco.apex.syntaxparser.token.BlancoApexSyntaxStatementToken;
 import blanco.apex.syntaxparser.token.BlancoApexSyntaxTypeToken;
 
 public class BlancoApexSyntaxParserTest {
-	static final String file2String(final File file) throws IOException {
-		final StringWriter writer = new StringWriter();
-		final BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
-		final char[] cbuf = new char[4096];
-		for (;;) {
-			final int length = reader.read(cbuf);
-			if (length <= 0) {
-				break;
-			}
-			writer.write(cbuf, 0, length);
-		}
-		reader.close();
-		writer.close();
+    static final String file2String(final File file) throws IOException {
+        final StringWriter writer = new StringWriter();
+        final BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
+        final char[] cbuf = new char[4096];
+        for (;;) {
+            final int length = reader.read(cbuf);
+            if (length <= 0) {
+                break;
+            }
+            writer.write(cbuf, 0, length);
+        }
+        reader.close();
+        writer.close();
 
-		return writer.toString();
-	}
+        return writer.toString();
+    }
 
-	@Test
-	public void testReadFukugen() throws Exception {
-		final File[] files = new File("./test/data/apex/").listFiles();
-		for (File file : files) {
-			if (file.isFile() && file.getName().toLowerCase().endsWith(".cls")) {
-				final String fileString = file2String(file);
+    @Test
+    public void testReadFukugen() throws Exception {
+        final File[] files = new File("./test/data/apex/").listFiles();
+        for (File file : files) {
+            if (file.isFile() && file.getName().toLowerCase().endsWith(".cls")) {
+                final String fileString = file2String(file);
 
-				System.out.println("Parse file [" + file.getName() + "]");
+                System.out.println("Parse file [" + file.getName() + "]");
 
-				final List<BlancoApexToken> sourceTokenList = new BlancoApexParser().parse(fileString);
+                final List<BlancoApexToken> sourceTokenList = new BlancoApexParser().parse(fileString);
 
-				final List<BlancoApexToken> tokenList = new BlancoApexSyntaxParser().parse(sourceTokenList, file);
+                final List<BlancoApexToken> tokenList = new BlancoApexSyntaxParser().parse(sourceTokenList, file);
 
-				if (false)
-					if (fileString.equals(BlancoApexParserUtil.tokenList2String(tokenList)) == false) {
-						System.out.println("Different: ");
+                if (false)
+                    if (fileString.equals(BlancoApexParserUtil.tokenList2String(tokenList)) == false) {
+                        System.out.println("Different: ");
 
-						// System.out.println(BlancoApexParserUtil.tokenList2String(tokenList));
-					}
+                        // System.out.println(BlancoApexParserUtil.tokenList2String(tokenList));
+                    }
 
-				assertEquals("eq", fileString, BlancoApexParserUtil.tokenList2String(tokenList));
-			}
-		}
-	}
+                assertEquals("eq", fileString, BlancoApexParserUtil.tokenList2String(tokenList));
+            }
+        }
+    }
 
-	@Test
-	public void testSingleFile() throws Exception {
-		// TODO change apex class filename to adapt your environment.
-		final List<BlancoApexToken> sourceTokenList = new BlancoApexParser()
-				.parse(new File("./test/data/apex/MySimpleTest.cls"));
+    @Test
+    public void testSingleFile() throws Exception {
+        // TODO change apex class filename to adapt your environment.
+        final List<BlancoApexToken> sourceTokenList = new BlancoApexParser()
+                .parse(new File("./test/data/apex/MySimpleTest.cls"));
 
-		final List<BlancoApexToken> tokenList = new BlancoApexSyntaxParser().parse(sourceTokenList);
+        final List<BlancoApexToken> tokenList = new BlancoApexSyntaxParser().parse(sourceTokenList);
 
-		if (true) {
-			for (BlancoApexToken token : tokenList) {
-				if (token instanceof AbstractBlancoApexSyntaxToken) {
-					displayDebug((AbstractBlancoApexSyntaxToken) token);
-				}
-			}
-		}
-		if (true) {
-			System.out.println(BlancoApexParserUtil.tokenList2String(tokenList));
-		}
-	}
+        if (true) {
+            for (BlancoApexToken token : tokenList) {
+                if (token instanceof AbstractBlancoApexSyntaxToken) {
+                    displayDebug((AbstractBlancoApexSyntaxToken) token);
+                }
+            }
+        }
+        if (true) {
+            System.out.println(BlancoApexParserUtil.tokenList2String(tokenList));
+        }
+    }
 
-	public static void displayDebug(final AbstractBlancoApexSyntaxToken token) throws Exception {
-		if (token instanceof BlancoApexSyntaxSourceToken) {
-			System.out.println("SOURCE: ");
-			for (BlancoApexToken token2 : token.getTokenList()) {
-				if (token2 instanceof AbstractBlancoApexSyntaxToken) {
-					displayDebug((AbstractBlancoApexSyntaxToken) token2);
-				}
-			}
-		} else if (token instanceof BlancoApexSyntaxClassToken) {
-			System.out.println("CLASS: " + ((BlancoApexSyntaxClassToken) token).getDefineString());
-			for (BlancoApexToken token2 : token.getTokenList()) {
-				// System.out.println(token2.getDisplayString());
-				if (token2 instanceof AbstractBlancoApexSyntaxToken) {
-					displayDebug((AbstractBlancoApexSyntaxToken) token2);
-				}
-			}
-		} else if (token instanceof BlancoApexSyntaxAnnotationToken) {
-			System.out.println("    ANNOTATION: " + token.getValue());
-		} else if (token instanceof BlancoApexSyntaxBlockToken) {
-			System.out.println("    BLOCK: ");
-			for (BlancoApexToken token2 : token.getTokenList()) {
-				if (token2 instanceof AbstractBlancoApexSyntaxToken) {
-					displayDebug((AbstractBlancoApexSyntaxToken) token2);
-				}
-			}
-		} else if (token instanceof BlancoApexSyntaxMethodToken) {
-			System.out.println("  METHOD: " + ((BlancoApexSyntaxMethodToken) token).getDefineString() + " : "
-					+ ((BlancoApexSyntaxMethodToken) token).getDefineArgsString());
-			for (BlancoApexToken token2 : token.getTokenList()) {
-				if (token2 instanceof AbstractBlancoApexSyntaxToken) {
-					displayDebug((AbstractBlancoApexSyntaxToken) token2);
-				}
-			}
-		} else if (token instanceof BlancoApexSyntaxTypeToken) {
-			System.out.println("  TYPE: " + token.getValue());
-		} else if (token instanceof BlancoApexSyntaxModifierToken) {
-			System.out.println("  MODIFIER: " + token.getValue());
-		} else if (token instanceof BlancoApexSyntaxFieldToken) {
-			System.out.println("  FIELD: " + token.getValue());
-		} else if (token instanceof BlancoApexSyntaxIfStatementToken) {
-			System.out.println("    IF_STATEMENT: " + token.getValue());
-		} else if (token instanceof BlancoApexSyntaxForStatementToken) {
-			System.out.println("    FOR_STATEMENT: " + token.getValue());
-		} else if (token instanceof BlancoApexSyntaxParenthesisToken) {
-			// System.out.println("PARENTHESIS: " + token.getValue());
-		} else if (token instanceof BlancoApexSyntaxPropertyToken) {
-			System.out.println("  PROPERTY: [" + token.getValue() + "]");
-		} else if (token instanceof BlancoApexSyntaxStatementToken) {
-			System.out.println("    STATEMENT: [" + token.getValue() + "]");
-			// System.out.println(token.getDisplayString());
-		} else {
-			System.out.println("LISTUP: Unexpected: " + token.getDisplayString());
-		}
-	}
+    public static void displayDebug(final AbstractBlancoApexSyntaxToken token) throws Exception {
+        if (token instanceof BlancoApexSyntaxSourceToken) {
+            System.out.println("SOURCE: ");
+            for (BlancoApexToken token2 : token.getTokenList()) {
+                if (token2 instanceof AbstractBlancoApexSyntaxToken) {
+                    displayDebug((AbstractBlancoApexSyntaxToken) token2);
+                }
+            }
+        } else if (token instanceof BlancoApexSyntaxClassToken) {
+            System.out.println("CLASS: " + ((BlancoApexSyntaxClassToken) token).getDefineString());
+            for (BlancoApexToken token2 : token.getTokenList()) {
+                // System.out.println(token2.getDisplayString());
+                if (token2 instanceof AbstractBlancoApexSyntaxToken) {
+                    displayDebug((AbstractBlancoApexSyntaxToken) token2);
+                }
+            }
+        } else if (token instanceof BlancoApexSyntaxAnnotationToken) {
+            System.out.println("    ANNOTATION: " + token.getValue());
+        } else if (token instanceof BlancoApexSyntaxBlockToken) {
+            System.out.println("    BLOCK: ");
+            for (BlancoApexToken token2 : token.getTokenList()) {
+                if (token2 instanceof AbstractBlancoApexSyntaxToken) {
+                    displayDebug((AbstractBlancoApexSyntaxToken) token2);
+                }
+            }
+        } else if (token instanceof BlancoApexSyntaxMethodToken) {
+            System.out.println("  METHOD: " + ((BlancoApexSyntaxMethodToken) token).getDefineString() + " : "
+                    + ((BlancoApexSyntaxMethodToken) token).getDefineArgsString());
+            for (BlancoApexToken token2 : token.getTokenList()) {
+                if (token2 instanceof AbstractBlancoApexSyntaxToken) {
+                    displayDebug((AbstractBlancoApexSyntaxToken) token2);
+                }
+            }
+        } else if (token instanceof BlancoApexSyntaxTypeToken) {
+            System.out.println("  TYPE: " + token.getValue());
+        } else if (token instanceof BlancoApexSyntaxModifierToken) {
+            System.out.println("  MODIFIER: " + token.getValue());
+        } else if (token instanceof BlancoApexSyntaxFieldToken) {
+            System.out.println("  FIELD: " + token.getValue());
+        } else if (token instanceof BlancoApexSyntaxIfStatementToken) {
+            System.out.println("    IF_STATEMENT: " + token.getValue());
+        } else if (token instanceof BlancoApexSyntaxForStatementToken) {
+            System.out.println("    FOR_STATEMENT: " + token.getValue());
+        } else if (token instanceof BlancoApexSyntaxParenthesisToken) {
+            // System.out.println("PARENTHESIS: " + token.getValue());
+        } else if (token instanceof BlancoApexSyntaxPropertyToken) {
+            System.out.println("  PROPERTY: [" + token.getValue() + "]");
+        } else if (token instanceof BlancoApexSyntaxStatementToken) {
+            System.out.println("    STATEMENT: [" + token.getValue() + "]");
+            // System.out.println(token.getDisplayString());
+        } else {
+            System.out.println("LISTUP: Unexpected: " + token.getDisplayString());
+        }
+    }
 }
