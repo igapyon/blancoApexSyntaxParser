@@ -2,10 +2,10 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>jp.igapyon.blanco.apex.syntaxparser</groupId>
-    <artifactId>BlancoApexSyntaxParser</artifactId>
+    <artifactId>blancoApexSyntaxParser</artifactId>
     <packaging>jar</packaging>
     <version>1.1.1</version>
-    <name>BlancoApexSyntaxParser</name>
+    <name>blancoApexSyntaxParser</name>
     <url>http://maven.apache.org</url>
 
     <properties>
