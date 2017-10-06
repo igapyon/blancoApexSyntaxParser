@@ -15,10 +15,13 @@
  */
 package blanco.apex.syntaxparser;
 
+import java.util.List;
+
 import blanco.apex.parser.token.BlancoApexNewlineToken;
 import blanco.apex.parser.token.BlancoApexSpecialCharToken;
 import blanco.apex.parser.token.BlancoApexToken;
 import blanco.apex.parser.token.BlancoApexWhitespaceToken;
+import blanco.apex.syntaxparser.token.AbstractBlancoApexSyntaxToken;
 
 /**
  * Util class for syntax parser.
@@ -109,4 +112,42 @@ public class BlancoApexSyntaxUtil {
 		}
 		return null;
 	}
+
+	/////////////////////////////////////////
+	// dump as token tree.
+
+	/**
+	 * Dump given token list to System.err.
+	 * 
+	 * @param tokenList
+	 */
+    public static void dumpAsTokenTree(final List<BlancoApexToken> tokenList) {
+        for (BlancoApexToken token : tokenList) {
+            if (token instanceof AbstractBlancoApexSyntaxToken) {
+                System.err.println(token.getClass().getSimpleName());
+                dumpAsTokenTreeInternal((AbstractBlancoApexSyntaxToken) token, 1);
+            } else {
+                System.err.println("    " + token.getDisplayString());
+            }
+        }
+    }
+
+    static void dumpAsTokenTreeInternal(final AbstractBlancoApexSyntaxToken tokenParent, final int indentLevel) {
+        for (BlancoApexToken token : tokenParent.getTokenList()) {
+            if (token instanceof AbstractBlancoApexSyntaxToken) {
+                System.err.println(getIndentString(indentLevel) + token.getClass().getSimpleName());
+                dumpAsTokenTreeInternal((AbstractBlancoApexSyntaxToken) token, indentLevel + 1);
+            } else {
+                System.err.println(getIndentString(indentLevel) + token.getDisplayString());
+            }
+        }
+    }
+
+    static final String getIndentString(final int level) {
+        final StringBuffer strbuf = new StringBuffer();
+        for (int index = 0; index < level * 2; index++) {
+            strbuf.append(' ');
+        }
+        return strbuf.toString();
+    }
 }
