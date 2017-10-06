@@ -21,7 +21,7 @@ package blanco.apex.syntaxparser;
  * @author Toshiki Iga
  */
 public class BlancoApexSyntaxConstants {
-	public static final String VERSION = "v1.1";
+	public static final String VERSION = "v1.1.1";
 
 	public static String getVersion() {
 		return VERSION;
@@ -96,9 +96,39 @@ public class BlancoApexSyntaxConstants {
 	 * 
 	 * Point: currently those are not used in parser.
 	 */
-	public static final String[] APEX_NAMESPACES = new String[] { "ApexPages", "AppLauncher", "Approval", "Auth",
-			"Cache", /* FIXME skipping... */"Database",
-			/* FIXME skipping... */"System" /* FIXME skipping... */ };
+    public static final String[] APEX_NAMESPACES = new String[] { //
+            "ApexPages", //
+            "AppLauncher", //
+            "Approval", //
+            "Auth", //
+            "Cache", //
+            "Canvas", //
+            "ChatterAnswers", //
+            "ConnectApi", //
+            "Database", //
+            "Datacloud", //
+            "DataSource", //
+            "Dom", //
+            "EventBus", //
+            "Flow", //
+            "KbManagement", //
+            "Messaging", //
+            "Metadata", //
+            "Process", //
+            "QuickAction", //
+            "Reports", //
+            "Schema", //
+            "Search", //
+            "Sfc", //
+            "Site", //
+            "Support", //
+            "System", //
+            "TerritoryMgmt", //
+            "TxnSecurity", //
+            "UserProvisioning", //
+            "VisualEditor", //
+            "wave",//
+    };
 
 	/**
 	 * Apex System classes that is shown in default namespace.
@@ -108,17 +138,85 @@ public class BlancoApexSyntaxConstants {
 	 * via:
 	 * <code> https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_namespace_System.htm</code>
 	 */
-	public static final String[] APEX_SYSTEM_CLASSES = new String[] { "Address", "Answers", "ApexPages", "Approval",
-			"Blob", "Boolean", "BusinessHours", "Cases", "Comparable", "Continuation", "Cookie", "Crypto", "Database",
-			"Date", "Datetime", "Decimal", "Double", "EncodingUtil", "FlexQueue", "Http", "HttpCalloutMock",
-			"HttpRequest", "HttpResponse", "Id", "Ideas", "InstallHandler", "Integer", "JSON", "JSONGenerator",
-			"JSONParser", "JSONToken Enum", "Limits", "List", "Location", "Long", "Map", "Matcher", "Math", "Messaging",
-			"MultiStaticResourceCalloutMock", "Network", "PageReference", "Pattern", "Queueable", "QueueableContext",
-			"QuickAction", "RemoteObjectController", "ResetPasswordResult", "RestContext", "RestRequest",
-			"RestResponse", "SandboxPostCopy", "Schedulable", "SchedulableContext", "Schema", "Search", "SelectOption",
-			"Set", "Site", "sObject", "StaticResourceCalloutMock", "String", "System", "Test", "Time", "TimeZone",
-			"Trigger", "Type", "UninstallHandler", "URL", "UserInfo", "Version", "WebServiceCallout", "WebServiceMock",
-			"XmlStreamReader", "XmlStreamWriter",
+	public static final String[] APEX_SYSTEM_CLASSES = new String[] { //
+            "Address", //
+            "Answers", //
+            "ApexPages", //
+            "Approval", //
+            "Blob", //
+            "Boolean", //
+            "BusinessHours", //
+            "Cases", //
+            "Comparable", //
+            "Continuation", //
+            "Cookie", //
+            "Crypto", //
+            "Database", //
+            "Date", //
+            "Datetime", //
+            "Decimal", //
+            "Double", //
+            "EncodingUtil", //
+            "EventBus", //
+            "FlexQueue", //
+            "FeatureManagement", //
+            "Http", //
+            "HttpCalloutMock", //
+            "HttpRequest", //
+            "HttpResponse", //
+            "Id", //
+            "Ideas", //
+            "InstallHandler", //
+            "Integer", //
+            "JSON", //
+            "JSONGenerator", //
+            "JSONParser", //
+            "JSONToken Enum", //
+            "Limits", //
+            "List", //
+            "Location", //
+            "Long", //
+            "Map", //
+            "Matcher", //
+            "Math", //
+            "Messaging", //
+            "MultiStaticResourceCalloutMock", //
+            "Network", //
+            "PageReference", //
+            "Pattern", //
+            "Queueable", //
+            "QueueableContext", //
+            "QuickAction", //
+            "RemoteObjectController", //
+            "ResetPasswordResult", //
+            "RestContext", //
+            "RestRequest", //
+            "RestResponse", //
+            "SandboxPostCopy", //
+            "Schedulable", //
+            "SchedulableContext", //
+            "Schema", //
+            "Search", //
+            "SelectOption", //
+            "Set", //
+            "Site", //
+            "sObject", //
+            "StaticResourceCalloutMock", //
+            "String", //
+            "System", //
+            "Test", //
+            "Time", //
+            "TimeZone", //
+            "Trigger", //
+            "Type", //
+            "UninstallHandler", //
+            "URL", //
+            "UserInfo", //
+            "Version", //
+            "WebServiceCallout", //
+            "WebServiceMock", //
+            "XmlStreamReader", //
+            "XmlStreamWriter",//
 
 			/** System Exceptions (Exception and Built-In Exceptions) */
 			"Exception", "AsyncException", "CalloutException", "DmlException", "EmailException",
