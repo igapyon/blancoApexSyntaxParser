@@ -52,7 +52,7 @@ public class BlancoApexSyntaxParser {
      * 
      * @param sourceTokenList
      *            List of token of source code
-     * @return Formatted list of token.
+     * @return list of token as Syntax.
      */
     public List<BlancoApexToken> parse(final List<BlancoApexToken> sourceTokenList) {
         final BlancoApexSyntaxParserInput input = new BlancoApexSyntaxParserInput(sourceTokenList);
@@ -69,7 +69,7 @@ public class BlancoApexSyntaxParser {
      *            List of token of source code
      * @param sourceFile
      *            File of source code. It will used to know file information.
-     * @return Formatted list of token.
+     * @return list of token as Syntax.
      */
     public List<BlancoApexToken> parse(final List<BlancoApexToken> sourceTokenList, final File sourceFile) {
         final BlancoApexSyntaxParserInput input = new BlancoApexSyntaxParserInput(sourceTokenList);

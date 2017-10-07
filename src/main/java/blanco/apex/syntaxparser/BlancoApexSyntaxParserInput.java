@@ -20,7 +20,7 @@ import java.util.List;
 import blanco.apex.parser.token.BlancoApexToken;
 
 /**
- * Input of syntax parser.
+ * Input setting/information of syntax parser.
  * 
  * @author Toshiki Iga
  */
@@ -35,6 +35,7 @@ public class BlancoApexSyntaxParserInput {
      * Constructor.
      * 
      * @param inputTokenList
+     *            List of token to process.
      */
     public BlancoApexSyntaxParserInput(final List<BlancoApexToken> inputTokenList) {
         this.inputTokenList = inputTokenList;
@@ -43,7 +44,7 @@ public class BlancoApexSyntaxParserInput {
     /**
      * Check token available or not.
      * 
-     * @return
+     * @return true:Available, false:Not-Available
      */
     public boolean availableToken() {
         if (inputTokenIndex < inputTokenList.size()) {
@@ -56,16 +57,18 @@ public class BlancoApexSyntaxParserInput {
     /**
      * Read token and go to next.
      * 
-     * @return
+     * @return read token and increment current position.
      */
     public BlancoApexToken readToken() {
         return inputTokenList.get(inputTokenIndex++);
     }
 
     /**
+     * Get token at the point.
      * 
      * @param index
-     * @return
+     *            index to know.
+     * @return Token.
      * @deprecated for internal use only.
      */
     public BlancoApexToken getTokenAt(int index) {
@@ -73,8 +76,10 @@ public class BlancoApexSyntaxParserInput {
     }
 
     /**
+     * Get count of token.
+     * 
      * @deprecated for internal use only.
-     * @return
+     * @return current token count.
      */
     public int getTokenCount() {
         return inputTokenList.size();
@@ -83,6 +88,11 @@ public class BlancoApexSyntaxParserInput {
     ///////////////////////////////////////////
     // methods for index
 
+    /**
+     * Get current index.
+     * 
+     * @return current index.
+     */
     public int getIndex() {
         return inputTokenIndex;
     }
