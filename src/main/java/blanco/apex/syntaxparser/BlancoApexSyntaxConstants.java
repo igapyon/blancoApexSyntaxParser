@@ -21,8 +21,16 @@ package blanco.apex.syntaxparser;
  * @author Toshiki Iga
  */
 public class BlancoApexSyntaxConstants {
+    /**
+     * Version String of blancoApexParser. ex. v1.2.
+     */
     public static final String VERSION = "v1.2";
 
+    /**
+     * Version String of blancoApexParser. ex. v1.2.
+     * 
+     * @return Version String of blancoApexParser. ex. v1.2.
+     */
     public static String getVersion() {
         return VERSION;
     }
@@ -32,9 +40,9 @@ public class BlancoApexSyntaxConstants {
     }
 
     /**
-     * reserved keywords on Force.com Apex language.
+     * reserved keywords on Apex language.
      * 
-     * via: <code>
+     * ref: <code>
      * https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_reserved_words.htm
      * </code>
      */
@@ -87,6 +95,9 @@ public class BlancoApexSyntaxConstants {
             // non reserved keywords, but will be needed to care.
             , "after", "before", "count", "excludes", "first", "includes", "last", "order", "sharing", "with" };
 
+    /**
+     * List of modifiers.
+     */
     public static final String[] MODIFIER_KEYWORDS = new String[] { "global", "public", "protected", "private",
             "abstract", "without", "with", "static", "virtual", "sharing", "webservice", "testMethod" };
 
@@ -96,7 +107,7 @@ public class BlancoApexSyntaxConstants {
     public static final String[] MAYBE_KEYWORDS = new String[] { "get", };
 
     /**
-     * Force.com Apex namespaces
+     * Apex namespaces
      * 
      * Point: currently those are not used in parser.
      */
@@ -228,5 +239,6 @@ public class BlancoApexSyntaxConstants {
             "ListException", "MathException", "NoAccessException", "NoDataFoundException", "NoSuchElementException",
             "NullPointerException", "QueryException", "RequiredFeatureMissing", "SearchException", "SecurityException",
             "SerializationException", "SObjectException", "StringException", "TypeException", "VisualforceException",
-            "XmlException" };
+            "XmlException"//
+    };
 }
