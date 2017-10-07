@@ -3,7 +3,7 @@
     <groupId>jp.igapyon.blanco.apex.syntaxparser</groupId>
     <artifactId>blancoApexSyntaxParser</artifactId>
     <packaging>jar</packaging>
-    <version>1.2.2</version>
+    <version>1.2.3-SNAPSHOT</version>
 
     <name>blancoApexSyntaxParser</name>
     <description>blancoApexSyntaxParser is a simple Apex Syntax Parser lib for developers written in Java.</description>
