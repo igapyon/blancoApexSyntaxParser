@@ -17,6 +17,11 @@ package blanco.apex.syntaxparser.token;
 
 import blanco.apex.parser.token.BlancoApexToken;
 
+/**
+ * Token class of block syntax.
+ * 
+ * @author Toshiki Iga
+ */
 public class BlancoApexSyntaxBlockToken extends AbstractBlancoApexSyntaxToken {
     public enum BlockType {
         UNDEFINED, MULTI_STATEMENT, CLASS_DEF, METHOD_DEF, PROPERTY_DEF, ENUM_DEF, RESERVED_VAL_INIT

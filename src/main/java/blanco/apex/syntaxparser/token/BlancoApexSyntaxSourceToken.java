@@ -19,8 +19,13 @@ import java.io.File;
 
 import blanco.apex.parser.token.BlancoApexToken;
 
+/**
+ * Token class of source syntax. This will be root of syntax token.
+ * 
+ * @author Toshiki Iga
+ */
 public class BlancoApexSyntaxSourceToken extends AbstractBlancoApexSyntaxToken {
-    File sourceFile = null;
+    protected File sourceFile = null;
 
     public void setSourceFile(final File sourceFile) {
         this.sourceFile = sourceFile;

@@ -17,6 +17,11 @@ package blanco.apex.syntaxparser.token;
 
 import blanco.apex.parser.token.BlancoApexToken;
 
+/**
+ * Token class of modifier syntax.
+ * 
+ * @author Toshiki Iga
+ */
 public class BlancoApexSyntaxModifierToken extends AbstractBlancoApexSyntaxToken {
     @Override
     public String getValue() {

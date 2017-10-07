@@ -17,6 +17,13 @@ package blanco.apex.syntaxparser.token;
 
 import blanco.apex.parser.token.BlancoApexToken;
 
+/**
+ * Token class of SOQL syntax.
+ * 
+ * This will be child of BlancoApexSyntaxBoxBracketsToken.
+ * 
+ * @author Toshiki Iga
+ */
 public class BlancoApexSyntaxSOQLToken extends AbstractBlancoApexSyntaxToken {
     @Override
     public String getValue() {

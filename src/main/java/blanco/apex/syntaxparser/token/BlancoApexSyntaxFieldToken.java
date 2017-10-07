@@ -17,6 +17,11 @@ package blanco.apex.syntaxparser.token;
 
 import blanco.apex.parser.token.BlancoApexToken;
 
+/**
+ * Token class of field syntax.
+ * 
+ * @author Toshiki Iga
+ */
 public class BlancoApexSyntaxFieldToken extends AbstractBlancoApexSyntaxToken {
     protected BlancoApexSyntaxTypeToken typeToken;
 

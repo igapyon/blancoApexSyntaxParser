@@ -17,6 +17,11 @@ package blanco.apex.syntaxparser.token;
 
 import blanco.apex.parser.token.BlancoApexToken;
 
+/**
+ * Token class of for statement syntax.
+ * 
+ * @author Toshiki Iga
+ */
 public class BlancoApexSyntaxForStatementToken extends AbstractBlancoApexSyntaxToken {
     @Override
     public String getValue() {

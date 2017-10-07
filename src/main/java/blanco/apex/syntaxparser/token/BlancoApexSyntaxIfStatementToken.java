@@ -17,6 +17,11 @@ package blanco.apex.syntaxparser.token;
 
 import blanco.apex.parser.token.BlancoApexToken;
 
+/**
+ * Token class of if statement syntax.
+ * 
+ * @author Toshiki Iga
+ */
 public class BlancoApexSyntaxIfStatementToken extends AbstractBlancoApexSyntaxToken {
     @Override
     public String getValue() {

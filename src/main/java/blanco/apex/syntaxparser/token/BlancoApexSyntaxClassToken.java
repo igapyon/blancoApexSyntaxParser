@@ -20,6 +20,11 @@ import java.util.List;
 
 import blanco.apex.parser.token.BlancoApexToken;
 
+/**
+ * Token class of class syntax.
+ * 
+ * @author Toshiki Iga
+ */
 public class BlancoApexSyntaxClassToken extends AbstractBlancoApexSyntaxToken {
     /**
      * Class name
