@@ -1,3 +1,5 @@
 /bin/
 /blancoApexSyntaxParser.zip
 /target/
+/pom.xml.releaseBackup
+/release.properties
