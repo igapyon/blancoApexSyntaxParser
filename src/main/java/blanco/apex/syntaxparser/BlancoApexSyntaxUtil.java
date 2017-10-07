@@ -37,8 +37,10 @@ public class BlancoApexSyntaxUtil {
      * Check string included in string list.
      * 
      * @param value
+     *            Tarvet value to compare.
      * @param list
-     * @return
+     *            List of string to compare with.
+     * @return true:Found, false:Not-found.
      */
     public static boolean isIncludedIgnoreCase(final String value, final String[] list) {
         for (String lookup : list) {
@@ -51,10 +53,14 @@ public class BlancoApexSyntaxUtil {
     }
 
     /**
+     * Getting first special char token.
+     * 
      * @deprecated most case getFirstSpecialCharTokenWithPreviousOne to be used.
      * @param input
+     *            Input setting/information of syntax parser.
      * @param specialChars
-     * @return
+     *            Special char to find.
+     * @return true:found, false:not-found.
      */
     public static BlancoApexSpecialCharToken getFirstSpecialCharToken(final BlancoApexSyntaxParserInput input,
             final String[] specialChars) {
@@ -89,6 +95,7 @@ public class BlancoApexSyntaxUtil {
      * get first token by value.
      * 
      * @param input
+     *            Input setting/information of syntax parser.
      * @param stringArray
      * @return
      */
@@ -124,6 +131,7 @@ public class BlancoApexSyntaxUtil {
      * Dump given token list to System.err.
      * 
      * @param tokenList
+     *            List of token to dump.
      */
     public static void dumpAsTokenTree(final List<BlancoApexToken> tokenList) {
         for (BlancoApexToken token : tokenList) {
