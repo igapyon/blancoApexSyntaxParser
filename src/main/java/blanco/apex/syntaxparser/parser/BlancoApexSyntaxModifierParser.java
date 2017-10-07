@@ -33,7 +33,7 @@ import blanco.apex.syntaxparser.token.BlancoApexSyntaxModifierToken;
 public class BlancoApexSyntaxModifierParser extends AbstractBlancoApexSyntaxSyntaxParser {
     public static final boolean ISDEBUG = false;
 
-    final BlancoApexSyntaxModifierToken modifierToken = new BlancoApexSyntaxModifierToken();
+    protected final BlancoApexSyntaxModifierToken modifierToken = new BlancoApexSyntaxModifierToken();
 
     public BlancoApexSyntaxModifierParser(final BlancoApexSyntaxParserInput input) {
         super(input);

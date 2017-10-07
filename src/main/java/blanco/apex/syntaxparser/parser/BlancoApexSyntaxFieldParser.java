@@ -31,7 +31,7 @@ import blanco.apex.syntaxparser.token.BlancoApexSyntaxFieldToken;
 public class BlancoApexSyntaxFieldParser extends AbstractBlancoApexSyntaxSyntaxParser {
     public static final boolean ISDEBUG = false;
 
-    final BlancoApexSyntaxFieldToken fieldToken = new BlancoApexSyntaxFieldToken();
+    protected final BlancoApexSyntaxFieldToken fieldToken = new BlancoApexSyntaxFieldToken();
 
     public BlancoApexSyntaxFieldParser(final BlancoApexSyntaxParserInput input) {
         super(input);

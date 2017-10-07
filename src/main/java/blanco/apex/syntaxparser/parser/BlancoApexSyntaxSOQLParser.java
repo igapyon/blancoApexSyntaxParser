@@ -28,7 +28,7 @@ import blanco.apex.syntaxparser.token.BlancoApexSyntaxSOQLToken;
 public class BlancoApexSyntaxSOQLParser extends AbstractBlancoApexSyntaxSyntaxParser {
     public static final boolean ISDEBUG = false;
 
-    final BlancoApexSyntaxSOQLToken soqlToken = new BlancoApexSyntaxSOQLToken();
+    protected final BlancoApexSyntaxSOQLToken soqlToken = new BlancoApexSyntaxSOQLToken();
 
     public BlancoApexSyntaxSOQLParser(final BlancoApexSyntaxParserInput input) {
         super(input);

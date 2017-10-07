@@ -29,7 +29,7 @@ import blanco.apex.syntaxparser.token.BlancoApexSyntaxStatementToken;
 public class BlancoApexSyntaxStatementParser extends AbstractBlancoApexSyntaxSyntaxParser {
     public static final boolean ISDEBUG = false;
 
-    final BlancoApexSyntaxStatementToken statementToken = new BlancoApexSyntaxStatementToken();
+    protected final BlancoApexSyntaxStatementToken statementToken = new BlancoApexSyntaxStatementToken();
 
     public BlancoApexSyntaxStatementParser(final BlancoApexSyntaxParserInput input) {
         super(input);

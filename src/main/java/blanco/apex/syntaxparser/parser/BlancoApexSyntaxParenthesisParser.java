@@ -28,7 +28,7 @@ import blanco.apex.syntaxparser.token.BlancoApexSyntaxParenthesisToken;
 public class BlancoApexSyntaxParenthesisParser extends AbstractBlancoApexSyntaxSyntaxParser {
     public static final boolean ISDEBUG = false;
 
-    final BlancoApexSyntaxParenthesisToken parenthesisToken = new BlancoApexSyntaxParenthesisToken();
+    protected final BlancoApexSyntaxParenthesisToken parenthesisToken = new BlancoApexSyntaxParenthesisToken();
 
     public BlancoApexSyntaxParenthesisParser(final BlancoApexSyntaxParserInput input) {
         super(input);

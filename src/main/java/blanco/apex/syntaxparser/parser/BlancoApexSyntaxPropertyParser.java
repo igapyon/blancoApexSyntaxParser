@@ -32,7 +32,7 @@ import blanco.apex.syntaxparser.token.BlancoApexSyntaxPropertyToken;
 public class BlancoApexSyntaxPropertyParser extends AbstractBlancoApexSyntaxSyntaxParser {
     public static final boolean ISDEBUG = false;
 
-    final BlancoApexSyntaxPropertyToken propertyToken = new BlancoApexSyntaxPropertyToken();
+    protected final BlancoApexSyntaxPropertyToken propertyToken = new BlancoApexSyntaxPropertyToken();
 
     public BlancoApexSyntaxPropertyParser(final BlancoApexSyntaxParserInput input) {
         super(input);

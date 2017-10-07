@@ -30,7 +30,7 @@ import blanco.apex.syntaxparser.token.BlancoApexSyntaxBoxBracketsToken;
 public class BlancoApexSyntaxBoxBracketsParser extends AbstractBlancoApexSyntaxSyntaxParser {
     public static final boolean ISDEBUG = false;
 
-    final BlancoApexSyntaxBoxBracketsToken boxbracketsToken = new BlancoApexSyntaxBoxBracketsToken();
+    protected final BlancoApexSyntaxBoxBracketsToken boxbracketsToken = new BlancoApexSyntaxBoxBracketsToken();
 
     public BlancoApexSyntaxBoxBracketsParser(final BlancoApexSyntaxParserInput input) {
         super(input);
