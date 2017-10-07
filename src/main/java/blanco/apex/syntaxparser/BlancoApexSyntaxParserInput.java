@@ -22,6 +22,10 @@ import blanco.apex.parser.token.BlancoApexToken;
 /**
  * Input setting/information of syntax parser.
  * 
+ * <p>
+ * Input function that is markable, reset-able like input stream.
+ * </p>
+ * 
  * @author Toshiki Iga
  */
 public class BlancoApexSyntaxParserInput {

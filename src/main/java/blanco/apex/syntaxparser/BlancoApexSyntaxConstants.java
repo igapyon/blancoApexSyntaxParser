@@ -27,9 +27,9 @@ public class BlancoApexSyntaxConstants {
     public static final String VERSION = "v1.2";
 
     /**
-     * Version String of blancoApexParser. ex. v1.2.
+     * Version String of blancoApexParser.
      * 
-     * @return Version String of blancoApexParser. ex. v1.2.
+     * @return Version String of blancoApexParser.
      */
     public static String getVersion() {
         return VERSION;
@@ -42,7 +42,8 @@ public class BlancoApexSyntaxConstants {
     /**
      * reserved keywords on Apex language.
      */
-    public static final String[] RESERVED_KEYWORDS = new String[] { "abstract", "activate"/* resv */
+    public static final String[] RESERVED_KEYWORDS = new String[] { //
+            "abstract", "activate"/* resv */
             , "and", "any"/* resv */
             , "array", "as", "asc", "autonomous"/* resv */
             , "begin"/* resv */
