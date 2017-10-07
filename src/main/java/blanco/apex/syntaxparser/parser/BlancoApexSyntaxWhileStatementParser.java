@@ -32,6 +32,12 @@ public class BlancoApexSyntaxWhileStatementParser extends AbstractBlancoApexSynt
 
     protected final BlancoApexSyntaxWhileStatementToken whileStatementToken = new BlancoApexSyntaxWhileStatementToken();
 
+    /**
+     * Construct parser instance.
+     * 
+     * @param input
+     *            Input setting/information of syntax parser.
+     */
     public BlancoApexSyntaxWhileStatementParser(final BlancoApexSyntaxParserInput input) {
         super(input);
     }

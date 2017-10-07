@@ -32,6 +32,14 @@ public class BlancoApexSyntaxBlockParser extends AbstractBlancoApexSyntaxSyntaxP
 
     protected final BlancoApexSyntaxBlockToken blockToken = new BlancoApexSyntaxBlockToken();
 
+    /**
+     * Construct parser instance.
+     * 
+     * @param input
+     *            Input setting/information of syntax parser.
+     * @param blockType
+     *            Type of block.
+     */
     public BlancoApexSyntaxBlockParser(final BlancoApexSyntaxParserInput input, final BlockType blockType) {
         super(input);
         blockToken.setBlockType(blockType);

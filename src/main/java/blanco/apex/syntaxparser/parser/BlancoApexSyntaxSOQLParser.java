@@ -30,6 +30,12 @@ public class BlancoApexSyntaxSOQLParser extends AbstractBlancoApexSyntaxSyntaxPa
 
     protected final BlancoApexSyntaxSOQLToken soqlToken = new BlancoApexSyntaxSOQLToken();
 
+    /**
+     * Construct parser instance.
+     * 
+     * @param input
+     *            Input setting/information of syntax parser.
+     */
     public BlancoApexSyntaxSOQLParser(final BlancoApexSyntaxParserInput input) {
         super(input);
     }

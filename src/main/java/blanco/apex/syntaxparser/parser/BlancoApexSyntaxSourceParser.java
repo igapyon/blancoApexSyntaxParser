@@ -38,10 +38,24 @@ public class BlancoApexSyntaxSourceParser extends AbstractBlancoApexSyntaxSyntax
 
     protected final BlancoApexSyntaxSourceToken sourceToken = new BlancoApexSyntaxSourceToken();
 
+    /**
+     * Construct parser instance.
+     * 
+     * @param input
+     *            Input setting/information of syntax parser.
+     */
     public BlancoApexSyntaxSourceParser(final BlancoApexSyntaxParserInput input) {
         super(input);
     }
 
+    /**
+     * Construct parser instance.
+     * 
+     * @param input
+     *            Input setting/information of syntax parser.
+     * @param sourceFile
+     *            File object of source file.
+     */
     public BlancoApexSyntaxSourceParser(final BlancoApexSyntaxParserInput input, final File sourceFile) {
         super(input);
 

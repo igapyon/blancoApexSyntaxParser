@@ -30,6 +30,12 @@ public class BlancoApexSyntaxParenthesisParser extends AbstractBlancoApexSyntaxS
 
     protected final BlancoApexSyntaxParenthesisToken parenthesisToken = new BlancoApexSyntaxParenthesisToken();
 
+    /**
+     * Construct parser instance.
+     * 
+     * @param input
+     *            Input setting/information of syntax parser.
+     */
     public BlancoApexSyntaxParenthesisParser(final BlancoApexSyntaxParserInput input) {
         super(input);
     }

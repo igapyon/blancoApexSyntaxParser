@@ -29,6 +29,12 @@ import blanco.apex.syntaxparser.token.BlancoApexSyntaxEnumToken;
 public class BlancoApexSyntaxEnumParser extends AbstractBlancoApexSyntaxSyntaxParser {
     public static final boolean ISDEBUG = false;
 
+    /**
+     * Construct parser instance.
+     * 
+     * @param input
+     *            Input setting/information of syntax parser.
+     */
     public BlancoApexSyntaxEnumParser(final BlancoApexSyntaxParserInput input) {
         super(input);
     }

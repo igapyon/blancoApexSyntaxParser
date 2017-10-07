@@ -32,6 +32,12 @@ public class BlancoApexSyntaxIfStatementParser extends AbstractBlancoApexSyntaxS
 
     protected final BlancoApexSyntaxIfStatementToken ifStatementToken = new BlancoApexSyntaxIfStatementToken();
 
+    /**
+     * Construct parser instance.
+     * 
+     * @param input
+     *            Input setting/information of syntax parser.
+     */
     public BlancoApexSyntaxIfStatementParser(final BlancoApexSyntaxParserInput input) {
         super(input);
     }

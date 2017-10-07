@@ -34,6 +34,14 @@ public class BlancoApexSyntaxMethodParenthesisParser extends AbstractBlancoApexS
 
     protected BlancoApexSyntaxMethodToken methodToken = null;
 
+    /**
+     * Construct parser instance.
+     * 
+     * @param input
+     *            Input setting/information of syntax parser.
+     * @param methodToken
+     *            Token of method.
+     */
     public BlancoApexSyntaxMethodParenthesisParser(final BlancoApexSyntaxParserInput input,
             final BlancoApexSyntaxMethodToken methodToken) {
         super(input);

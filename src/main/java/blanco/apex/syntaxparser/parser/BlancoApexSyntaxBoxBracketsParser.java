@@ -32,6 +32,12 @@ public class BlancoApexSyntaxBoxBracketsParser extends AbstractBlancoApexSyntaxS
 
     protected final BlancoApexSyntaxBoxBracketsToken boxbracketsToken = new BlancoApexSyntaxBoxBracketsToken();
 
+    /**
+     * Construct parser instance.
+     * 
+     * @param input
+     *            Input setting/information of syntax parser.
+     */
     public BlancoApexSyntaxBoxBracketsParser(final BlancoApexSyntaxParserInput input) {
         super(input);
     }

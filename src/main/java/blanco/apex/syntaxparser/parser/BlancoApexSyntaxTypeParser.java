@@ -34,6 +34,12 @@ public class BlancoApexSyntaxTypeParser extends AbstractBlancoApexSyntaxSyntaxPa
 
     protected final BlancoApexSyntaxTypeToken typeToken = new BlancoApexSyntaxTypeToken();
 
+    /**
+     * Construct parser instance.
+     * 
+     * @param input
+     *            Input setting/information of syntax parser.
+     */
     public BlancoApexSyntaxTypeParser(final BlancoApexSyntaxParserInput input) {
         super(input);
     }

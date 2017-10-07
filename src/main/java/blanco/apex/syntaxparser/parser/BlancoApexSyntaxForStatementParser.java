@@ -32,6 +32,12 @@ public class BlancoApexSyntaxForStatementParser extends AbstractBlancoApexSyntax
 
     protected final BlancoApexSyntaxForStatementToken forStatementToken = new BlancoApexSyntaxForStatementToken();
 
+    /**
+     * Construct parser instance.
+     * 
+     * @param input
+     *            Input setting/information of syntax parser.
+     */
     public BlancoApexSyntaxForStatementParser(final BlancoApexSyntaxParserInput input) {
         super(input);
     }
