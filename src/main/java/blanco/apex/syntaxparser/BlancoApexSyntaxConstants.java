@@ -16,7 +16,7 @@
 package blanco.apex.syntaxparser;
 
 /**
- * Force.com Apex constants for parser.
+ * Apex constants for parser.
  * 
  * @author Toshiki Iga
  */
@@ -41,10 +41,6 @@ public class BlancoApexSyntaxConstants {
 
     /**
      * reserved keywords on Apex language.
-     * 
-     * ref: <code>
-     * https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_reserved_words.htm
-     * </code>
      */
     public static final String[] RESERVED_KEYWORDS = new String[] { "abstract", "activate"/* resv */
             , "and", "any"/* resv */
@@ -148,10 +144,7 @@ public class BlancoApexSyntaxConstants {
     /**
      * Apex System classes that is shown in default namespace.
      * 
-     * TODO ... Enum Methods / / Custom Settings Methods
-     * 
-     * via:
-     * <code> https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_namespace_System.htm</code>
+     * TODO ... Enum Methods / Custom Settings Methods
      */
     public static final String[] APEX_SYSTEM_CLASSES = new String[] { //
             "Address", //
