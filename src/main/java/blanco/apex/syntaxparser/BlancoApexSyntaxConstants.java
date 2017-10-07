@@ -22,12 +22,12 @@ package blanco.apex.syntaxparser;
  */
 public class BlancoApexSyntaxConstants {
     /**
-     * Version String of blancoApexParser. ex. v1.2.
+     * Version String of blancoApexSyntaxParser. ex. v1.2.
      */
     public static final String VERSION = "v1.2";
 
     /**
-     * Version String of blancoApexParser.
+     * Version String of blancoApexSyntaxParser.
      * 
      * @return Version String of blancoApexParser.
      */
