@@ -45,6 +45,11 @@ public class BlancoApexSyntaxMethodParser extends AbstractBlancoApexSyntaxSyntax
         this.classToken = classToken;
     }
 
+    /**
+     * Parse token from current position.
+     * 
+     * @return Result of parse.
+     */
     public BlancoApexSyntaxMethodToken parse() {
         if (ISDEBUG)
             System.out.println("method parser: begin: " + input.getIndex());

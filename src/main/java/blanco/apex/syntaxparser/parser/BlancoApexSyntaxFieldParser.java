@@ -37,6 +37,11 @@ public class BlancoApexSyntaxFieldParser extends AbstractBlancoApexSyntaxSyntaxP
         super(input);
     }
 
+    /**
+     * Parse token from current position.
+     * 
+     * @return Result of parse.
+     */
     @SuppressWarnings("deprecation")
     public BlancoApexSyntaxFieldToken parse() {
         if (ISDEBUG)

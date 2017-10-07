@@ -36,6 +36,11 @@ public class BlancoApexSyntaxWhileStatementParser extends AbstractBlancoApexSynt
         super(input);
     }
 
+    /**
+     * Parse token from current position.
+     * 
+     * @return Result of parse.
+     */
     @SuppressWarnings("deprecation")
     public BlancoApexSyntaxWhileStatementToken parse() {
         if (ISDEBUG)

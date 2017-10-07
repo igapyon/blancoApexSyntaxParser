@@ -33,6 +33,11 @@ public class BlancoApexSyntaxEnumParser extends AbstractBlancoApexSyntaxSyntaxPa
         super(input);
     }
 
+    /**
+     * Parse token from current position.
+     * 
+     * @return Result of parse.
+     */
     public BlancoApexSyntaxEnumToken parse() {
         if (ISDEBUG)
             System.out.println("enum parser: begin: " + input.getIndex());

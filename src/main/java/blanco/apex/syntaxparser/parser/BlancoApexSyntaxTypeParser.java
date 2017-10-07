@@ -38,6 +38,11 @@ public class BlancoApexSyntaxTypeParser extends AbstractBlancoApexSyntaxSyntaxPa
         super(input);
     }
 
+    /**
+     * Parse token from current position.
+     * 
+     * @return Result of parse.
+     */
     public BlancoApexSyntaxTypeToken parse() {
         if (ISDEBUG)
             System.out.println("type parser: begin");

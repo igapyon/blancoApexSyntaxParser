@@ -48,6 +48,11 @@ public class BlancoApexSyntaxSourceParser extends AbstractBlancoApexSyntaxSyntax
         sourceToken.setSourceFile(sourceFile);
     }
 
+    /**
+     * Parse token from current position.
+     * 
+     * @return Result of parse.
+     */
     public BlancoApexSyntaxSourceToken parse() {
 
         if (ISDEBUG)

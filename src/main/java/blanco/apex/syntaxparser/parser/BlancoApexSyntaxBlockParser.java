@@ -37,6 +37,11 @@ public class BlancoApexSyntaxBlockParser extends AbstractBlancoApexSyntaxSyntaxP
         blockToken.setBlockType(blockType);
     }
 
+    /**
+     * Parse token from current position.
+     * 
+     * @return Result of parse.
+     */
     @SuppressWarnings("deprecation")
     public BlancoApexSyntaxBlockToken parse() {
         if (ISDEBUG)

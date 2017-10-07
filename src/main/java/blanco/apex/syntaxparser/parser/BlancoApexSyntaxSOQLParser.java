@@ -34,6 +34,11 @@ public class BlancoApexSyntaxSOQLParser extends AbstractBlancoApexSyntaxSyntaxPa
         super(input);
     }
 
+    /**
+     * Parse token from current position.
+     * 
+     * @return Result of parse.
+     */
     @SuppressWarnings("deprecation")
     public BlancoApexSyntaxSOQLToken parse() {
         if (ISDEBUG)

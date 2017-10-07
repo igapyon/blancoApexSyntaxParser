@@ -39,6 +39,11 @@ public class BlancoApexSyntaxModifierParser extends AbstractBlancoApexSyntaxSynt
         super(input);
     }
 
+    /**
+     * Parse token from current position.
+     * 
+     * @return Result of parse.
+     */
     @SuppressWarnings("deprecation")
     public BlancoApexSyntaxModifierToken parse() {
         if (ISDEBUG)

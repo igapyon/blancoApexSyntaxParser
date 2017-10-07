@@ -36,6 +36,11 @@ public class BlancoApexSyntaxForStatementParser extends AbstractBlancoApexSyntax
         super(input);
     }
 
+    /**
+     * Parse token from current position.
+     * 
+     * @return Result of parse.
+     */
     @SuppressWarnings("deprecation")
     public BlancoApexSyntaxForStatementToken parse() {
         if (ISDEBUG)
