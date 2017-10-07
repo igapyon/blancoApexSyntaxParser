@@ -59,7 +59,7 @@ public class BlancoApexSyntaxMethodParenthesisParser extends AbstractBlancoApexS
             System.out.println("parenthesis parser: begin: " + input.getIndex() + ": "
                     + input.getTokenAt(input.getIndex()).getDisplayString());
 
-        // カッコ開始を消費。
+        // Consume start of parenthesis.
         methodParenthesisToken.getTokenList().add(input.readToken());
 
         try {

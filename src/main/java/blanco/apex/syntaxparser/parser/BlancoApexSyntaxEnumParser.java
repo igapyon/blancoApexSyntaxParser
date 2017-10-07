@@ -66,7 +66,6 @@ public class BlancoApexSyntaxEnumParser extends AbstractBlancoApexSyntaxSyntaxPa
                         return enumToken;
                     } else {
                         enumToken.getTokenList().add(sourceToken);
-
                     }
                 } else {
                     enumToken.getTokenList().add(sourceToken);

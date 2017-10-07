@@ -54,8 +54,6 @@ public class BlancoApexSyntaxFieldParser extends AbstractBlancoApexSyntaxSyntaxP
             System.out.println("field parser: begin: " + input.getIndex() + ": "
                     + input.getTokenAt(input.getIndex()).getDisplayString());
 
-        // fieldToken.getTokenList().add(input.readToken());
-
         try {
             for (input.markRead(); input.availableToken(); input.markRead()) {
                 final BlancoApexToken inputToken = input.readToken();

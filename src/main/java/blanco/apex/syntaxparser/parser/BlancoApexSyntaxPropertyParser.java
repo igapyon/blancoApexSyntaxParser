@@ -55,8 +55,6 @@ public class BlancoApexSyntaxPropertyParser extends AbstractBlancoApexSyntaxSynt
             System.out.println("property parser: begin: " + input.getIndex() + ": "
                     + input.getTokenAt(input.getIndex()).getDisplayString());
 
-        // propertyToken.getTokenList().add(input.readToken());
-
         try {
             for (input.markRead(); input.availableToken(); input.markRead()) {
                 final BlancoApexToken inputToken = input.readToken();

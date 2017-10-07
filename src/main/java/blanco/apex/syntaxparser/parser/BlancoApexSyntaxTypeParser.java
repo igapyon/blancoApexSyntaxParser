@@ -54,7 +54,6 @@ public class BlancoApexSyntaxTypeParser extends AbstractBlancoApexSyntaxSyntaxPa
             System.out.println("type parser: begin");
 
         // 最初の読み込みはなし。
-        // typeToken.getTokenList().add(input.readToken());
 
         try {
             // 2つめのWORDが来たら終わる。<>ではないところでカンマが来ても終わる。

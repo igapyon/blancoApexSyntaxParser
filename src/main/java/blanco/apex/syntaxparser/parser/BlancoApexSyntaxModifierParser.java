@@ -56,9 +56,7 @@ public class BlancoApexSyntaxModifierParser extends AbstractBlancoApexSyntaxSynt
             System.out.println("modifier parser: begin: " + input.getIndex() + ": "
                     + input.getTokenAt(input.getIndex()).getDisplayString());
 
-        // modifierToken.getTokenList().add(input.readToken());
-
-        List<BlancoApexToken> modifierList = new ArrayList<BlancoApexToken>();
+        final List<BlancoApexToken> modifierList = new ArrayList<BlancoApexToken>();
 
         try {
             final List<BlancoApexToken> keepTokenList = new ArrayList<BlancoApexToken>();

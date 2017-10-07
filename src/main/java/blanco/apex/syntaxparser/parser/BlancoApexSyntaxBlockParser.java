@@ -79,9 +79,6 @@ public class BlancoApexSyntaxBlockParser extends AbstractBlancoApexSyntaxSyntaxP
                         blockToken.getTokenList().add(specialCharToken);
                         // prevent process
                         return blockToken;
-                        // } else if (specialCharToken.getValue().equals(";")) {
-                        // input.resetIndex();
-                        // return blockToken;
                     } else if (specialCharToken.getValue().equals("(")) {
                         input.resetRead();
                         blockToken.getTokenList()
@@ -106,11 +103,6 @@ public class BlancoApexSyntaxBlockParser extends AbstractBlancoApexSyntaxSyntaxP
                         continue;
                     }
 
-                    // System.out.println("TRACE DEBUG: " +
-                    // wordToken.getDisplayString());
-
-                    // treat as simple line
-                    // think like below: new String[]{}
                     input.resetRead();
                     blockToken.getTokenList().add(new BlancoApexSyntaxStatementParser(input).parse());
                 } else {

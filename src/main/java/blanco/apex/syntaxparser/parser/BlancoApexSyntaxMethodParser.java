@@ -127,7 +127,6 @@ public class BlancoApexSyntaxMethodParser extends AbstractBlancoApexSyntaxSyntax
                                 boolean isConstructor = false;
                                 if (inputToken.getValue().equalsIgnoreCase(classToken.getName())) {
                                     // Constructor
-                                    // System.out.println("TRACE: コンストラクタ!");
                                     isConstructor = true;
                                 }
 
