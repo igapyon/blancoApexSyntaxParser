@@ -36,7 +36,7 @@ public class BlancoApexSyntaxClassToken extends AbstractBlancoApexSyntaxToken {
     /**
      * class Name
      * 
-     * @return
+     * @return Name of class.
      */
     public String getName() {
         return name;
@@ -46,6 +46,7 @@ public class BlancoApexSyntaxClassToken extends AbstractBlancoApexSyntaxToken {
      * class name
      * 
      * @param name
+     *            Name of class.
      */
     public void setName(String name) {
         this.name = name;

@@ -97,7 +97,8 @@ public class BlancoApexSyntaxUtil {
      * @param input
      *            Input setting/information of syntax parser.
      * @param stringArray
-     * @return
+     *            Array of string to compare.
+     * @return true:Found, false:Not-found.
      */
     @SuppressWarnings("deprecation")
     public static BlancoApexToken getFirstTokenByValue(final BlancoApexSyntaxParserInput input,
