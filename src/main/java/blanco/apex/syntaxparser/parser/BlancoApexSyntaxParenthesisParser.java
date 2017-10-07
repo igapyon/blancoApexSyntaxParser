@@ -21,7 +21,7 @@ import blanco.apex.syntaxparser.BlancoApexSyntaxParserInput;
 import blanco.apex.syntaxparser.token.BlancoApexSyntaxParenthesisToken;
 
 /**
- * () class
+ * Syntax parser for parenthesis '()'.
  * 
  * @author Toshiki Iga
  */

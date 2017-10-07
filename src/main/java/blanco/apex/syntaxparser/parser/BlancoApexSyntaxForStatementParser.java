@@ -22,6 +22,11 @@ import blanco.apex.syntaxparser.BlancoApexSyntaxUtil;
 import blanco.apex.syntaxparser.token.BlancoApexSyntaxBlockToken.BlockType;
 import blanco.apex.syntaxparser.token.BlancoApexSyntaxForStatementToken;
 
+/**
+ * Syntax parser for 'for statement'.
+ * 
+ * @author Toshiki Iga
+ */
 public class BlancoApexSyntaxForStatementParser extends AbstractBlancoApexSyntaxSyntaxParser {
     public static final boolean ISDEBUG = false;
 

@@ -23,6 +23,11 @@ import blanco.apex.syntaxparser.BlancoApexSyntaxParserInput;
 import blanco.apex.syntaxparser.BlancoApexSyntaxUtil;
 import blanco.apex.syntaxparser.token.BlancoApexSyntaxFieldToken;
 
+/**
+ * Syntax parser for field.
+ * 
+ * @author Toshiki Iga
+ */
 public class BlancoApexSyntaxFieldParser extends AbstractBlancoApexSyntaxSyntaxParser {
     public static final boolean ISDEBUG = false;
 

@@ -22,6 +22,11 @@ import blanco.apex.syntaxparser.BlancoApexSyntaxUtil;
 import blanco.apex.syntaxparser.token.BlancoApexSyntaxBlockToken.BlockType;
 import blanco.apex.syntaxparser.token.BlancoApexSyntaxIfStatementToken;
 
+/**
+ * Syntax parser for 'if statement'.
+ * 
+ * @author Toshiki Iga
+ */
 public class BlancoApexSyntaxIfStatementParser extends AbstractBlancoApexSyntaxSyntaxParser {
     public static final boolean ISDEBUG = false;
 

@@ -17,6 +17,11 @@ package blanco.apex.syntaxparser.parser;
 
 import blanco.apex.syntaxparser.BlancoApexSyntaxParserInput;
 
+/**
+ * Abstract class of syntax parser.
+ * 
+ * @author Toshiki Iga
+ */
 public abstract class AbstractBlancoApexSyntaxSyntaxParser {
     protected BlancoApexSyntaxParserInput input = null;
 

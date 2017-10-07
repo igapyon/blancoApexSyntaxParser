@@ -22,6 +22,11 @@ import blanco.apex.syntaxparser.BlancoApexSyntaxParserInput;
 import blanco.apex.syntaxparser.token.BlancoApexSyntaxAnnotationToken;
 import blanco.apex.syntaxparser.token.BlancoApexSyntaxParenthesisToken;
 
+/**
+ * Syntax parser for annotation.
+ * 
+ * @author Toshiki Iga
+ */
 public class BlancoApexSyntaxAnnotationParser extends AbstractBlancoApexSyntaxSyntaxParser {
     public static final boolean ISDEBUG = false;
 

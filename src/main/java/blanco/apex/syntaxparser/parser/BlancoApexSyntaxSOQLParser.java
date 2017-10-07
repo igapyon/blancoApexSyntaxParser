@@ -21,7 +21,7 @@ import blanco.apex.syntaxparser.BlancoApexSyntaxParserInput;
 import blanco.apex.syntaxparser.token.BlancoApexSyntaxSOQLToken;
 
 /**
- * SOQL class
+ * Syntax parser for SOQL.
  * 
  * @author Toshiki Iga
  */

@@ -22,6 +22,11 @@ import blanco.apex.syntaxparser.BlancoApexSyntaxUtil;
 import blanco.apex.syntaxparser.token.BlancoApexSyntaxBlockToken.BlockType;
 import blanco.apex.syntaxparser.token.BlancoApexSyntaxWhileStatementToken;
 
+/**
+ * Syntax parser for 'while statement'.
+ * 
+ * @author Toshiki Iga
+ */
 public class BlancoApexSyntaxWhileStatementParser extends AbstractBlancoApexSyntaxSyntaxParser {
     public static final boolean ISDEBUG = false;
 

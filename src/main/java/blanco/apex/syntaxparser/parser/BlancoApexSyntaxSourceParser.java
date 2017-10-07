@@ -29,6 +29,11 @@ import blanco.apex.syntaxparser.BlancoApexSyntaxUtil;
 import blanco.apex.syntaxparser.token.BlancoApexSyntaxSourceToken;
 
 /**
+ * Syntax parser for source.
+ * 
+ * @author Toshiki Iga
+ */
+/**
  * Source file parser
  * 
  * @author Toshiki Iga

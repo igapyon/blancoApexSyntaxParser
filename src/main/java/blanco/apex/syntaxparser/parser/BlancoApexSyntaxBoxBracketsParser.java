@@ -23,7 +23,7 @@ import blanco.apex.syntaxparser.BlancoApexSyntaxUtil;
 import blanco.apex.syntaxparser.token.BlancoApexSyntaxBoxBracketsToken;
 
 /**
- * () class
+ * Syntax parser for box brackets [].
  * 
  * @author Toshiki Iga
  */

@@ -24,6 +24,11 @@ import blanco.apex.syntaxparser.BlancoApexSyntaxUtil;
 import blanco.apex.syntaxparser.token.BlancoApexSyntaxBlockToken.BlockType;
 import blanco.apex.syntaxparser.token.BlancoApexSyntaxPropertyToken;
 
+/**
+ * Syntax parser for property.
+ * 
+ * @author Toshiki Iga
+ */
 public class BlancoApexSyntaxPropertyParser extends AbstractBlancoApexSyntaxSyntaxParser {
     public static final boolean ISDEBUG = false;
 

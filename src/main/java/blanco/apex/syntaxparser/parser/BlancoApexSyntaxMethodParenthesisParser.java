@@ -23,7 +23,7 @@ import blanco.apex.syntaxparser.token.BlancoApexSyntaxMethodToken;
 import blanco.apex.syntaxparser.token.BlancoApexSyntaxParenthesisToken;
 
 /**
- * method () class
+ * Syntax parser for method parenthesis 'method()'.
  * 
  * @author Toshiki Iga
  */
