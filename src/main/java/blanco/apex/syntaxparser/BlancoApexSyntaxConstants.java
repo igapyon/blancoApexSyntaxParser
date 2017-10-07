@@ -27,6 +27,10 @@ public class BlancoApexSyntaxConstants {
         return VERSION;
     }
 
+    private BlancoApexSyntaxConstants() {
+        // do nothing.
+    }
+
     /**
      * reserved keywords on Force.com Apex language.
      * 

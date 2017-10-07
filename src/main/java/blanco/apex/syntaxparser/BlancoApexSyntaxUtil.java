@@ -29,6 +29,10 @@ import blanco.apex.syntaxparser.token.AbstractBlancoApexSyntaxToken;
  * @author Toshiki Iga
  */
 public class BlancoApexSyntaxUtil {
+    private BlancoApexSyntaxUtil() {
+        // do nothing.
+    }
+
     /**
      * Check string included in string list.
      * 
