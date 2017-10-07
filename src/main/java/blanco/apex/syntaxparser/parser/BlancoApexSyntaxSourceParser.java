@@ -33,11 +33,6 @@ import blanco.apex.syntaxparser.token.BlancoApexSyntaxSourceToken;
  * 
  * @author Toshiki Iga
  */
-/**
- * Source file parser
- * 
- * @author Toshiki Iga
- */
 public class BlancoApexSyntaxSourceParser extends AbstractBlancoApexSyntaxSyntaxParser {
     public static final boolean ISDEBUG = false;
 
