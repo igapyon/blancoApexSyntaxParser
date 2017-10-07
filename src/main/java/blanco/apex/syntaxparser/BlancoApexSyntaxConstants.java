@@ -179,7 +179,7 @@ public class BlancoApexSyntaxConstants {
             "JSON", //
             "JSONGenerator", //
             "JSONParser", //
-            "JSONToken Enum", //
+            "JSONToken", //
             "Limits", //
             "List", //
             "Location", //
