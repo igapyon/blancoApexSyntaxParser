@@ -15,12 +15,7 @@
  */
 package blanco.apex.syntaxparser;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.StringWriter;
 import java.util.List;
 
 import org.junit.Test;
@@ -37,29 +32,13 @@ public class BlancoApexSyntaxParser002Test {
         System.err.println("    lexical parser: " + BlancoApexConstants.getVersion());
         System.err.println("     syntax parser: " + BlancoApexSyntaxConstants.getVersion());
 
-        final String fileString = file2String(new File("./test/data/apex/MySimpleTest2.cls"));
+        final String fileString = BlancoApexSyntaxParserTestCommon
+                .file2String(new File("./test/data/apex/MySimpleTest2.cls"));
 
         final List<BlancoApexToken> sourceTokenList = new BlancoApexParser().parse(fileString);
 
         final List<BlancoApexToken> tokenList = new BlancoApexSyntaxParser().parse(sourceTokenList);
 
         BlancoApexSyntaxUtil.dumpAsTokenTree(tokenList);
-    }
-
-    static final String file2String(final File file) throws IOException {
-        final StringWriter writer = new StringWriter();
-        final BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
-        final char[] cbuf = new char[4096];
-        for (;;) {
-            final int length = reader.read(cbuf);
-            if (length <= 0) {
-                break;
-            }
-            writer.write(cbuf, 0, length);
-        }
-        reader.close();
-        writer.close();
-
-        return writer.toString();
     }
 }
