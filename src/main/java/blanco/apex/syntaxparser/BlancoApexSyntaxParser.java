@@ -23,7 +23,21 @@ import blanco.apex.parser.token.BlancoApexToken;
 import blanco.apex.syntaxparser.parser.BlancoApexSyntaxSourceParser;
 
 /**
- * Simple Apex syntax parser.
+ * Simple Apex language Syntax Parser.
+ * 
+ * <p>
+ * This is Syntax Parser of Apex written in Java.
+ * </p>
+ * 
+ * <p>
+ * Useage:
+ * </p>
+ * 
+ * <code>
+ * List&lt;BlancoApexToken&gt; sourceTokenList = new BlancoApexParser().parse(fileString);
+ * List&lt;BlancoApexToken&gt; tokenList = new BlancoApexSyntaxParser().parse(sourceTokenList);
+ * BlancoApexSyntaxUtil.dumpAsTokenTree(tokenList);
+ * </code>
  * 
  * @author Toshiki Iga
  */
@@ -33,6 +47,13 @@ public class BlancoApexSyntaxParser {
      */
     protected List<BlancoApexToken> tokenList = new ArrayList<BlancoApexToken>();
 
+    /**
+     * Entry point of Apex syntax parser.
+     * 
+     * @param sourceTokenList
+     *            List of token of source code
+     * @return Formatted list of token.
+     */
     public List<BlancoApexToken> parse(final List<BlancoApexToken> sourceTokenList) {
         final BlancoApexSyntaxParserInput input = new BlancoApexSyntaxParserInput(sourceTokenList);
 
@@ -41,6 +62,15 @@ public class BlancoApexSyntaxParser {
         return tokenList;
     }
 
+    /**
+     * Entry point of Apex syntax parser.
+     * 
+     * @param sourceTokenList
+     *            List of token of source code
+     * @param sourceFile
+     *            File of source code. It will used to know file information.
+     * @return Formatted list of token.
+     */
     public List<BlancoApexToken> parse(final List<BlancoApexToken> sourceTokenList, final File sourceFile) {
         final BlancoApexSyntaxParserInput input = new BlancoApexSyntaxParserInput(sourceTokenList);
 
